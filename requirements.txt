@@ -1,0 +1,17 @@
+pytest
+pandas
+frictionless
+# google-api-python-client
+earthengine-api
+pyyaml
+polling2
+yaspin
+PyInquirer
+pyfiglet
+colorama
+tqdm
+types-requests
+click
+jinja2
+google-auth
+pytest-socket

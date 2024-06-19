@@ -1,0 +1,110 @@
+---
+# Export settings for "standard" outputs
+standard:
+    export_raw_dam_pts: False
+    export_snapped_dam_pts: True
+    export_watershed_cpts: False
+    export_watershed_dpts: False
+    export_catchment_pixels: False
+    export_catchment_vector: True
+    export_ni_catchment_vector: False
+    export_waterbodies: False
+    export_reservoir_vector: True
+    export_reservoir_boundary: False
+    export_simplified_reservoir: False
+    export_simplified_reservoir_boundary: False
+    export_sink_lines: False
+    export_source_lines: False
+    export_river: False
+    export_main_river: True
+# Export settings for "extended" outputs
+extended:
+    export_raw_dam_pts: False
+    export_snapped_dam_pts: True
+    export_watershed_cpts: False
+    export_watershed_dpts: False
+    export_catchment_pixels: False
+    export_catchment_vector: True
+    export_ni_catchment_vector: False
+    export_waterbodies: False
+    export_reservoir_vector: True
+    export_reservoir_boundary: False
+    export_simplified_reservoir: False
+    export_simplified_reservoir_boundary: False
+    export_sink_lines: False
+    export_source_lines: False
+    export_river: False
+    export_main_river: True
+# Export settings for "catchment diagnostic" outputs
+diagnostic-catch:
+    export_raw_dam_pts: False
+    export_snapped_dam_pts: True
+    export_watershed_cpts: False
+    export_watershed_dpts: False
+    export_catchment_pixels: False
+    export_catchment_vector: True
+    export_ni_catchment_vector: False
+    export_waterbodies: False
+    export_reservoir_vector: True
+    export_reservoir_boundary: False
+    export_simplified_reservoir: False
+    export_simplified_reservoir_boundary: False
+    export_sink_lines: False
+    export_source_lines: False
+    export_river: False
+    export_main_river: True
+# Export settings for "reservoir diagnostic" outputs
+diagnostic-res:
+    export_raw_dam_pts: False
+    export_snapped_dam_pts: True
+    export_watershed_cpts: False
+    export_watershed_dpts: False
+    export_catchment_pixels: False
+    export_catchment_vector: True
+    export_ni_catchment_vector: False
+    export_waterbodies: False
+    export_reservoir_vector: True
+    export_reservoir_boundary: False
+    export_simplified_reservoir: False
+    export_simplified_reservoir_boundary: False
+    export_sink_lines: False
+    export_source_lines: False
+    export_river: False
+    export_main_river: True
+# Export settings for "river diagnostic" outputs
+diagnostic-riv:
+    export_raw_dam_pts: False
+    export_snapped_dam_pts: True
+    export_watershed_cpts: False
+    export_watershed_dpts: False
+    export_catchment_pixels: False
+    export_catchment_vector: True
+    export_ni_catchment_vector: False
+    export_waterbodies: False
+    export_reservoir_vector: True
+    export_reservoir_boundary: False
+    export_simplified_reservoir: False
+    export_simplified_reservoir_boundary: False
+    export_sink_lines: False
+    export_source_lines: False
+    export_river: False
+    export_main_river: True
+# Export settings for "diagnostic" outputs
+diagnostic:
+    export_raw_dam_pts: False
+    export_snapped_dam_pts: True
+    export_watershed_cpts: False
+    export_watershed_dpts: False
+    export_catchment_pixels: False
+    export_catchment_vector: True
+    export_ni_catchment_vector: False
+    export_waterbodies: False
+    export_reservoir_vector: True
+    export_reservoir_boundary: False
+    export_simplified_reservoir: False
+    export_simplified_reservoir_boundary: False
+    export_sink_lines: False
+    export_source_lines: False
+    export_river: False
+    export_main_river: True
+...

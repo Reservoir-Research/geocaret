@@ -1,0 +1,113 @@
+---
+# Configuration of output messages (signals) rendered in JinJa
+err_fatal:
+    template: err_fatal.j2
+    variables:
+        - fatal_error_message
+        - thanks_message
+    default_printer: YaspinPrinter
+err_filenotfound:
+    template: err_filenotfound.j2
+    variables:
+        - error_message
+        - thanks_message
+    default_printer: YaspinPrinter
+err_folder:
+    template: err_folder.j2
+    variables:
+        - error_message
+        - folder_path
+        - thanks_message
+    default_printer: YaspinPrinter
+err_internet:
+    template: err_internet.j2
+    variables:
+        - error_message
+        - thanks_message
+    default_printer: YaspinPrinter
+err_interrupted:
+    template: err_interrupted.j2
+    variables:
+        - asset_folder
+        - app_name
+    default_printer: YaspinPrinter
+err_inv_fields:
+    template: err_inv_fields.j2
+    variables:
+        - error_message
+        - issues
+        - thanks_message
+    default_printer: YaspinPrinter
+err_inv_file:
+    template: err_inv_file.j2
+    variables:
+        - error_message
+        - issues
+        - thanks_message
+    default_printer: YaspinPrinter
+err_load:
+    template: err_load.j2
+    variables:
+        - error_message
+        - input_file_path
+        - log_file
+        - thanks_message
+    default_printer: YaspinPrinter
+err_noaudit:
+    template: err_noaudit.j2
+    variables:
+        - task_output_file
+    default_printer: YaspinPrinter
+err_running:
+    template: err_running.j2
+    variables:
+        - app_name
+        - asset_folder
+    default_printer: YaspinPrinter
+err_time:
+    template: err_time.j2
+    variables:
+        current_active_analyses
+    default_printer: YaspinPrinter
+err_upload:
+    template: err_upload.j2
+    variables:
+        - error_message
+        - log_file
+        - thanks_message
+    default_printer: YaspinPrinter
+results_summary:
+    template: results_summary.j2
+    variables:
+        - output_drive_folder
+        - output_folder_name
+        - thanks_message
+    default_printer: YaspinPrinter
+warn_inv_output:
+    template: warn_inv_output.j2
+    variables:
+        - issues
+        - output_report
+    default_printer: YaspinPrinter
+warn_skip:
+    template: warn_skip.j2
+    variables:
+        - log_file
+    default_printer: YaspinPrinter
+greet_figlet:
+    template: greet_figlet.j2
+    variables:
+        - app_name
+    default_printer: FigletPrinter
+greet:
+    template: greet.j2
+    variables:
+        - app_version
+    default_printer: ColorPrinter
+app_start:
+    template: app_start.j2
+    variables:
+        - input_file
+        - job_name
+    default_printer: ColorPrinter
+...

@@ -1,0 +1,13 @@
+{# Template for generating an error message when input file contains errors. #}
+
+{{error_message}}
+  [ERROR] Input file contains errors.
+
+  Please fix the following issues:
+
+     {{ issues | join(', ') }}
+
+  See {input_report_file} for further details.
+
+{{thanks_message}}
+

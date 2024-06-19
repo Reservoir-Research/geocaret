@@ -1,0 +1,19 @@
+---
+application:
+    name_short: HEET
+    name_long: Hee Eee Eee Tee
+    version: 0.1
+    temp_folder: ./tmp
+assets:
+    asset_folder: XHEET/tmp
+templates:
+    template_folder: terminal/emissions
+printers:
+    font_color: blue
+    figlet_color: yellow
+logging:
+    level: DEBUG
+    log_dir: './tmp/heet'
+    log_filename: heet.log
+    mode: w # w for writing and a for append
+...

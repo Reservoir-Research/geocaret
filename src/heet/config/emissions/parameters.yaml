@@ -1,0 +1,15 @@
+---
+dams:
+    # Radius (in metres) which is used to snapping dams to neares river sections
+    search_radius: 1000.0
+    # Maximum number of dams that can be processed at once (in a single batch)
+    max_dams_in_set: 1000
+
+algorithms:
+    upstream_method: 3
+
+export_level: standard
+# Available options (check exports.yaml):
+# standard, extended, diagnostic-catch, diagnostic-res, diagnostic-riv,
+# diagnostic
+...

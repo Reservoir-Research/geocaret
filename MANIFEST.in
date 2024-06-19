@@ -1,0 +1,7 @@
+include *.in
+include *.md
+include *.txt
+recursive-include src *.ini
+recursive-include src *.yaml
+recursive-include src *.j2
+exclude MANIFEST.in

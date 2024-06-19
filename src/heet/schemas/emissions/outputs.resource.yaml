@@ -1,0 +1,699 @@
+format: csv
+hashing: md5
+layout:
+  headerRows:
+    - 1
+name: dams
+schema:
+    fields:
+      - constraints: 
+          required: true
+          unique: true
+          minimum: 1
+        name: id
+        title: "Dam Identifier"
+        description: "Dam identifier"
+        type:  integer
+      - constraints: 
+          required: true
+        name: country
+        title: "Country Name"
+        description: " The name of the country the dam is located in (the ISO 3166 official short name (EN))"
+        type:  string
+      - constraints: 
+          required: true
+        name: name
+        title: "Dam Name"
+        description: " The name of the dam"
+        type:  string
+      - constraints: 
+          required: true
+        name: river
+        title: "River Name"
+        description: " The name of the river the dam will be constructed on"
+        type:  string
+      - constraints: 
+          required: true
+        name: main_basin
+        title: "Main Basin Name"
+        description: " The name of main river basin the dam will be located in"
+        type:  string
+      - constraints: 
+          required: true
+          minimum: -60
+          maximum: 60
+        name: dam_lat
+        title: "Dam Latitude"
+        description: " The latitude of the dam location in decimal degrees (DD)"
+        type:  number
+      - constraints: 
+          required: true
+          maximum: 180
+        name: dam_lon
+        title: "Dam Longitude"
+        description: " The longitude of the dam location in decimal degrees (DD)"
+        type:  number
+      - constraints: 
+          required: false
+          minimum: 10
+          maximum: 300
+        name: dam_height
+        title: "Dam Height"
+        description: " The dam height in metres (m)"
+        type:  number
+      - constraints: 
+          required: false
+          minimum: 10
+          maximum: 300
+        name: water_level
+        title: "Water Level"
+        description: " The water level of the reservoir relative to the base of the dam wall in metres (m)"
+        type:  number
+      - constraints: 
+          required: false
+          minimum: 0.001
+          maximum: 22500
+        name: power_capacity
+        title: "Power Capacity"
+        description: " The installed power capacity of the dam in megawatts (MW)"
+        type:  number
+        constraints:
+          required: false
+          minimum: 0
+          maximum: 100
+        name: turbine_efficiency
+        title: "Turbine Efficiency"
+        description: " The efficiency of the dam's turbines, percentage (%)"
+        type:  number
+      - constraints: 
+          required: false
+          minimum: 0
+          maximum: 300
+        name: plant_depth
+        title: "Power Plant Depth"
+        description: " The depth of the power plant below the base of the dam wall in metres (m)"
+        type:  number
+      - constraints:
+          required: true
+          minimum: 0
+        name: ps_snap_displacement
+        title: "Snap Displacement (Snapped Point)"
+        description: "The distance between the hydroriver-snapped dam location and the raw dam location (m)"
+        type:  number
+      - constraints:
+          required: true
+          maximum: 90
+        name: ps_lat
+        title: "Snapped Dam Latitude"
+        description: " The latitude of the hydroriver-snapped dam location in decimal degrees (DD)"
+        type:  number
+      - constraints:
+          required: true
+          maximum: 180
+        name: ps_lon
+        title: "Snapped Dam Longitude"
+        description: " The longitude of the hydroriver-snapped dam location in decimal degrees (DD)"
+        type:  number
+      - constraints: 
+          required: true
+          minimum: 0
+        name: c_area_km2
+        title: "Area [catchment]"
+        description: "The area of the catchment (km^2)"
+        type:  number
+      - constraints: 
+          required: true
+          minimum: 0
+          maximum: 241.41
+        name: c_mean_slope_pc
+        title: "Mean slope [catchment]"
+        description: "The mean slope of the catchment (%)"
+        type:  number
+      - constraints: 
+          required: true
+        name: c_biome
+        title: "Predominant biome [catchment]"
+        description: "The predominant biome of the catchment"
+        type: string
+      - constraints: 
+          required: true
+        name: c_climate_zone
+        title: "Predominant climate [catchment]"
+        description: "The predominant climate zone of the catchment (kloppen climate zones)"
+        type: number
+      - constraints: 
+          required: true
+          minimum: 0
+        name: c_population
+        title: "Population [catchment]"
+        description: "The population of the catchment (persons)"
+        type: number
+      - constraints: 
+          required: true
+          minimum: 0
+          maximum: 78683
+        name: c_population_density
+        title: "Population density [catchment]"
+        description: "The population density of the catchment (persons/km^2)"
+        type: number
+      - constraints: 
+          required: true
+          minimum: 0
+          maximum: 1
+        name: c_landcover_0
+        title: "Landcover category 0 fraction [catchment]"
+        description: "The landcover category 0  (﻿'No Data') fraction of the catchment"
+        type: number
+      - constraints: 
+          required: true
+          minimum: 0
+          maximum: 1
+        name: c_landcover_1
+        title: "Landcover category 1 fraction [catchment]"
+        description: "The landcover category 1 (﻿'Croplands') fraction of the catchment"
+        type: number
+      - constraints: 
+          required: true
+          minimum: 0
+          maximum: 1
+        name: c_landcover_2
+        title: "Landcover category 2 fraction [catchment]"
+        description: "The landcover category 2 (﻿'Forest')  fraction of the catchment"
+        type: number
+      - constraints: 
+          required: true
+          minimum: 0
+          maximum: 1
+        name: c_landcover_3
+        title: "Landcover category 3 fraction [catchment]"
+        description: "The landcover category 3 (﻿'Grassland/Shrubland') fraction of the catchment"
+        type: number
+      - constraints: 
+          required: true
+          minimum: 0
+          maximum: 1
+        name: c_landcover_4
+        title: "Landcover category 4 fraction [catchment]"
+        description: "The landcover category 4 (﻿'Wetlands') fraction of the catchment"
+        type: number
+      - constraints: 
+          required: true
+          minimum: 0
+          maximum: 1
+        name: c_landcover_5
+        title: "Landcover category 5 fraction [catchment]"
+        description: "The landcover category 5 (﻿'Settlements') fraction of the catchment"
+        type: number
+      - constraints: 
+          required: true
+          minimum: 0
+          maximum: 1
+        name: c_landcover_6
+        title: "Landcover category 6 fraction [catchment]"
+        description: "The landcover category 6 (﻿'Bare Areas')  fraction of the catchment"
+        type: number
+      - constraints: 
+          required: true
+          minimum: 0
+          maximum: 1
+        name: c_landcover_7
+        title: "Landcover category 7 fraction [catchment]"
+        description: "The landcover category 7 (﻿'Water Bodies') fraction of the catchment"
+        type: number
+      - constraints: 
+          required: true
+          minimum: 0
+          maximum: 1
+        name: c_landcover_8
+        title: "Landcover category 8 fraction [catchment]"
+        description: "The landcover category 8 (﻿'Permanent snow and ice')  fraction of the catchment"
+        type: number
+      - constraints: 
+          required: true
+          minimum: 0
+          maximum: 2500
+        name: c_mpet_mm
+        title: "Mean annual evapotranspiration [catchment]"
+        description: "The mean annual evapotranspiration for the catchment (mm/year)"
+        type: number
+      - constraints: 
+          required: true
+          minimum: 0
+          maximum: 6000
+        name: c_map_mm
+        title: "Mean annual precipitation [catchment]"
+        description: "The mean annual precipitation for the catchment (mm/year)"
+        type: number
+      - constraints: 
+          required: true
+          minimum: 0
+          maximum: 6000
+        name: c_mar_mm
+        title: "Mean annual runoff [catchment]"
+        description: "The mean annual runoff for the catchment (mm/year)"
+        type: number
+      - constraints:
+          required: false
+          minimum: 0
+          maximum: 6000
+        name: c_mar_mm_alt1
+        title: "Mean annual runoff alt1 [catchment]"
+        description: "The mean annual runoff for the catchment (mm/year). Alternative definition 1"
+        type: number
+      - constraints: 
+          required: true
+          minimum: 0
+          maximum: 6000
+        name: c_mar_mm_alt2
+        title: "Mean annual runoff alt2 [catchment]"
+        description: "The mean annual runoff for the catchment (mm/year). Alternative definition 2"
+        type: number
+      - constraints: 
+          required: true
+          minimum: 0
+        name: c_msoc_kgperm
+        title: "Mean soil organic carbon [catchment]"
+        type: number
+      - constraints: 
+          required: true
+        name: c_soil_type
+        title: "Predominant soil type (mineral/organic) [catchment]"
+        type: string        
+      - constraints: 
+          required: true
+          minimum: 0
+        name: c_masm_mm
+        title: "Mean soil moisture [catchment]"
+        description: "The mean soil moisture of the catchment (mm/m soil depth)"
+        type: number
+      - constraints: 
+          required: true
+          minimum: 0
+        name: c_mean_olsen
+        title: "Soil Olsen P [catchment]"
+        type: number
+      - constraints: 
+          required: true
+          minimum: 0
+        name: n_population
+        type: number
+      - constraints: 
+          required: true
+          minimum: 0
+          maximum: 78683
+        name: n_population_density
+        type: number
+      - constraints: 
+          required: true
+          minimum: 0
+        name: r_imputed_water_level
+        title: "Imputed water level"
+        description: "The imputed water level (m) relative to the base of the dam"
+        type: number
+      - constraints: 
+          required: true
+          minimum: 0
+        name: r_imputed_water_level_prov
+        title: "Imputed water level provenance"
+        type: number
+      - constraints: 
+          required: true
+          minimum: 0
+        name: r_area_km2
+        title: "Area [reservoir]"
+        description: "The area of the reservoir (km^2)"
+        type: number
+      - constraints: 
+          required: true
+          minimum: 0
+        name: r_volume_m3
+        title: "Volume [reservoir]"
+        description: "The volume of the reservoir (m^3)"
+        type: number
+      - constraints: 
+          required: true
+          minimum: 0
+        name: r_mean_depth_m
+        title: "Mean depth [reservoir]"
+        description: "The mean depth of the reservoir (m)"
+        type: number
+      - constraints: 
+          required: true
+          minimum: 0
+        name: r_maximum_depth_m
+        title: "Maximum depth [reservoir]"
+        description: "The maximum depth of the reservoir (m); alternative 1 "
+        type: number
+      - constraints: 
+          required: true
+          minimum: 0
+        name: r_maximum_depth_m_alt1
+        title: "Maximum depth [reservoir] alt 1"
+        description: "The maximum depth of the reservoir (m); alternative 1 "
+        type: number
+      - constraints: 
+          required: true
+          minimum: 0
+        name: r_maximum_depth_m_alt2
+        title: "Maximum depth [reservoir] alt 2"
+        description: "The maximum depth of the reservoir (m); alternative 2"
+        type: number
+      - constraints: 
+          required: true
+          minimum: 0
+          maximum: 1
+        name: r_landcover_bysoil_0
+        title: "Landcover/soil type category 0 fraction [reservoir]"
+        type: number
+      - constraints: 
+          required: true
+          minimum: 0
+          maximum: 1
+        name: r_landcover_bysoil_1
+        title: "Landcover/soil type category 1 fraction [reservoir]"
+        type: number
+      - constraints: 
+          required: true
+          minimum: 0
+          maximum: 1
+        name: r_landcover_bysoil_2
+        title: "Landcover/soil type category 2 fraction [reservoir]"
+        type: number
+      - constraints: 
+          required: true
+          minimum: 0
+          maximum: 1
+        name: r_landcover_bysoil_3
+        title: "Landcover/soil type category 3 fraction [reservoir]"
+        type: number
+      - constraints: 
+          required: true
+          minimum: 0
+          maximum: 1
+        name: r_landcover_bysoil_4
+        title: "Landcover/soil type category 4 fraction [reservoir]"
+        type: number
+      - constraints: 
+          required: true
+          minimum: 0
+          maximum: 1
+        name: r_landcover_bysoil_5
+        title: "Landcover/soil type category 5 fraction [reservoir]"
+        type: number
+      - constraints: 
+          required: true
+          minimum: 0
+          maximum: 1
+        name: r_landcover_bysoil_6
+        title: "Landcover/soil type category 6 fraction [reservoir]"
+        type: number
+      - constraints: 
+          required: true
+          minimum: 0
+          maximum: 1
+        name: r_landcover_bysoil_7
+        title: "Landcover/soil type category 7 fraction [reservoir]"
+        type: number
+      - constraints: 
+          required: true
+          minimum: 0
+          maximum: 1
+        name: r_landcover_bysoil_8
+        title: "Landcover/soil type category 8 fraction [reservoir]"
+        type: number
+      - constraints: 
+          required: true
+          minimum: 0
+          maximum: 1
+        name: r_landcover_bysoil_9
+        title: "Landcover/soil type category 9 fraction [reservoir]"
+        type: number
+      - constraints: 
+          required: true
+          minimum: 0
+          maximum: 1
+        name: r_landcover_bysoil_10
+        title: "Landcover/soil type category 10 fraction [reservoir]"
+        type: number
+      - constraints: 
+          required: true
+          minimum: 0
+          maximum: 1
+        name: r_landcover_bysoil_11
+        title: "Landcover/soil type category 11 fraction [reservoir]"
+        type: number
+      - constraints: 
+          required: true
+          minimum: 0
+          maximum: 1
+        name: r_landcover_bysoil_12
+        title: "Landcover/soil type category 12 fraction [reservoir]"
+        type: number
+      - constraints: 
+          required: true
+          minimum: 0
+          maximum: 1
+        name: r_landcover_bysoil_13
+        title: "Landcover/soil type category 13 fraction [reservoir]"
+        type: number
+      - constraints: 
+          required: true
+          minimum: 0
+          maximum: 1
+        name: r_landcover_bysoil_14
+        title: "Landcover/soil type category 14 fraction [reservoir]"
+        type: number
+      - constraints: 
+          required: true
+          minimum: 0
+          maximum: 1
+        name: r_landcover_bysoil_15
+        title: "Landcover/soil type category 15 fraction [reservoir]"
+        type: number
+      - constraints: 
+          required: true
+          minimum: 0
+          maximum: 1
+        name: r_landcover_bysoil_16
+        title: "Landcover/soil type category 16 fraction [reservoir]"
+        type: number
+      - constraints: 
+          required: true
+          minimum: 0
+          maximum: 1
+        name: r_landcover_bysoil_17
+        title: "Landcover/soil type category 17 fraction [reservoir]"
+        type: number
+      - constraints:
+          required: true
+          minimum: 0
+          maximum: 1
+        name: r_landcover_bysoil_18
+        title: "Landcover/soil type category 18 fraction [reservoir]"
+        type: number
+      - constraints:
+          required: true
+          minimum: 0
+          maximum: 1
+        name: r_landcover_bysoil_19
+        title: "Landcover/soil type category 19 fraction [reservoir]"
+        type: number
+      - constraints:
+          required: true
+          minimum: 0
+          maximum: 1
+        name: r_landcover_bysoil_20
+        title: "Landcover/soil type category 20 fraction [reservoir]"
+        type: number
+      - constraints:
+          required: true
+          minimum: 0
+          maximum: 1
+        name: r_landcover_bysoil_21
+        title: "Landcover/soil type category 21 fraction [reservoir]"
+        type: number
+      - constraints:
+          required: true
+          minimum: 0
+          maximum: 1
+        name: r_landcover_bysoil_22
+        title: "Landcover/soil type category 22 fraction [reservoir]"
+        type: number
+      - constraints:
+          required: true
+          minimum: 0
+          maximum: 1
+        name: r_landcover_bysoil_23
+        title: "Landcover/soil type category 23 fraction [reservoir]"
+        type: number
+      - constraints:
+          required: true
+          minimum: 0
+          maximum: 1
+        name: r_landcover_bysoil_24
+        title: "Landcover/soil type category 24 fraction [reservoir]"
+        type: number
+      - constraints:
+          required: true
+          minimum: 0
+          maximum: 1
+        name: r_landcover_bysoil_25
+        title: "Landcover/soil type category 25 fraction [reservoir]"
+        type: number
+      - constraints:
+          required: true
+          minimum: 0
+          maximum: 1
+        name: r_landcover_bysoil_26
+        title: "Landcover/soil type category 26 fraction [reservoir]"
+        type: number
+      - constraints: 
+          required: true
+          maximum: 57
+        name: r_mean_temp_1
+        title: "Mean monthly temperature (Jan) [reservoir]"
+        description: "Mean monthly temperature (Jan)  for reservoir (degrees C)"
+        type: number
+      - constraints: 
+          required: true
+          maximum: 57
+        name: r_mean_temp_2
+        title: "Mean monthly temperature (Feb) [reservoir]"
+        description: "Mean monthly temperature (Feb) for reservoir (degrees C)"
+        type: number
+      - constraints: 
+          required: true
+          maximum: 57
+        name: r_mean_temp_3
+        title: "Mean monthly temperature (Mar) [reservoir]"
+        description: "Mean monthly temperature (Mar) for reservoir (degrees C)"
+        type: number
+      - constraints: 
+          required: true
+          maximum: 57
+        name: r_mean_temp_4
+        title: "Mean monthly temperature (Apr) [reservoir]"
+        description: "Mean monthly temperature (Apr) for reservoir (degrees C)"
+        type: number
+      - constraints: 
+          required: true
+          maximum: 57
+        name: r_mean_temp_5
+        title: "Mean monthly temperature (May) [reservoir]"
+        description: "Mean monthly temperature (May) for reservoir (degrees C)"
+        type: number
+      - constraints: 
+          required: true
+          maximum: 57
+        name: r_mean_temp_6
+        title: "Mean monthly temperature (Jun) [reservoir]"
+        description: "Mean monthly temperature (Jun) for reservoir (degrees C)"
+        type: number
+      - constraints: 
+          required: true
+          maximum: 57
+        name: r_mean_temp_7
+        title: "Mean monthly temperature (Jul) [reservoir]"
+        description: "Mean monthly temperature (Jul) for reservoir (degrees C)"
+        type: number
+      - constraints: 
+          required: true
+          maximum: 57
+        name: r_mean_temp_8
+        title: "Mean monthly temperature (Aug) [reservoir]"
+        description: "Mean monthly temperature (Aug) for reservoir (degrees C)"
+        type: number
+      - constraints: 
+          required: true
+          maximum: 57
+        name: r_mean_temp_9
+        title: "Mean monthly temperature (Sep) [reservoir]"
+        description: "Mean monthly temperature (Sep) for reservoir (degrees C)"
+        type: number
+      - constraints: 
+          required: true
+          maximum: 57
+        name: r_mean_temp_10
+        title: "Mean monthly temperature (Oct) [reservoir]"
+        description: "Mean monthly temperature (Oct) for reservoir (degrees C)"
+        type: number
+      - constraints: 
+          required: true
+          maximum: 57
+        name: r_mean_temp_11
+        title: "Mean monthly temperature (Nov) [reservoir]"
+        description: "Mean monthly temperature (Nov) for reservoir (degrees C)"
+        type: number
+      - constraints: 
+          required: true
+          maximum: 57
+        name: r_mean_temp_12
+        title: "Mean monthly temperature (Dec) [reservoir]"
+        description: "Mean monthly temperature (Dec) for reservoir (degrees C)"
+        type: number
+      - constraints: 
+          required: true
+          minimum: 0
+        name: r_mghr_all_kwhperm2perday
+        title: "Mean global horizonal radiance [reservoir]"
+        type: number
+      - constraints: 
+          required: false
+          minimum: 0
+        name: r_mghr_all_kwhperm2perday_alt1
+        title: "Mean global horizonal radiance, alt1 [reservoir]"
+        type: number
+      - constraints: 
+          required: true
+          minimum: 0
+        name: r_mghr_may_sept_kwhperm2perday
+        type: number
+      - constraints: 
+          required: false
+          minimum: 0
+        name: r_mghr_may_sept_kwhperm2perday_alt1
+        type: number
+      - constraints: 
+          required: true
+          minimum: 0
+        name: r_mghr_nov_mar_kwhperm2perday
+        type: number
+      - constraints: 
+          required: false
+          minimum: 0
+        name: r_mghr_nov_mar_kwhperm2perday_alt1
+        type: number
+      - constraints: 
+          required: true
+          minimum: 0
+        name: r_msoc_kgperm2
+        title: "Mean soil organic carbon [reservoir]"
+        type: number
+      - constraints: 
+          required: true
+          minimum: 0
+        name: r_mean_annual_windspeed
+        title: "Mean annual wind speed [reservoir]"
+        description: "Mean annual wind speed at the reservoir (m/s)"
+        type: number
+      - constraints: 
+          required: true
+          minimum: 0
+        name: ms_length
+        title: "Length of inundated river [reservoir]"
+        description: "Length of inundated river, main channel (m)"
+        type: number
+      - constraints: 
+          required: true
+          minimum: 0
+        name: error_code
+        title: "Error codes"
+        description: "Error code"
+        type: number
+    missingValues:
+      - ''
+      - 'UD'
+      - 'NA'
+      - 'NONE'
+      - 'ND'
+      - 'NODATA'

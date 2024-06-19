@@ -1,0 +1,20 @@
+---
+# Configuration of simple text output messages (signals)
+thanks:
+    text:
+        - "Thank you for using {app_name}!"
+    variables:
+        - app_name
+    default_printer: ColorPrinter
+error:
+    text:
+        - f"  [ERROR] {app_name} encountered an error and will exit."
+    variables:
+        - app_name
+    default_printer: ColorPrinter
+fatal_error:
+    text: f"  [ERROR] {app_name} encountered a fatal error and will exit."
+    variables:
+        - app_name
+    default_printer: ColorPrinter
+...

@@ -1,0 +1,133 @@
+---
+
+# ============================================================================
+# HYDROLOGIC DATA USED AS A BASE DATASET FOR DELINEATING CATCHMENTS, RIVERS
+# AND RESERVOIRS
+# ============================================================================
+
+# Hydrosheds Flow Accumulation
+# -----------------------------
+# This flow accumulation dataset defines the amount of upstream area (in number
+# of cells) draining into each cell. The drainage direction layer is used to
+# define which cells flow into the target cell. The number of accumulated cells
+# is essentially a measure of the upstream catchment area. However, since the
+# cell size of the HydroSHEDS data set depends on latitude, the cell
+# accumulation value cannot directly be translated into drainage areas in square
+# kilometers. Values range from 1 at topographic highs (river sources) to very
+# large numbers (on the order of millions of cells) at the mouths of large
+# rivers.
+# This dataset is at 15 arc-second resolution.
+# Lehner, B., Verdin, K., Jarvis, A. (2008): New global hydrography derived
+# from spaceborne elevation data. Eos, Transactions, AGU, 89(10): 93-94
+flow_accumulation:
+  type: image
+  url: WWF/HydroSHEDS/15ACC
+# Hydrosheds Hydrorivers
+# Global river network delineation derived from HydroSHEDS data at 15 arc-second
+# resolution
+# Lehner, B., Grill G. (2013): Global river hydrography and network routing:
+# baseline data and new approaches to study the world’s large river systems.
+# Hydrological Processes, 27(15): 2171–2186. Data is available at
+# www.hydrosheds.org
+hydrorivers:
+  type: vector
+  url: users/KamillaHarding/XHEET_ASSETS/HydroRIVERS_v10
+# Hydrosheds Drainage Directions
+# This dataset is at 15 arc-second resolution. The datasets available at 15
+# arc-seconds are the Hydrologically Conditioned DEM, Drainage (Flow)
+# Direction, and Flow Accumulation
+# The drainage direction values follow the convention adopted by ESRI's flow
+# direction implementation: 1=E, 2=SE, 4=S, 8=SW, 16=W, 32=NW, 64=N, 128=NE
+hydrosheds_drainage_dir:
+  type: image
+  url: WWF/HydroSHEDS/15DIR
+# HydroSHEDS is a mapping product that provides hydrographic information for
+# regional and global-scale applications in a consistent format. It offers a
+# suite of geo-referenced datasets (vector and raster) at various scales,
+# including river networks, watershed boundaries, drainage directions, and
+# flow accumulations. HydroSHEDS is based on elevation data obtained in 2000
+# by NASA's Shuttle Radar Topography Mission (SRTM).
+# This dataset provides polygons of nested, hierarchical watersheds, based on
+# 15 arc-seconds (approx. 500 m at the equator) resolution raster data. The
+# watersheds range from level 1 (coarse) to level 12 (detailed), using
+# Pfastetter codes.
+# Technical documentation:
+# https://hydrosheds.org/images/inpages/HydroBASINS_TechDoc_v1c.pdf
+hydrobasins:
+  type: vector
+  url:
+    1: WWF/HydroSHEDS/v1/Basins/hybas_1
+    2: WWF/HydroSHEDS/v1/Basins/hybas_2
+    3: WWF/HydroSHEDS/v1/Basins/hybas_3
+    4: WWF/HydroSHEDS/v1/Basins/hybas_4
+    5: WWF/HydroSHEDS/v1/Basins/hybas_5
+    6: WWF/HydroSHEDS/v1/Basins/hybas_6
+    7: WWF/HydroSHEDS/v1/Basins/hybas_7
+    8: WWF/HydroSHEDS/v1/Basins/hybas_8
+    9: WWF/HydroSHEDS/v1/Basins/hybas_9
+    10: WWF/HydroSHEDS/v1/Basins/hybas_10
+    11: WWF/HydroSHEDS/v1/Basins/hybas_11
+    12: WWF/HydroSHEDS/v1/Basins/hybas_12
+# Hydrosheds Hydrobasins 12
+# hybas_12 is at level 12 (detailed) of HydroSHEDS
+# Lehner, B., Grill G. (2013): Global river hydrography and network routing:
+# baseline data and new approaches to study the world’s large river systems.
+# Hydrological Processes, 27(15): 2171–2186. Data is available at
+# www.hydrosheds.org
+
+
+# ============================================================================
+# DATA FOR CALCULATING PARAMETERS FOR E.G. DERIVING INPUT DATA FOR CALCULATING
+# GHG EMISSIONS
+# ============================================================================
+
+dem:
+  type: image
+  url: USGS/SRTMGL1_003
+org_soil_carbon:
+  type: image
+  url: projects/soilgrids-isric/ocs_mean
+landcover_esa:
+  type: image
+  url: users/KamillaHarding/ESACCI-LC-L4-LCCS-Map-300m-P1Y-2010-v2-0-7cds-lccs_class
+mghr:
+  type: vector
+  url: users/KamillaHarding/GHI_NASA_low
+terraclimate:
+  type: imagecollection
+  url: IDAHO_EPSCOR/TERRACLIMATE
+smap:
+  type: imagecollection
+  url: NASA_USDA/HSL/SMAP10KM_soil_moisture
+runoff_orig:
+  type: image
+  url: users/KamillaHarding/XHEET_ASSETS/cmp_ro_grdc
+runoff:
+  type: image
+  url: users/KamillaHarding/cmp_ro_prepared_kkh
+precipitation:
+  type: image
+  url: users/KamillaHarding/XHEET_ASSETS/wc2-1_30s_bio_12
+bioclimate:
+  type: image
+  url: users/KamillaHarding/wc2-1_30s_bio_12
+biomes:
+  type: vector
+  url: RESOLVE/ECOREGIONS/2017
+climate:
+  type: image
+  url: users/KamillaHarding/Beck_KG_V1_present_0p0083
+population_density:
+  type: imagecollection
+  url: CIESIN/GPWv411/GPW_Population_Density
+temperatures:
+  type: imagecollection
+  url: users/KamillaHarding/wc2-1_30s_tavg
+mean_olsen_p:
+  type: image
+  url: users/KamillaHarding/OlsenP_kgha1_World
+runoff_gldas:
+  type: imagecollection
+  url: NASA/GLDAS/V021/NOAH/G025/T3H
+
+...

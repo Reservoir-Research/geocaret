@@ -1,0 +1,12 @@
+{# Template for generating a warning message when outputs contain impossible
+   or improbable values #}
+
+  [Warning] Calculated parameters contain impossible or improbable values on
+            some fields
+
+  Please be aware of the following issues:
+
+     {{ issues | join(', ') }}
+
+  See {{output_report}} for further details.
+

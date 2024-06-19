@@ -1,0 +1,45 @@
+{# JinJa template for generating input data for the re-emission python package
+   for calculating GHG emissions from a reservoir. #}
+{ "{{ reservoir_name }}":
+    {
+    "coordinates": {{ coordinates }}, {# 2x1 vector (lat, lon) #}
+    "monthly_temps": {{ monthly_temps }}, {# 12x1 vector, deg C #}
+    "year_vector": {{ year_vector | default([1, 5, 10, 20, 30, 40, 50, 65, 80, 100])}},
+    "gases": {{'[' + '\"' + gases|join('\", \"') + '\"' + ']' }},
+    "catchment":
+    {
+        "runoff": {{ catchment.runoff }}, {# mm/year #}
+        "area": {{ catchment.area }}, {# ha #}
+        "riv_length": {{ catchment.riv_length }}, {# length of inundated river, km #}
+        "population": {{ catchment.population }}, {# capita #}
+        "area_fractions": {{ catchment.area_fractions }}, {# 8x1 vector, -, the sum of all elments must equal 1.000 #}
+        "slope": {{ catchment.slope }}, {# % #}
+        "precip": {{ catchment.precip }}, {# mm/year #}
+        "etransp": {{ catchment.etransp }}, {# mm/year #}
+        "soil_wetness": {{ catchment.soil_wetness }}, {# mm over profile #}
+        "mean_olsen": {{ catchment.mean_olsen }}, {# soil Olsen P content, kgP/ha #}
+        "biogenic_factors":
+        {
+            "biome": {{ '\"' + catchment.biogenic_factors.biome + '\"' | upper }},
+            "climate": {{ '\"' + catchment.biogenic_factors.climate + '\"' | upper }},
+            "soil_type": {{ '\"' + catchment.biogenic_factors.soil_type + '\"' | upper }},
+            "treatment_factor": {{ '\"' + catchment.biogenic_factors.treatment_factor + '\"' | upper }},
+            "landuse_intensity": {{ '\"' + catchment.biogenic_factors.landuse_intensity + '\"' | upper }}
+        }
+    },
+    "reservoir":{
+        "volume": {{ reservoir.volume }}, {# m^3 #}
+        "area": {{ reservoir.area }}, {# km^2 #}
+        "max_depth": {{ reservoir.max_depth }}, {# maximum reservoir depth, m #}
+        "mean_depth": {{ reservoir.mean_depth }}, {# mean reservoir depth, m #}
+        "area_fractions": {{ reservoir.area_fractions }}, {# inundated area fractions, 8x1 vector, -, Sum of all elements must equal 1.00 #}
+        "soil_carbon": {{ reservoir.soil_carbon }}, {# soil carbon in inundated area, kgC/m^2 #}
+        "mean_radiance": {{ reservoir.mean_radiance }}, {# mean monthly horiz. radiance, kWh/m2/d#}
+        "mean_radiance_may_sept": {{ reservoir.mean_radiance_may_sept }}, {# mean monthly horiz. radiance, may-sept, kWh/m2/d#}
+	"mean_radiance_nov_mar": {{ reservoir.mean_radiance_nov_mar }}, {# mean monthly horiz. radiance, nov-mar, kWh/m2/d#}
+        "mean_monthly_windspeed": {{ reservoir.mean_monthly_windspeed }}, {# mean monthly windspeed, m/s #}
+	"water_intake_depth": {%if reservoir.water_intake_depth is none %}
+		{{ "null" }} {% else %} {{ reservoir.water_intake_depth }} {% endif %}{# water intake depth below surface, m #}
+    }
+    }
+}

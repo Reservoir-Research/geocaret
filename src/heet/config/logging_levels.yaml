@@ -1,0 +1,23 @@
+---
+gis:
+   basins: debug
+   catchment: debug
+   dams: debug
+   reservoir: debug
+   river: debug
+   helper: debug
+parameters:
+   base_classes: debug
+   catchment: debug
+   nicatchment: debug
+   reservoir: debug
+   river: debug
+profiles:
+   base_classes: debug
+   profile_output: debug
+   catchment: debug
+   nicatchment: debug
+   point: debug
+   reservoir: debug
+   river: debug
+...

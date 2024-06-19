@@ -1,0 +1,55 @@
+---
+# Variables used in the application during GIS data retrieval, processing and
+# exporting
+# _alt[number] in variable names means that they're alternate variables
+# sourced from different datasets (or via different methods)
+c_mean_slope_pc:
+   name: Mean catchment slope
+   unit: "%"
+   min_value: 0.0
+   max_value: 100.0
+   max_max_value: 241.41
+   default_value: null
+c_mar_mm:
+   name: Mean annual runoff in catchment
+   unit: mm
+   min_value: 0.0
+   max_value: 3500.0
+   max_max_value: 6000.0
+   default_value: null
+c_mar_mm_alt1:
+   name: Mean annual runoff in catchment, alt1
+   unit: mm
+   min_value: 0.0
+   max_value: 3500.0
+   max_max_value: 6000.0
+   default_value: null
+c_mar_mm_alt2:
+   name: Mean annual runoff in catchment, alt2
+   unit: mm
+   min_value: 0.0
+   max_value: 3500.0
+   max_max_value: 6000.0
+   default_value: null
+r_mean_annual_windpseed:
+   name: Reservoir mean annual windspeed
+   unit: m/s
+   min_value: 0.0
+   max_value: 15.0
+   max_max_value: null
+   default_value: null
+c_map_mm:
+   name: Mean annual precipitation in the catchment
+   unit: mm
+   min_value: 0.0
+   max_value: 4000
+   max_max_value: 6000
+   default_value: null
+
+c_msoc_kgperm:
+   name: Mean soil carbon content in the catchment
+   unit: kg/m2
+   min_value: 12.5
+   max_value: 22
+   default_value: null
+...

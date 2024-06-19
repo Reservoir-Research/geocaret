@@ -1,0 +1,188 @@
+# Prefixes denote:
+# c_ - catchment focused parameters
+# r_ - reservoir focused parameters
+# rr - river focused parameters
+# t_ - target focused parameters
+
+# CATCHMENT RELATED PARAMETERS
+MeanSlopePercParameter:
+   prefix: "c_"
+   name: "mean catchment slope"
+   var_names: ["mean_slope_pc"]
+   var_units: ["%"]
+   var_lengths: [1]
+   empty_vals: ["NA"]
+   undefined_vals: ["UD"]
+MeanAnnualRunoffParameter:
+   prefix: "c_"
+   name: "mean annual runoff"
+   var_names: ["mar_mm"]
+   var_units: ["mm/yr"]
+   var_lengths: [1]
+   empty_vals: ["NA"]
+   undefined_vals: ["UD"]
+MeanAnnualPrecParameter:
+   prefix: "c_"
+   name: "mean annual precipitation"
+   var_names: ["map_mm"]
+   var_units: ["mm/yr"]
+   var_lengths: [1]
+   empty_vals: ["NA"]
+   undefined_vals: ["UD"]
+PredominantBiomeParameter:
+   prefix: "c_"
+   name: "predominant biome"
+   var_names: ["biome"]
+   var_units: ["-"]
+   var_lengths: [1]
+   empty_vals: ["NONE"]
+   undefined_vals: ["UD"]
+PredominantClimateParameter:
+   prefix: "c_"
+   name: "predominant climate zone"
+   var_names: ["climate_zone"]
+   var_units: ["-"]
+   var_lengths: [1]
+   empty_vals: ["NA"]
+   undefined_vals: ["UD"]
+MeanOlsenParameter:
+   prefix: "c_"
+   name: "P content in soil"
+   var_names: ["mean_olsen"]
+   var_units: ["kgP/ha"]
+   var_lengths: [1]
+   empty_vals: ["NA"]
+   undefined_vals: ["UD"]
+LandcoverParameter:
+   prefix: "c_"
+   name: "Land cover fractions in an area"
+   var_names: ["landcover"]
+   var_units: ["-"]
+   var_lengths: [9]
+   empty_vals: ["NA"]
+   undefined_vals: ["UD"]
+MeanSoilOrgCarbonParameter:
+   prefix: "c_"
+   name: "Mean soil organic carbon content"
+   var_names: ["msoc_kgperm2"]
+   var_units: ["kg/m2"]
+   var_lengths: [1]
+   empty_vals: ["NA"]
+   undefined_vals: ["UD"]
+
+
+# RESERVOIR RELATED PARAMETERS
+MGHRParameter:
+   prefix: "r_"
+   name: "mean annual global horizontal irradiance"
+   var_names: ["mghr_all", "mghr_nov_mar", "mghr_may_sept"]
+   var_units: ["kWh/m2/d", "kWh/m2/d", "kWh/m2/d"]
+   var_lengths: [1, 1, 1]
+   empty_vals: ["NA", "NA", "NA"]
+   undefined_vals: ["UD", "UD", "UD"]
+LandCoverBySoilParameter:
+   prefix: "r_"
+   name: "land cover category by soil type"
+   var_names: ["landcover_bysoil"]
+   var_units: ["-"]
+   var_lengths: [27]
+   empty_vals: ["NA"]
+   undefined_vals: ["UD"]
+
+
+
+
+
+
+
+            "ps_snap_displacement": "NA",
+            "ps_lon": "NA",
+            "ps_lat": "NA"
+            "c_area_km2" : "NA",
+            "c_msoc_kgperm" : "NA",
+            "c_masm_mm" : "NA", # Slow
+            "c_masm_mm_alt1" : "NA",
+            "c_climate_zone" : "NA",
+            "c_mpet_mm" : "NA",
+            "c_population" : "NA",
+            "c_population_density" : "NA",
+            "c_mar_mm_alt1" : "NA", # Very Slow
+            "c_mar_mm_alt2" : "NA",
+            "c_mean_olsen" : "NA",
+            "c_soil_type" : "NONE",
+            "c_imputed_water_level" : "NA",
+            "c_imputed_water_level_prov" : "NA"
+             "r_area_km2": "NA",
+             "r_mean_depth_m": "NA",
+             "r_maximum_depth_m": "NA",
+             "r_maximum_depth_m_alt1": "NA",
+             "r_maximum_depth_m_alt2": "NA",
+             "r_volume_m3": "NA",
+             "r_mean_temp_1": "NA",
+             "r_mean_temp_2": "NA",
+             "r_mean_temp_3": "NA",
+             "r_mean_temp_4": "NA",
+             "r_mean_temp_5": "NA",
+             "r_mean_temp_6": "NA",
+             "r_mean_temp_7": "NA",
+             "r_mean_temp_8": "NA",
+             "r_mean_temp_9": "NA",
+             "r_mean_temp_10": "NA",
+             "r_mean_temp_11": "NA",
+             "r_mean_temp_12": "NA",
+             "r_mghr_all_kwhperm2perday_alt1": "NA",
+             "r_mghr_nov_mar_kwhperm2perday_alt1": "NA",
+             "r_mghr_may_sept_kwhperm2perday_alt1": "NA",
+             "r_msoc_kgperm2": "NA",
+             "r_mean_annual_windspeed": "NA"
+             "n_population" : "NA",
+             "n_population_density" : "NA"
+ 		"ms_length" : "NA"
+
+    water_level = ee.Number(catchFeat.get('t_water_level'))
+    dam_height = ee.Number(catchFeat.get('t_dam_height'))
+    turbine_efficiency = ee.Number(catchFeat.get('t_turbine_efficiency'))
+    power_capacity = ee.Number(catchFeat.get('power_capacity'))
+    plant_depth = ee.Number(catchFeat.get('t_plant_depth'))
+'turbine_efficiency_prov')
+            "c_area_km2": area_km2,
+            # Landcover
+            "c_msoc_kgperm": msoc_kgperm2,
+            "c_masm_mm": masm_mm, # Slow
+            "c_masm_mm_alt1": masm_mm_alt1,
+            "c_climate_zone": climate_zone,
+            "c_mpet_mm": mpet_mm,
+            "c_population": c_current_population,
+            "c_population_density": c_current_population_density,
+            "c_mar_mm_alt1": mar_mm_alt1, # Very Slow
+            "c_mar_mm_alt2": mar_mm_alt2,
+            "c_mean_olsen": mean_olsen,
+            "c_soil_type": soil_type_cat,
+            "r_imputed_water_level": c_imputed_water_level,
+            "r_imputed_water_level_prov": c_imputed_water_level_prov
+            "n_population": c_current_population,
+            "n_population_density": c_current_population_density})))
+        "ms_length": length})))
+        "r_area_km2" : area_km2,
+        "r_mean_depth_m" : mean_depth_m,
+        "r_maximum_depth_m": maximum_depth_m,
+        "r_maximum_depth_m_alt1": maximum_depth_m_alt1,
+        "r_maximum_depth_m_alt2": maximum_depth_m_alt2,
+        "r_volume_m3" : volume_m3,
+        "r_mean_temp_1" : mean_temp_1,
+        "r_mean_temp_2" : mean_temp_2,
+        "r_mean_temp_3" : mean_temp_3,
+        "r_mean_temp_4" : mean_temp_4,
+        "r_mean_temp_5" : mean_temp_5,
+        "r_mean_temp_6" : mean_temp_6,
+        "r_mean_temp_7" : mean_temp_7,
+        "r_mean_temp_8" : mean_temp_8,
+        "r_mean_temp_9" : mean_temp_9,
+        "r_mean_temp_10" : mean_temp_10,
+        "r_mean_temp_11" : mean_temp_11,
+        "r_mean_temp_12" : mean_temp_12,
+        "r_mghr_all_kwhperm2perday_alt1" : mghr_all_kwhperm2perday_alt1,
+        "r_mghr_nov_mar_kwhperm2perday_alt1" : mghr_nov_mar_kwhperm2perday_alt1,
+        "r_mghr_may_sept_kwhperm2perday_alt1" : mghr_may_sept_kwhperm2perday_alt1,
+        "r_msoc_kgperm2" : msoc_kgperm2,
+        "r_mean_annual_windspeed": mean_annual_windpseed_mpers
