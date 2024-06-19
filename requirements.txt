@@ -1,0 +1,13 @@
+pytest
+pytest-cov
+pandas
+frictionless<=4.40.8
+earthengine-api
+pyyaml
+polling2
+yaspin
+PyInquirer
+pyfiglet
+colorama
+tqdm
+setuptools-scm

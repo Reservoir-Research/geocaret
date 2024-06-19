@@ -1,0 +1,112 @@
+﻿name,title,description,type,contraints,required,unique,minimum,maximum,gis_layer,ee_asset_vars
+id,Dam Identifier, Dam identifier, integer,,TRUE,TRUE,1,,NA,-
+country,Country Name, The name of the country the dam is located in (the ISO 3166 official short name (EN)), string,,TRUE,FALSE,,,NA,-
+name,Dam Name, The name of the dam, string,,TRUE,FALSE,,,NA,-
+river,River Name, The name of the river the dam will be constructed on, string,,TRUE,FALSE,,,NA,-
+main_basin,Main Basin Name, The name of main river basin the dam will be located in, string,,TRUE,FALSE,,,NA,-
+dam_lat,Dam Latitude, The latitude of the dam location in decimal degrees (DD), number,,TRUE,FALSE,-90,90,NA,-
+dam_lon,Dam Longitude, The longitude of the dam location in decimal degrees (DD), number,,TRUE,FALSE,-180,180,NA,-
+dam_height,Dam Height, The dam height in metres (m), number,,TRUE,FALSE,10,300,NA,-
+year_commissioned,Year Commissioned,The year the dam was commissioned in,number,,TRUE,FALSE,0,,,
+fsl_msl,Full Supply Level,The full supply level of the reservoir (masl), number,,TRUE,FALSE,-113,9148,NA,-
+power_capacity ,Power Capacity, The installed power capacity of the dam in megawatts (MW), number,,TRUE,FALSE,0.001,22500,NA,-
+turbine_efficiency,Turbine Efficiency," The efficiency of the dam's turbines, percentage (%)", number,,TRUE,FALSE,0,100,NA,-
+plant_depth,Power Plant Depth, The depth of the power plant below the base of the dam wall in metres (m), number,,TRUE,FALSE,0,300,NA,-
+ps_snap_displacement,Snap Displacement,The distance between the hydroriver-snapped dam location and the raw dam location (m,number,,TRUE,FALSE,0,,NA,-
+ps_lat,Snapped Dam Latitude, The latitude of the snapped dam location in decimal degrees (DD), number,,TRUE,FALSE,-90,90,NA,-
+ps_lon,Snapped Dam Longitude, The longitude of the snapped dam location in decimal degrees (DD), number,,TRUE,FALSE,-180,180,NA,-
+d_dam_elevation,Snapped Dam Elevation,The elevation at the snapped dam location, number,,TRUE,FALSE,-413,8848,USGS/SRTMGL1_003,b[elevation]
+c_area_km2,Area [catchment],The area of the catchment ($km^2$), number,,TRUE,FALSE,0,,NA,-
+c_mean_slope_pc,Mean slope [catchment],The mean slope of the catchment (%), number,,TRUE,FALSE,0,241.41,USGS/SRTMGL1_003,b[elevation]
+c_biome,Predominant biome [catchment],The predominant biome of the catchment,string,,TRUE,FALSE,,,RESOLVE/ECOREGIONS/2017,f[BIOME_NAME]
+c_climate_zone,Predominant climate [catchment],The predominant climate zone of the catchment (koppen climate zones - see 99_koppen_codes.md),number,,TRUE,FALSE,,,XHEET_ASSETS/Beck_KG_V1_present_0p0083,b[b1]
+c_population,Population [catchment],The population of the catchment (persons),number,,TRUE,FALSE,0,,CIESIN/GPWv411/GPW_Population_Density,b[population_density]
+c_population_density,Population density [catchment],The population density of the catchment ($persons/km^2$),number,,TRUE,FALSE,0,"78,683",CIESIN/GPWv411/GPW_Population_Density,b[population_density]
+c_landcover_0,Landcover category 0 fraction [catchment],The landcover category 0  ('No Data') fraction of the catchment,number,,TRUE,FALSE,0,1,XHEET_ASSETS/ESACCI-LC-L4-LCCS-Map-300m-P1Y-2010-v2-0-7cds-lccs_class,b[b1]
+c_landcover_1,Landcover category 1 fraction [catchment],The landcover category 1 ('Croplands') fraction of the catchment,number,,TRUE,FALSE,0,1,XHEET_ASSETS/ESACCI-LC-L4-LCCS-Map-300m-P1Y-2010-v2-0-7cds-lccs_class,b[b1]
+c_landcover_2,Landcover category 2 fraction [catchment],The landcover category 2 ('Grassland/Shrubland')  fraction of the catchment,number,,TRUE,FALSE,0,1,XHEET_ASSETS/ESACCI-LC-L4-LCCS-Map-300m-P1Y-2010-v2-0-7cds-lccs_class,b[b1]
+c_landcover_3,Landcover category 3 fraction [catchment],The landcover category 3 ('Forest') fraction of the catchment,number,,TRUE,FALSE,0,1,XHEET_ASSETS/ESACCI-LC-L4-LCCS-Map-300m-P1Y-2010-v2-0-7cds-lccs_class,b[b1]
+c_landcover_4,Landcover category 4 fraction [catchment],The landcover category 4 ('Wetlands') fraction of the catchment,number,,TRUE,FALSE,0,1,XHEET_ASSETS/ESACCI-LC-L4-LCCS-Map-300m-P1Y-2010-v2-0-7cds-lccs_class,b[b1]
+c_landcover_5,Landcover category 5 fraction [catchment],The landcover category 5 ('Settlements') fraction of the catchment,number,,TRUE,FALSE,0,1,XHEET_ASSETS/ESACCI-LC-L4-LCCS-Map-300m-P1Y-2010-v2-0-7cds-lccs_class,b[b1]
+c_landcover_6,Landcover category 6 fraction [catchment],The landcover category 6 ('Bare Areas')  fraction of the catchment,number,,TRUE,FALSE,0,1,XHEET_ASSETS/ESACCI-LC-L4-LCCS-Map-300m-P1Y-2010-v2-0-7cds-lccs_class,b[b1]
+c_landcover_7,Landcover category 7 fraction [catchment],The landcover category 7 ('Water Bodies') fraction of the catchment,number,,TRUE,FALSE,0,1,XHEET_ASSETS/ESACCI-LC-L4-LCCS-Map-300m-P1Y-2010-v2-0-7cds-lccs_class,b[b1]
+c_landcover_8,Landcover category 8 fraction [catchment],The landcover category 8 ('Permanent snow and ice')  fraction of the catchment,number,,TRUE,FALSE,0,1,XHEET_ASSETS/ESACCI-LC-L4-LCCS-Map-300m-P1Y-2010-v2-0-7cds-lccs_class,b[b1]
+c_mpet_mm,Mean annual evapotranspiration [catchment],The mean annual evapotranspiration for the catchment (mm/year),number,,TRUE,FALSE,0,2500,IDAHO_EPSCOR/TERRACLIMATE,b[pet]
+c_mpet_mm_alt1,Mean annual evapotranspiration [catchment] alt1,The mean annual evapotranspiration for the catchment (mm/year) alt1,number,,TRUE,FALSE,0,2500,﻿XHEET_ASSETS/Eo150_clim_xyz_updated,b[b1]
+c_map_mm,Mean annual precipitation [catchment],The mean annual precipitation for the catchment (mm/year),number,,TRUE,FALSE,0,6000,XHEET_ASSETS/wc2-1_30s_bio_12,b[b1]
+c_map_mm_alt1,Mean annual precipitation [catchment],The mean annual precipitation for the catchment (mm/year),number,,TRUE,FALSE,0,6000,IDAHO_EPSCOR/TERRACLIMATE,b[pr]
+c_mar_mm,Mean annual runoff [catchment] default,The mean annual runoff for the catchment (mm/year). Default definition using UNH/GRDC Composite Runoff Fields V1.0 - Fekete(2002),number,,TRUE,FALSE,0,6000,XHEET_ASSETS/cmp_ro_grdc,b[b1]
+c_mar_mm_alt2,Mean annual runoff alt2 [catchment],The mean annual runoff for the catchment (mm/year). Alternative definition 2: Long term mean (2000-2019) of TerraClimate total runoff (mm) per calendar year, number,,TRUE,FALSE,0,6000,IDAHO_EPSCOR/TERRACLIMATE,b[ro]
+﻿c_mad_m3_peryr,Mean annual discharge [catchment] default,The mean annual discharge for the catchment (m3/year). Default definition using UNH/GRDC Composite Runoff Fields V1.0 - Fekete(2002),number,,TRUE,FALSE,0,,XHEET_ASSETS/cmp_ro_grdc,b[b1]
+﻿c_mad_m3_pers,Mean annual discharge [catchment] default,The mean annual discharge for the catchment (m3/s). Default definition using UNH/GRDC Composite Runoff Fields V1.0 - Fekete(2002),number,,TRUE,FALSE,0,,XHEET_ASSETS/cmp_ro_grdc,b[b1]
+c_msocs_kgperm2,Mean soil organic carbon stocks  [catchment],The mean soil organic carbon stocks of the catchment (0-30cm; $kg C m^2$),number,,TRUE,FALSE,0,,projects/soilgrids-isric/ocs_mean,b[ocs_mean]
+c_msocc_perc,Mean soil organic carbon content [catchment],The mean soil organic carbon content of the catchment (0-30cm; $%$),,,TRUE,FALSE,0,,projects/soilgrids-isric/soc_mean,b[soc_0-5cm_mean]|soc_5-15cm_mean|soc_15-30cm_mean
+c_msocc_gperkg,Mean soil organic carbon content [catchment],The mean soil organic carbon content of the catchment (0-30cm; $g/kg$),,,TRUE,FALSE,0,,projects/soilgrids-isric/soc_mean,b[soc_0-5cm_mean]|soc_5-15cm_mean|soc_15-30cm_mean
+c_msnc_gperkg,Mean soil total nitrogen content [catchment],The mean soil nitrogen content of the catchment (0-30cm; $g/kg$),,,TRUE,FALSE,0,,projects/soilgrids-isric/nitrogen_mean,b[nitrogen_0-5cm_mean]|nitrogen_5-15cm_mean|nitrogen_15-30cm_mean
+c_msbdod_kgperdm3,Mean soil bulk density [catchment],The mean soil bulk of the catchment (0-30cm; $kg/dm^3$),,,TRUE,FALSE,0,,projects/soilgrids-isric/bdod_mean,b[bdod_0-5cm_mean]|bdod_5-15cm_mean|bdod_15-30cm_mean
+c_soil_type,Soil Type [catchment],The predominant soil type (mineral/organic) of the catchment area,string,,TRUE,FALSE,,,projects/soilgrids-isric/ocs_mean,b[ocs_mean]
+c_masm_mm,Mean soil moisture [catchment],The nean soil moisture of the catchment (mm/m soil depth),number,,TRUE,FALSE,0,,NASA_USDA/HSL/SMAP10KM_soil_moisture,b[b1]
+c_mean_olsen,Soil Olsen P [catchment],The soil Olsen P of the catchment (kg ha-1),number,,TRUE,FALSE,0,,XHEET_ASSETS/OlsenP_kgha1_World,b[b1]
+n_population,Population [non-inundated catchment],The population of non-inundated catchment (persons),number,,TRUE,FALSE,0,,CIESIN/GPWv411/GPW_Population_Density,b[population_density]
+n_population_density,Population density [non-inundated catchment],The population of non-inundated catchment ($persons/km^2$),number,,TRUE,FALSE,0,"78,683",CIESIN/GPWv411/GPW_Population_Density,b[population_density]
+r_imputed_water_level,Imputed water level,The imputed water level (m) relative to the base of the dam,number,,TRUE,FALSE,0,,NA,-
+r_imputed_water_level_prov,Imputed water level provenance,"The imputed water level provenance (0 - inputted water level, 1 - inputted dam height , 2- calculated dam height )",number,,TRUE,FALSE,0,,NA,-
+r_area_km2,Area [reservoir],The area of the reservoir ($km^2$),number,,TRUE,FALSE,0,,NA,-
+r_volume_m3,Volume [reservoir],The volume of the reservoir ($m^3$),number,,TRUE,FALSE,0,,USGS/SRTMGL1_003,b[elevation]
+r_mean_depth_m,Mean depth [reservoir],The mean depth of the reservoir (m),number,,TRUE,FALSE,0,,USGS/SRTMGL1_003,b[elevation]
+r_maximum_depth_m,Maximum depth [reservoir],The maximum depth of the reservoir (m); Default definition 1: max(Water Elevation(res) - Land Elevation(res)),number,,TRUE,FALSE,0,,USGS/SRTMGL1_003,b[elevation]
+r_maximum_depth_m_alt1,Maximum depth [reservoir] alt 1,The maximum depth of the reservoir (m); Alternative definition 1: Max Elevation(res) - Min Elevation(dam) NB: this definition assumes that the deepest point of the reservoir is at the dam wall, number,,TRUE,FALSE,0,,USGS/SRTMGL1_003,b[elevation]
+r_maximum_depth_m_alt2,Maximum depth [reservoir] alt 2,The maximum depth of the reservoir (m); Alternative 2: Max Elevation(res) - Min Elevation(res),number,,TRUE,FALSE,0,,USGS/SRTMGL1_003,b[elevation]
+r_landcover_bysoil_0,Landcover/soil type category 0 fraction [reservoir],The landcover/soil type category ('Mineral - No Data') fraction of the reservoir,number,,TRUE,FALSE,0,1,Derived,-
+r_landcover_bysoil_1,Landcover/soil type category 1 fraction [reservoir],The landcover/soil type category 1 ('Mineral - Croplands') fraction of the reservoir,number,,TRUE,FALSE,0,1,Derived,-
+r_landcover_bysoil_2,Landcover/soil type category 2 fraction [reservoir],The landcover/soil type category 2 ('Mineral - Grassland/Shrubland') fraction of the reservoir,number,,TRUE,FALSE,0,1,Derived,-
+r_landcover_bysoil_3,Landcover/soil type category 3 fraction [reservoir],The landcover/soil type category 3 ('Mineral - Forest')  fraction of the reservoir,number,,TRUE,FALSE,0,1,Derived,-
+r_landcover_bysoil_4,Landcover/soil type category 4 fraction [reservoir],The landcover/soil type category 4 ('Mineral - Wetlands') fraction of the reservoir,number,,TRUE,FALSE,0,1,Derived,-
+r_landcover_bysoil_5,Landcover/soil type category 5 fraction [reservoir],The landcover/soil type category 5 ('Mineral - Settlements') fraction of the reservoir,number,,TRUE,FALSE,0,1,Derived,-
+r_landcover_bysoil_6,Landcover/soil type category 6 fraction [reservoir],The landcover/soil type category 6 ('Mineral - Bare Areas') fraction of the reservoir,number,,TRUE,FALSE,0,1,Derived,-
+r_landcover_bysoil_7,Landcover/soil type category 7 fraction [reservoir],The landcover/soil type category 7 ('Mineral - Water Bodies') fraction of the reservoir,number,,TRUE,FALSE,0,1,Derived,-
+r_landcover_bysoil_8,Landcover/soil type category 8 fraction [reservoir],The landcover/soil type category 8 ('Mineral - Permanent snow and ice') fraction of the reservoir,number,,TRUE,FALSE,0,1,Derived,-
+r_landcover_bysoil_9,Landcover/soil type category 9 fraction [reservoir],The landcover/soil type category 9 ('Organic - No Data') fraction of the reservoir,number,,TRUE,FALSE,0,1,Derived,-
+r_landcover_bysoil_10,Landcover/soil type category 10 fraction [reservoir],The landcover/soil type category 10 ('Organic - Croplands')  fraction of the reservoir,number,,TRUE,FALSE,0,1,Derived,-
+r_landcover_bysoil_11,Landcover/soil type category 11 fraction [reservoir],The landcover/soil type category 11 ('Organic - Grassland/Shrubland') fraction of the reservoir,number,,TRUE,FALSE,0,1,Derived,-
+r_landcover_bysoil_12,Landcover/soil type category 12 fraction [reservoir],The landcover/soil type category 12 ('Organic - Forest') fraction of the reservoir,number,,TRUE,FALSE,0,1,Derived,-
+r_landcover_bysoil_13,Landcover/soil type category 13 fraction [reservoir],The landcover/soil type category 13 ('Organic - Wetlands')  fraction of the reservoir,number,,TRUE,FALSE,0,1,Derived,-
+r_landcover_bysoil_14,Landcover/soil type category 14 fraction [reservoir],The landcover/soil type category 14 ('Organic - Settlements')  fraction of the reservoir,number,,TRUE,FALSE,0,1,Derived,-
+r_landcover_bysoil_15,Landcover/soil type category 15 fraction [reservoir],The landcover/soil type category 15 ('Organic - Bare Areas') fraction  of the reservoir,number,,TRUE,FALSE,0,1,Derived,-
+r_landcover_bysoil_16,Landcover/soil type category 16 fraction [reservoir],The landcover/soil type category 16 ('Organic - Water Bodies') fraction of the reservoir,number,,TRUE,FALSE,0,1,Derived,-
+r_landcover_bysoil_17,Landcover/soil type category 17 fraction [reservoir],The landcover/soil type category 17 ('Organic - Permanent snow and ice') fraction of the reservoir,number,,TRUE,FALSE,0,1,Derived,-
+r_landcover_bysoil_18,Landcover/soil type category 18 fraction [reservoir],The landcover/soil type category 18 ('No Data - No Data') fraction of the reservoir,,,TRUE,FALSE,0,1,Derived,-
+r_landcover_bysoil_19,Landcover/soil type category 19 fraction [reservoir],The landcover/soil type category 19 ('No Data - Croplands') fraction of the reservoir,,,TRUE,FALSE,0,1,Derived,-
+r_landcover_bysoil_20,Landcover/soil type category 20 fraction [reservoir],The landcover/soil type category 20 ('No Data - Grassland/Shrubland') fraction of the reservoir,,,TRUE,FALSE,0,1,Derived,-
+r_landcover_bysoil_21,Landcover/soil type category 21 fraction [reservoir],The landcover/soil type category 21 ('No Data - Forest')  fraction of the reservoir,,,TRUE,FALSE,0,1,Derived,-
+r_landcover_bysoil_22,Landcover/soil type category 22 fraction [reservoir],The landcover/soil type category 22 ('No Data - Wetlands') fraction of the reservoir,,,TRUE,FALSE,0,1,Derived,-
+r_landcover_bysoil_23,Landcover/soil type category 23 fraction [reservoir],The landcover/soil type category 23 ('No Data - Settlements') fraction of the reservoir,,,TRUE,FALSE,0,1,Derived,-
+r_landcover_bysoil_24,Landcover/soil type category 24 fraction [reservoir],The landcover/soil type category 24 ('No Data - Bare Areas') fraction of the reservoir,,,TRUE,FALSE,0,1,Derived,-
+r_landcover_bysoil_25,Landcover/soil type category 25 fraction [reservoir],The landcover/soil type category 25 ('No Data - Water Bodies') fraction of the reservoir,,,TRUE,FALSE,0,1,Derived,-
+r_landcover_bysoil_26,Landcover/soil type category 26 fraction [reservoir],The landcover/soil type category 26 ('No Data - Permanent snow and ice') fraction of the reservoir,,,TRUE,FALSE,0,1,Derived,-
+r_mean_temp_1,Mean monthly temperature (Jan) [reservoir],Mean monthly temperature (Jan)  for reservoir (degrees C),number,,TRUE,FALSE,-90,57,XHEET_ASSETS/wc2-1_30s_tavg,b[b1]
+r_mean_temp_2,Mean monthly temperature (Feb) [reservoir],Mean monthly temperature (Feb) for reservoir (degrees C),number,,TRUE,FALSE,-90,57,XHEET_ASSETS/wc2-1_30s_tavg,b[b1]
+r_mean_temp_3,Mean monthly temperature (Mar) [reservoir],Mean monthly temperature (Mar) for reservoir (degrees C),number,,TRUE,FALSE,-90,57,XHEET_ASSETS/wc2-1_30s_tavg,b[b1]
+r_mean_temp_4,Mean monthly temperature (Apr) [reservoir],Mean monthly temperature (Apr) for reservoir (degrees C),number,,TRUE,FALSE,-90,57,XHEET_ASSETS/wc2-1_30s_tavg,b[b1]
+r_mean_temp_5,Mean monthly temperature (May) [reservoir],Mean monthly temperature (May) for reservoir (degrees C),number,,TRUE,FALSE,-90,57,XHEET_ASSETS/wc2-1_30s_tavg,b[b1]
+r_mean_temp_6,Mean monthly temperature (Jun) [reservoir],Mean monthly temperature (Jun) for reservoir (degrees C),number,,TRUE,FALSE,-90,57,XHEET_ASSETS/wc2-1_30s_tavg,b[b1]
+r_mean_temp_7,Mean monthly temperature (Jul) [reservoir],Mean monthly temperature (Jul) for reservoir (degrees C),number,,TRUE,FALSE,-90,57,XHEET_ASSETS/wc2-1_30s_tavg,b[b1]
+r_mean_temp_8,Mean monthly temperature (Aug) [reservoir],Mean monthly temperature (Aug) for reservoir (degrees C),number,,TRUE,FALSE,-90,57,XHEET_ASSETS/wc2-1_30s_tavg,b[b1]
+r_mean_temp_9,Mean monthly temperature (Sep) [reservoir],Mean monthly temperature (Sep) for reservoir (degrees C),number,,TRUE,FALSE,-90,57,XHEET_ASSETS/wc2-1_30s_tavg,b[b1]
+r_mean_temp_10,Mean monthly temperature (Oct) [reservoir],Mean monthly temperature (Oct) for reservoir (degrees C),number,,TRUE,FALSE,-90,57,XHEET_ASSETS/wc2-1_30s_tavg,b[b1]
+r_mean_temp_11,Mean monthly temperature (Nov) [reservoir],Mean monthly temperature (Nov) for reservoir (degrees C),number,,TRUE,FALSE,-90,57,XHEET_ASSETS/wc2-1_30s_tavg,b[b1]
+r_mean_temp_12,Mean monthly temperature (Dec) [reservoir],Mean monthly temperature (Dec) for reservoir (degrees C),number,,TRUE,FALSE,-90,57,XHEET_ASSETS/wc2-1_30s_tavg,b[b1]
+r_mghr_all_kwhperm2perday,Mean global horizonal radiance [reservoir],"Mean global horizontal radiance, reservoir ($kWh m^2 d^-1$); Default definition from NASA/SSE Irradiance Data 1983-2005",number,,TRUE,FALSE,0,,XHEET_ASSETS/GHI_NASA_low,f[annual]
+r_mghr_all_kwhperm2perday_alt1,"Mean global horizonal radiance, alt1 [reservoir]",Mean global horizontal radiance ($kWh m^2 d^-1$); Alternative definition 1: Long term annual mean (2000-2019) of downward surface shortwave radiation (srad) from TerraClimate [UNAVAILABLE].,number,,TRUE,FALSE,0,,XHEET_ASSETS/GHI_NASA_low,b[b1]
+r_mghr_may_sept_kwhperm2perday,Mean global horizonal radiance May-Sept [reservoir],"Mean global horizontal radiance May-Sept, reservoir ($kWh m^2 d^-1$); Default definition from NASA/SSE Irradiance Data 1983-2005",number,,TRUE,FALSE,0,,XHEET_ASSETS/GHI_NASA_low,f[annual]
+r_mghr_may_sept_kwhperm2perday_alt1,Mean global horizonal radiance May-Sept [reservoir],"Mean global horizontal radiance May-Sept, reservoir ($kWh m^2 d^-1$); Alternative definition 1: Long term annual mean (2000-2019) of downward surface shortwave radiation (srad) from TerraClimate [UNAVAILABLE].",number,,TRUE,FALSE,0,,XHEET_ASSETS/GHI_NASA_low,b[b1]
+r_mghr_nov_mar_kwhperm2perday,Mean global horizonal radiance Nov-Mar [reservoir],"Mean global horizontal radiance Nov-Mar, reservoir ($kWh m^2 d^-1$); Alternative definition 1: Default definition from NASA/SSE Irradiance Data 1983-2005",number,,TRUE,FALSE,0,,XHEET_ASSETS/GHI_NASA_low,f[annual]
+r_mghr_nov_mar_kwhperm2perday_alt1,Mean global horizonal radiance Nov-Mar [reservoir],"Mean global horizontal radiance Nov-Mar, reservoir ($kWh m^2 d^-1$); Alternative definition 1: Long term annual mean (2000-2019) of downward surface shortwave radiation (srad) from TerraClimate [UNAVAILABLE].",number,,TRUE,FALSE,0,,XHEET_ASSETS/GHI_NASA_low,b[b1]
+r_msocs_kgperm2,Mean soil organic carbon stocks [reservoir],The mean soil organic carbon stocks of the reservoir (0-30cm; $kg C m^2$),number,,TRUE,FALSE,0,,projects/soilgrids-isric/ocs_mean,b[ocs_mean]
+r_msocc_perc,Mean soil organic carbon content [reservoir],The mean soil organic carbon content of the reservoir (0-30cm; $%$),,,TRUE,FALSE,0,,projects/soilgrids-isric/soc_mean,b[soc_0-5cm_mean]|soc_5-15cm_mean|soc_15-30cm_mean
+r_msocc_gperkg,Mean soil organic carbon content [reservoir],The mean soil organic carbon content of the reservoir (0-30cm; $g/kg$),,,TRUE,FALSE,0,,projects/soilgrids-isric/soc_mean,b[soc_0-5cm_mean]|soc_5-15cm_mean|soc_15-30cm_mean
+r_msnc_gperkg,Mean soil total nitrogen content [reservoir],The mean soil nitrogen content of the reservoir (0-30cm; $g/kg$),,,TRUE,FALSE,0,,projects/soilgrids-isric/nitrogen_mean,b[nitrogen_0-5cm_mean]|nitrogen_5-15cm_mean|nitrogen_15-30cm_mean
+r_msbdod_kgperdm3,Mean soil bulk density [reservoir],The mean soil bulk of the reservoir (0-30cm; $kg/dm^3$),,,TRUE,FALSE,0,,projects/soilgrids-isric/bdod_mean,b[bdod_0-5cm_mean]|bdod_5-15cm_mean|bdod_15-30cm_mean
+r_mean_annual_windspeed_mpers,Mean annual wind speed [reservoir],Mean annual wind speed at the reservoir ($m s^-1$),number,,TRUE,FALSE,0,,IDAHO_EPSCOR/TERRACLIMATE,b[vs]
+ms_length,Length of inundated river [reservoir],Length of inundated river (km),number,,TRUE,FALSE,0,,XHEET_ASSETS/HydroRIVERS_v10,various
+error_code,Error codes,Error code; ,number,,TRUE,FALSE,0,,,
