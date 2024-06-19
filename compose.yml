@@ -1,0 +1,11 @@
+services:
+  geocaret:
+    build:
+      context: .
+    image: geocaret
+    volumes:
+      - ${GEOCARET_AUTH_PATH:-./auth}:/home/appuser/.config
+      - ./data:/home/appuser/geocaret/data
+      - ./outputs:/home/appuser/geocaret/outputs
+    stdin_open: true 
+    tty: true

@@ -1,0 +1,114 @@
+encoding: utf-8
+format: csv
+hashing: md5
+layout:
+  headerRows:
+    - 1
+name: dams
+path: dams.csv
+profile: tabular-data-resource
+schema:
+  fields:
+    - constraints:
+        required: true
+        unique: true
+        minimum: 1
+      description: "Dam identifier"
+      name: id
+      title: "Dam Identifier"
+      type: integer
+    - constraints:
+        required: true
+      description: "The name of the country the dam is located in (the ISO 3166 official short name (EN))"
+      name: country
+      title: "Country Name"
+      type: string
+    - constraints:
+        required: true
+      description: "The name of the dam"
+      name: name
+      title: "Dam Name"
+      type: string
+    - constraints:
+        required: false
+      description: "The name of the river the dam will be constructed on"
+      name: river
+      title: River Name
+      type: string
+    - constraints:
+        required: false
+      description: "The name of main river basin the dam will be located in"
+      name: main_basin
+      title: Main Basin Name
+      type: string
+    - constraints:
+        maximum: 60
+        minimum: -60
+        required: true
+      description: "The latitude of the dam location in decimal degrees (DD)"
+      name: dam_lat
+      title: Dam Latitude
+      type: number
+    - constraints:
+        maximum: 180
+        minimum: -180
+        required: true
+      description: "The longitude of the dam location in decimal degrees (DD)"
+      name: dam_lon
+      title: Dam Longitude
+      type: number
+    - constraints:
+        minimum: 0
+        required: false
+      description: "The year the dam was commissioned"
+      name: year_commissioned
+      title: Year Commissioned
+      type: number
+    - constraints:
+        required: true
+      description: "The dam should be modelled as a future dam (Y/N)"
+      name: future_dam_model
+      title: Future Dam Model
+      type: boolean
+    - constraints:
+        maximum: 300
+        minimum: 10
+        required: false
+      description: "The dam height in metres (m)"
+      name: dam_height
+      title: Dam Height
+      type: number
+    - constraints:
+        maximum: 9148
+        minimum: -113
+        required: false
+      description: "The full supply level of the reservoir in metres above sea level (masl)"
+      name: fsl_masl
+      title: "Full Supply Level"
+      type: number
+    - constraints:
+        maximum: 22500
+        minimum: 0.001
+        required: false
+      description: "The installed power capacity of the dam in megawatts (MW)"
+      name: power_capacity
+      title: "Power Capacity"
+      type: number
+    - constraints:
+        maximum: 100
+        minimum: 0
+        required: false
+      description: The efficiency of the dam's turbines, percentage (%).
+      name: turbine_efficiency
+      title: "Turbine Efficiency"
+      type: number
+    - constraints:
+        maximum: 300
+        minimum: 0
+        required: false
+      description: "The depth of the power plant below the base of the dam wall in metres (m)"
+      name: plant_depth
+      title: "Power Plant Depth"
+      type: number
+  missingValues:
+    - ""

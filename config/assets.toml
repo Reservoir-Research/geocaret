@@ -1,0 +1,27 @@
+[public_assets]
+    hydrosheds = "WWF/HydroSHEDS/"
+    hydrosheds_flow_acc = "WWF/HydroSHEDS/15ACC"
+    hydrosheds_drainage_dir = "WWF/HydroSHEDS/15DIR"
+    hydrobasins_12 = "WWF/HydroSHEDS/v1/Basins/hybas_12"
+    nasa_srtm = "USGS/SRTMGL1_003"
+    biome2017 = "RESOLVE/ECOREGIONS/2017"
+    soilgrids250m_ocs = "projects/soilgrids-isric/ocs_mean"
+    soilgrids250m_soc = "projects/soilgrids-isric/soc_mean"
+    soilgrids250m_n = "projects/soilgrids-isric/nitrogen_mean"
+    soilgrids250m_bdod = "projects/soilgrids-isric/bdod_mean"
+    idaho_terraclimate = "IDAHO_EPSCOR/TERRACLIMATE"
+    nasa_smap_soil_moisture = "NASA_USDA/HSL/SMAP10KM_soil_moisture"
+    GPWv411_pop_den = "CIESIN/GPWv411/GPW_Population_Density"
+
+[private_assets]
+    # Need to be individually imported into GEE
+    ghi_nasa_low = "projects/ee-future-dams/assets/XHEET_ASSETS/GHI_NASA_low"
+    cmp_ro_grdc_runoff = "projects/ee-future-dams/assets/XHEET_ASSETS/cmp_ro_grdc"
+    worldclim_tavg = "projects/ee-future-dams/assets/XHEET_ASSETS/wc2-1_30s_tavg"
+    worldclim_bio = "projects/ee-future-dams/assets/XHEET_ASSETS/wc2-1_30s_bio_12"
+    OlsenP_kgha1_World = "projects/ee-future-dams/assets/XHEET_ASSETS/OlsenP_kgha1_World"
+    Eo150_clim = "projects/ee-future-dams/assets/XHEET_ASSETS/Eo150_clim_xyz_updated"
+    beck_clim = "projects/ee-future-dams/assets/XHEET_ASSETS/Beck_KG_V1_present_0p0083"
+    hydrorivers_v10 = "projects/ee-future-dams/assets/XHEET_ASSETS/HydroRIVERS_v10"
+    climate_copernicus = "projects/ee-future-dams/assets/XHEET_ASSETS/ESACCI-LC-L4-LCCS-Map-300m-P1Y"
+    
