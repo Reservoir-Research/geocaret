@@ -1,0 +1,237 @@
+---
+title: "Code Profiling"
+author: "Kamilla Kopec-Harding"
+date: '2022-11-02'
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r load, echo=FALSE}
+source("analyse.R")
+```
+
+## Introduction
+
+One of the main performance limitations of this tool is the slow calculation speed.
+
+End to end, analysis of a single dam takes a minimum of \~ 16 min, consisting of (tested using GawLan (id=12)):
+
+-   [ 1.0 M] Initialization and upload
+-   [10.5 M] GEE Analysis
+-   [ 3.5 M] Post-processing (exporting, downloading and checking results)
+
+## Python Profiling
+
+A number of tools are available for profiling python code including timeit and cProfile. They are discussed in the following resources:
+
+-   <https://machinelearningmastery.com/profiling-python-code/>
+-   <https://stackoverflow.com/questions/582336/how-do-i-profile-a-python-script>
+-   <https://towardsdatascience.com/how-to-profile-your-code-in-python-e70c834fad89>
+-   <https://www.toucantoco.com/en/tech-blog/python-performance-optimization>
+-   <https://www.geeksforgeeks.org/profiling-in-python/>
+
+Unfortunately, due to the delayed execution model of Google Earth Engine, these can only be used to investigate the parts of the code that runs locally.
+
+It is unlikely that major bottlenecks within the code will be found in these parts of the code.
+
+## Earth Engine Profiling
+
+In order to find bottlenecks in the pipeline to target for improvement, we need to profile the code that runs on GEE.
+
+GEE has a number of builtin code profiling tools discussed below: 
+
+* <https://philippgaertner.github.io/2017/10/profiler/> 
+
+* <https://gis.stackexchange.com/questions/379634/optimize-earth-engine-script-script-profiler>
+
+However, GEE's built-in code profiling tools only work in the interactive code-editor with javascript.
+
+If we want to use these, we need to identify and prioritise parts of the code to translate to js and look at more closely.
+
+We can do this by examining run-times and queue times of each pipeline step via the GEE task list.
+
+## Analysis of GEE Task List
+
+We analysed the pipeline run-times for analysis of GawLan (batch size 1). This is what we found.
+
+```{r run-time, echo=FALSE}
+p_runtime
+```
+
+```{r run-time-stats, echo=FALSE}
+min_runtime <- sprintf(
+  "%.0f", 
+  min(df_tasks_prepared %>% filter(batch == 'nov') %>%
+        pull(run_time))
+)
+
+max_runtime <- sprintf(
+  "%.0f", 
+  max(df_tasks_prepared %>% filter(batch == 'nov') %>%
+        pull(run_time))
+)
+
+mean_runtime <- sprintf(
+  "%.0f", 
+  mean(df_tasks_prepared %>% filter(batch == 'nov') %>%
+        pull(run_time))
+)
+
+longest_step <- 
+  (df_tasks_prepared %>% 
+  filter(batch_id == 1) %>%
+  filter(run_time > 30) %>%
+  arrange(desc(run_time)) %>%
+  pull(description))[1]
+
+longer_than_30s <- 
+  df_tasks_prepared %>% 
+  filter(batch_id == 1) %>%
+  arrange(desc(run_time)) %>%
+  filter(run_time > 30) %>%
+  select(fmt_run_time, description)
+  
+```
+
+-   Each step takes between `r min_runtime` and `r max_runtime` seconds (mean: `r mean_runtime` s).
+-   The longest step is `r longest_step`:
+-   The following tasks take longer than 30s and should be targeted for improvement:
+
+```{r longer-than-30s, echo=TRUE}
+longer_than_30s
+```
+
+```{r batch-time, echo=FALSE}
+p_eecu
+```
+
+```{r eecu-stats, echo=FALSE}
+min_eecu <- sprintf(
+  "%.2f", 
+  min(df_tasks_prepared %>% filter(batch == 'nov') %>%
+        pull(batch_eecu_usage_seconds))
+)
+
+max_eecu<- sprintf(
+  "%.2f", 
+  max(df_tasks_prepared %>% filter(batch == 'nov') %>%
+        pull(batch_eecu_usage_seconds))
+)
+
+mean_eecu <- sprintf(
+  "%.2f", 
+  mean(df_tasks_prepared %>% filter(batch == 'nov') %>%
+        pull(batch_eecu_usage_seconds))
+)
+
+longest_eecu_step <- 
+  (df_tasks_prepared %>% 
+  filter(batch_id == 1) %>%
+  filter(batch_eecu_usage_seconds > 30) %>%
+  arrange(desc(batch_eecu_usage_seconds)) %>%
+  pull(description))[1]
+
+longer_than_30e <- 
+  df_tasks_prepared %>% 
+  filter(batch_id == 1) %>%
+  arrange(desc(batch_eecu_usage_seconds)) %>%
+  filter(batch_eecu_usage_seconds > 30) %>%
+  select(batch_eecu_usage_seconds, description)
+  
+```
+
+*   Each step takes between `r min_eecu` and `r max_eecu` ecu seconds (mean: `r mean_eecu` ecu s).
+
+*   The longest step is: `r longest_eecu_step`.
+
+*   The following tasks take longer than 30s and should be targeted for improvement:
+
+```{r longer-than-30e, echo=FALSE}
+longer_than_30e
+
+min_mean_time <- sprintf(
+  "%.2f", 
+  min(
+    df_tasks_prepared %>% 
+      filter(batch == "nov") %>%
+      pull(mean_time)
+  )
+)
+
+max_mean_time <- sprintf(
+  "%.2f", 
+  max(
+    df_tasks_prepared %>% 
+      filter(batch == "nov") %>%
+      pull(mean_time)
+  )
+)
+```
+
+# How do job times change as a function of batch-size?
+```{r batchsize_totaltime, echo=FALSE}
+p_batchsize_totaltime
+```
+We constructed increasingly large batches of dams (n = 1, 2, 4, 8, 16) consisting of a single small dam replicated n times to explore the effect of batch size on job time.
+
+The plot shows that:
+
+* The average time for processing of a single dam initially falls   exponentially and then levels off from `r min_mean_time`s (batch size = 1) to `r max_mean_time`s (batch size = 32).
+
+* Despite the early (s-shape) gains in analysis time with batch size, there is a broadly linear increase in total run-time with batch size. 
+
+```{r p_batchsize_exporttime, echo=FALSE}
+p_batchsize_exporttime
+```
+
+A similar pattern is seen with export time.
+
+# How do task times change as a function of batch-size?
+
+We can look at changes in job time (queue + run time) or 
+run-time (computation only) as a function of batch- size/
+
+```{r p_batchsize_runtime, echo=FALSE}
+p_batchsize_runtime
+```
+We see some odd trends in run-time with batch size:
+
+* As batch size increases the spread (variability) of task run-times increases and in some cases becomes bi-modal.
+
+```{r p_batchsize_jobtime, echo=FALSE}
+p_batchsize_jobtime
+```
+
+When we take in to account both queue time and run time, 
+
+* We see more pronounced increase in job time variability and multimodality with batch size.
+
+* We see a general increase in job time with batch size.
+
+# How do batch compute times change as a function of batch-size.
+```{r p_batchsize_ecu, echo=FALSE}
+p_batchsize_ecu
+```
+* Batch compute resource use is fairly consistent across tasks with batch size. 
+
+* We see some strange results with subbasin_pt (snapping dam to hydrorivers); resource use and spread of resource use increases remarkably with batch size.
+
+
+# Takeaway messages:
+
+* The time to export to Google Drive increases linearly with batch size to ~30 minutes for 32 dams.
+
+* The Snapping dam locations to hydro-rivers task has the longest run time, the highest batch compute resource use and  the highest variability of runtime is a piece of code that should be profiled further. 
+
+
+* Other analysis tasks that should be targeted are:
+  * Params main river vector
+  * Non-inundated catchment vector
+  * Params reservoir vector
+  * Main river vector
+  
+
+

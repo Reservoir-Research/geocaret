@@ -1,0 +1,538 @@
+{
+    "reservoir_1201": {
+        "monthly_temps": [
+            8.8,
+            10.4,
+            13.8,
+            16.0,
+            19.2,
+            20.7,
+            20.8,
+            21.0,
+            20.3,
+            17.9,
+            13.4,
+            10.1
+        ],
+        "catchment": {
+            "runoff": 1682.0,
+            "area": 782.032,
+            "population": 6341.0,
+            "area_fractions": [
+                0.007,
+                0.237,
+                0.747,
+                0.008,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+            ],
+            "slope": 62.0,
+            "precip": 1270.0,
+            "etransp": 849.0,
+            "soil_wetness": 132.0,
+            "biogenic_factors": {
+                "biome": "Temperate Conifer Forests",
+                "climate": 12,
+                "soil_type": "MINERAL",
+                "treatment_factor": "NA",
+                "landuse_intensity": "NA"
+            }
+        },
+        "reservoir": {
+            "volume": 9649108.381,
+            "area": 0.444,
+            "max_depth": 63.0,
+            "mean_depth": 21.7,
+            "area_fractions": [
+                0.0,
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+            ],
+            "soil_carbon": 6.714
+        }
+    },
+    "reservoir_1202": {
+        "monthly_temps": [
+            8.8,
+            10.4,
+            13.8,
+            16.0,
+            19.2,
+            20.7,
+            20.8,
+            21.0,
+            20.3,
+            17.9,
+            13.4,
+            10.1
+        ],
+        "catchment": {
+            "runoff": 1682.0,
+            "area": 782.032,
+            "population": 6341.0,
+            "area_fractions": [
+                0.007,
+                0.237,
+                0.747,
+                0.008,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+            ],
+            "slope": 62.0,
+            "precip": 1270.0,
+            "etransp": 849.0,
+            "soil_wetness": 132.0,
+            "biogenic_factors": {
+                "biome": "Temperate Conifer Forests",
+                "climate": 12,
+                "soil_type": "MINERAL",
+                "treatment_factor": "NA",
+                "landuse_intensity": "NA"
+            }
+        },
+        "reservoir": {
+            "volume": 9649108.381,
+            "area": 0.444,
+            "max_depth": 63.0,
+            "mean_depth": 21.7,
+            "area_fractions": [
+                0.0,
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+            ],
+            "soil_carbon": 6.714
+        }
+    },
+    "reservoir_1203": {
+        "monthly_temps": [
+            8.8,
+            10.4,
+            13.8,
+            16.0,
+            19.2,
+            20.7,
+            20.8,
+            21.0,
+            20.3,
+            17.9,
+            13.4,
+            10.1
+        ],
+        "catchment": {
+            "runoff": 1682.0,
+            "area": 782.032,
+            "population": 6341.0,
+            "area_fractions": [
+                0.007,
+                0.237,
+                0.747,
+                0.008,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+            ],
+            "slope": 62.0,
+            "precip": 1270.0,
+            "etransp": 849.0,
+            "soil_wetness": 132.0,
+            "biogenic_factors": {
+                "biome": "Temperate Conifer Forests",
+                "climate": 12,
+                "soil_type": "MINERAL",
+                "treatment_factor": "NA",
+                "landuse_intensity": "NA"
+            }
+        },
+        "reservoir": {
+            "volume": 9649108.381,
+            "area": 0.444,
+            "max_depth": 63.0,
+            "mean_depth": 21.7,
+            "area_fractions": [
+                0.0,
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+            ],
+            "soil_carbon": 6.714
+        }
+    },
+    "reservoir_1204": {
+        "monthly_temps": [
+            8.8,
+            10.4,
+            13.8,
+            16.0,
+            19.2,
+            20.7,
+            20.8,
+            21.0,
+            20.3,
+            17.9,
+            13.4,
+            10.1
+        ],
+        "catchment": {
+            "runoff": 1682.0,
+            "area": 782.032,
+            "population": 6341.0,
+            "area_fractions": [
+                0.007,
+                0.237,
+                0.747,
+                0.008,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+            ],
+            "slope": 62.0,
+            "precip": 1270.0,
+            "etransp": 849.0,
+            "soil_wetness": 132.0,
+            "biogenic_factors": {
+                "biome": "Temperate Conifer Forests",
+                "climate": 12,
+                "soil_type": "MINERAL",
+                "treatment_factor": "NA",
+                "landuse_intensity": "NA"
+            }
+        },
+        "reservoir": {
+            "volume": 9649108.381,
+            "area": 0.444,
+            "max_depth": 63.0,
+            "mean_depth": 21.7,
+            "area_fractions": [
+                0.0,
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+            ],
+            "soil_carbon": 6.714
+        }
+    },
+    "reservoir_1205": {
+        "monthly_temps": [
+            8.8,
+            10.4,
+            13.8,
+            16.0,
+            19.2,
+            20.7,
+            20.8,
+            21.0,
+            20.3,
+            17.9,
+            13.4,
+            10.1
+        ],
+        "catchment": {
+            "runoff": 1682.0,
+            "area": 782.032,
+            "population": 6341.0,
+            "area_fractions": [
+                0.007,
+                0.237,
+                0.747,
+                0.008,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+            ],
+            "slope": 62.0,
+            "precip": 1270.0,
+            "etransp": 849.0,
+            "soil_wetness": 132.0,
+            "biogenic_factors": {
+                "biome": "Temperate Conifer Forests",
+                "climate": 12,
+                "soil_type": "MINERAL",
+                "treatment_factor": "NA",
+                "landuse_intensity": "NA"
+            }
+        },
+        "reservoir": {
+            "volume": 9649108.381,
+            "area": 0.444,
+            "max_depth": 63.0,
+            "mean_depth": 21.7,
+            "area_fractions": [
+                0.0,
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+            ],
+            "soil_carbon": 6.714
+        }
+    },
+    "reservoir_1206": {
+        "monthly_temps": [
+            8.8,
+            10.4,
+            13.8,
+            16.0,
+            19.2,
+            20.7,
+            20.8,
+            21.0,
+            20.3,
+            17.9,
+            13.4,
+            10.1
+        ],
+        "catchment": {
+            "runoff": 1682.0,
+            "area": 782.032,
+            "population": 6341.0,
+            "area_fractions": [
+                0.007,
+                0.237,
+                0.747,
+                0.008,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+            ],
+            "slope": 62.0,
+            "precip": 1270.0,
+            "etransp": 849.0,
+            "soil_wetness": 132.0,
+            "biogenic_factors": {
+                "biome": "Temperate Conifer Forests",
+                "climate": 12,
+                "soil_type": "MINERAL",
+                "treatment_factor": "NA",
+                "landuse_intensity": "NA"
+            }
+        },
+        "reservoir": {
+            "volume": 9649108.381,
+            "area": 0.444,
+            "max_depth": 63.0,
+            "mean_depth": 21.7,
+            "area_fractions": [
+                0.0,
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+            ],
+            "soil_carbon": 6.714
+        }
+    },
+    "reservoir_1207": {
+        "monthly_temps": [
+            8.8,
+            10.4,
+            13.8,
+            16.0,
+            19.2,
+            20.7,
+            20.8,
+            21.0,
+            20.3,
+            17.9,
+            13.4,
+            10.1
+        ],
+        "catchment": {
+            "runoff": 1682.0,
+            "area": 782.032,
+            "population": 6341.0,
+            "area_fractions": [
+                0.007,
+                0.237,
+                0.747,
+                0.008,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+            ],
+            "slope": 62.0,
+            "precip": 1270.0,
+            "etransp": 849.0,
+            "soil_wetness": 132.0,
+            "biogenic_factors": {
+                "biome": "Temperate Conifer Forests",
+                "climate": 12,
+                "soil_type": "MINERAL",
+                "treatment_factor": "NA",
+                "landuse_intensity": "NA"
+            }
+        },
+        "reservoir": {
+            "volume": 9649108.381,
+            "area": 0.444,
+            "max_depth": 63.0,
+            "mean_depth": 21.7,
+            "area_fractions": [
+                0.0,
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+            ],
+            "soil_carbon": 6.714
+        }
+    },
+    "reservoir_1208": {
+        "monthly_temps": [
+            8.8,
+            10.4,
+            13.8,
+            16.0,
+            19.2,
+            20.7,
+            20.8,
+            21.0,
+            20.3,
+            17.9,
+            13.4,
+            10.1
+        ],
+        "catchment": {
+            "runoff": 1682.0,
+            "area": 782.032,
+            "population": 6341.0,
+            "area_fractions": [
+                0.007,
+                0.237,
+                0.747,
+                0.008,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+            ],
+            "slope": 62.0,
+            "precip": 1270.0,
+            "etransp": 849.0,
+            "soil_wetness": 132.0,
+            "biogenic_factors": {
+                "biome": "Temperate Conifer Forests",
+                "climate": 12,
+                "soil_type": "MINERAL",
+                "treatment_factor": "NA",
+                "landuse_intensity": "NA"
+            }
+        },
+        "reservoir": {
+            "volume": 9649108.381,
+            "area": 0.444,
+            "max_depth": 63.0,
+            "mean_depth": 21.7,
+            "area_fractions": [
+                0.0,
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+            ],
+            "soil_carbon": 6.714
+        }
+    }
+}
