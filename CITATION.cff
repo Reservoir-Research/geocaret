@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: If you use this software, please cite it using these metadata.
+title: "GeoCARET"
+abstract: A command line tool for geospatial analysis of catchments and reservoirs.
+authors:
+  - family-names: Kopec-Harding
+    given-names: Kamilla
+    orcid: "https://orcid.org/0000-0002-2960-7944"
+  - familiy-names: Janus
+    given-names: Tomasz
+  - family-names: Barry
+    given-names: Chris
+  - family-names: Kuriakose
+    given-names: Jaise
+  - name: "GeoCARET"
+version: 0.0.1
+date-released: "2022-02-20"
+license: GPL-3.0
+repository-code: "https://github.com/citation-file-format/my-research-software"

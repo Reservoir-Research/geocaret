@@ -1,0 +1,2 @@
+id,country,name,river,main_basin,dam_lat,dam_lon,dam_height,power_capacity ,turbine_efficiency,year_commissioned,future_dam_model
+1,Myanmar,Kinda,,,21.1596,96.3221,46,,,1990,FALSE
