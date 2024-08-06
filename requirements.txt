@@ -12,3 +12,4 @@ colorama
 tqdm
 setuptools-scm
 toml
+matplotlib

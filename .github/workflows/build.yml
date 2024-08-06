@@ -32,7 +32,7 @@ jobs:
         run: |
           sudo apt install --no-install-recommends pandoc
           pip install --upgrade pip
-          pip install -e .
+          pip install -r requirements.txt
           pip install -r requirements_doc.txt
           pip install https://github.com/SuperKogito/sphinxcontrib-pdfembed/archive/master.zip
           cd docs
