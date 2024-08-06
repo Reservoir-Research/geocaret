@@ -1,0 +1,1949 @@
+<!DOCTYPE html>
+
+<html :class="{'dark': darkMode === 'dark' || (darkMode === 'system' &amp;&amp; window.matchMedia('(prefers-color-scheme: dark)').matches)}" class="scroll-smooth" data-content_root="../" lang="en" x-data="{ darkMode: localStorage.getItem('darkMode') || localStorage.setItem('darkMode', 'system'), activeSection: '' }" x-init="$watch('darkMode', val =&gt; localStorage.setItem('darkMode', val))">
+<head>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta charset="utf-8"/>
+<meta content="white" media="(prefers-color-scheme: light)" name="theme-color"/>
+<meta content="black" media="(prefers-color-scheme: dark)" name="theme-color"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Output Data | GeoCARET 1.0.0 documentation</title>
+<meta content="Output Data | GeoCARET 1.0.0 documentation" property="og:title"/>
+<meta content="Output Data | GeoCARET 1.0.0 documentation" name="twitter:title"/>
+<link href="../_static/pygments.css?v=c842c44c" rel="stylesheet" type="text/css"/>
+<link href="../_static/theme.css?v=ecdfb4fc" rel="stylesheet" type="text/css"/>
+<link href="../_static/copybutton.css?v=76b2166b" rel="stylesheet" type="text/css"/>
+<link href="../_static/plot_directive.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/tabs.css?v=a5c4661c" rel="stylesheet" type="text/css"/>
+<link href="../_static/css/custom.css?v=38484ab1" rel="stylesheet" type="text/css"/>
+<link href="../search.html" rel="search" title="Search"/>
+<link href="../genindex.html" rel="index" title="Index"/>
+<link href="output_data_exports.html" rel="next" title="Exporting to Google Drive"/>
+<link href="gis_assets.html" rel="prev" title="GIS Assets"/>
+<script>
+    <!-- Prevent Flash of wrong theme -->
+      const userPreference = localStorage.getItem('darkMode');
+      let mode;
+      if (userPreference === 'dark' || window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        mode = 'dark';
+        document.documentElement.classList.add('dark');
+      } else {
+        mode = 'light';
+      }
+      if (!userPreference) {localStorage.setItem('darkMode', mode)}
+    </script>
+</head>
+<body :class="{ 'overflow-hidden': showSidebar }" class="min-h-screen font-sans antialiased bg-background text-foreground" x-data="{ showSidebar: false }">
+<div @click.self="showSidebar = false" class="fixed inset-0 z-50 overflow-hidden bg-background/80 backdrop-blur-sm md:hidden" x-cloak="" x-show="showSidebar"></div><div class="relative flex flex-col min-h-screen" id="page"><a class="absolute top-0 left-0 z-[100] block bg-background p-4 text-xl transition -translate-x-full opacity-0 focus:translate-x-0 focus:opacity-100" href="#content">
+      Skip to content
+    </a><header class="sticky top-0 z-40 w-full border-b shadow-sm border-border supports-backdrop-blur:bg-background/60 bg-background/95 backdrop-blur"><div class="container flex items-center h-14">
+<div class="hidden mr-4 md:flex">
+<a class="flex items-center mr-6" href="../index.html"><span class="hidden font-bold sm:inline-block text-clip whitespace-nowrap">GeoCARET 1.0.0 documentation</span>
+</a></div><button @click="showSidebar = true" class="inline-flex items-center justify-center h-10 px-0 py-2 mr-2 text-base font-medium transition-colors rounded-md hover:text-accent-foreground hover:bg-transparent md:hidden" type="button">
+<svg aria-hidden="true" fill="currentColor" height="24" viewbox="0 96 960 960" width="24" xmlns="http://www.w3.org/2000/svg">
+<path d="M152.587 825.087q-19.152 0-32.326-13.174t-13.174-32.326q0-19.152 13.174-32.326t32.326-13.174h440q19.152 0 32.326 13.174t13.174 32.326q0 19.152-13.174 32.326t-32.326 13.174h-440Zm0-203.587q-19.152 0-32.326-13.174T107.087 576q0-19.152 13.174-32.326t32.326-13.174h320q19.152 0 32.326 13.174T518.087 576q0 19.152-13.174 32.326T472.587 621.5h-320Zm0-203.587q-19.152 0-32.326-13.174t-13.174-32.326q0-19.152 13.174-32.326t32.326-13.174h440q19.152 0 32.326 13.174t13.174 32.326q0 19.152-13.174 32.326t-32.326 13.174h-440ZM708.913 576l112.174 112.174q12.674 12.674 12.674 31.826t-12.674 31.826Q808.413 764.5 789.261 764.5t-31.826-12.674l-144-144Q600 594.391 600 576t13.435-31.826l144-144q12.674-12.674 31.826-12.674t31.826 12.674q12.674 12.674 12.674 31.826t-12.674 31.826L708.913 576Z"></path>
+</svg>
+<span class="sr-only">Toggle navigation menu</span>
+</button>
+<div class="flex items-center justify-between flex-1 space-x-2 sm:space-x-4 md:justify-end">
+<div class="flex-1 w-full md:w-auto md:flex-none"><form @keydown.k.window.meta="$refs.search.focus()" action="../search.html" class="relative flex items-center group" id="searchbox" method="get">
+<input aria-label="Search the docs" class="inline-flex items-center font-medium transition-colors bg-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ring-offset-background border border-input hover:bg-accent focus:bg-accent hover:text-accent-foreground focus:text-accent-foreground hover:placeholder-accent-foreground py-2 px-4 relative h-9 w-full justify-start rounded-[0.5rem] text-sm text-muted-foreground sm:pr-12 md:w-40 lg:w-64" id="search-input" name="q" placeholder="Search ..." type="search" x-ref="search"/>
+<kbd class="pointer-events-none absolute right-1.5 top-2 hidden h-5 select-none text-muted-foreground items-center gap-1 rounded border border-border bg-muted px-1.5 font-mono text-[10px] font-medium opacity-100 sm:flex group-hover:bg-accent group-hover:text-accent-foreground">
+<span class="text-xs">⌘</span>
+    K
+  </kbd>
+</form>
+</div>
+<nav class="flex items-center space-x-1">
+<button @click="darkMode = darkMode === 'light' ? 'dark' : 'light'" aria-label="Color theme switcher" class="relative inline-flex items-center justify-center px-0 text-sm font-medium transition-colors rounded-md hover:bg-accent hover:text-accent-foreground h-9 w-9" type="button">
+<svg class="absolute transition-all scale-100 rotate-0 dark:-rotate-90 dark:scale-0" fill="currentColor" height="24" viewbox="0 96 960 960" width="24" xmlns="http://www.w3.org/2000/svg">
+<path d="M480 685q45.456 0 77.228-31.772Q589 621.456 589 576q0-45.456-31.772-77.228Q525.456 467 480 467q-45.456 0-77.228 31.772Q371 530.544 371 576q0 45.456 31.772 77.228Q434.544 685 480 685Zm0 91q-83 0-141.5-58.5T280 576q0-83 58.5-141.5T480 376q83 0 141.5 58.5T680 576q0 83-58.5 141.5T480 776ZM80 621.5q-19.152 0-32.326-13.174T34.5 576q0-19.152 13.174-32.326T80 530.5h80q19.152 0 32.326 13.174T205.5 576q0 19.152-13.174 32.326T160 621.5H80Zm720 0q-19.152 0-32.326-13.174T754.5 576q0-19.152 13.174-32.326T800 530.5h80q19.152 0 32.326 13.174T925.5 576q0 19.152-13.174 32.326T880 621.5h-80Zm-320-320q-19.152 0-32.326-13.174T434.5 256v-80q0-19.152 13.174-32.326T480 130.5q19.152 0 32.326 13.174T525.5 176v80q0 19.152-13.174 32.326T480 301.5Zm0 720q-19.152 0-32.326-13.17Q434.5 995.152 434.5 976v-80q0-19.152 13.174-32.326T480 850.5q19.152 0 32.326 13.174T525.5 896v80q0 19.152-13.174 32.33-13.174 13.17-32.326 13.17ZM222.174 382.065l-43-42Q165.5 327.391 166 308.239t13.174-33.065q13.435-13.674 32.587-13.674t32.065 13.674l42.239 43q12.674 13.435 12.555 31.706-.12 18.272-12.555 31.946-12.674 13.674-31.445 13.413-18.772-.261-32.446-13.174Zm494 494.761-42.239-43q-12.674-13.435-12.674-32.087t12.674-31.565Q686.609 756.5 705.38 757q18.772.5 32.446 13.174l43 41.761Q794.5 824.609 794 843.761t-13.174 33.065Q767.391 890.5 748.239 890.5t-32.065-13.674Zm-42-494.761Q660.5 369.391 661 350.62q.5-18.772 13.174-32.446l41.761-43Q728.609 261.5 747.761 262t33.065 13.174q13.674 13.435 13.674 32.587t-13.674 32.065l-43 42.239q-13.435 12.674-31.706 12.555-18.272-.12-31.946-12.555Zm-495 494.761Q165.5 863.391 165.5 844.239t13.674-32.065l43-42.239q13.435-12.674 32.087-12.674t31.565 12.674Q299.5 782.609 299 801.38q-.5 18.772-13.174 32.446l-41.761 43Q231.391 890.5 212.239 890t-33.065-13.174ZM480 576Z"></path>
+</svg>
+<svg class="absolute transition-all scale-0 rotate-90 dark:rotate-0 dark:scale-100" fill="currentColor" height="24" viewbox="0 96 960 960" width="24" xmlns="http://www.w3.org/2000/svg">
+<path d="M480 936q-151 0-255.5-104.5T120 576q0-138 90-239.5T440 218q25-3 39 18t-1 44q-17 26-25.5 55t-8.5 61q0 90 63 153t153 63q31 0 61.5-9t54.5-25q21-14 43-1.5t19 39.5q-14 138-117.5 229T480 936Zm0-80q88 0 158-48.5T740 681q-20 5-40 8t-40 3q-123 0-209.5-86.5T364 396q0-20 3-40t8-40q-78 32-126.5 102T200 576q0 116 82 198t198 82Zm-10-270Z"></path>
+</svg>
+</button>
+</nav>
+</div>
+</div>
+</header>
+<div class="flex-1"><div class="container flex-1 items-start md:grid md:grid-cols-[220px_minmax(0,1fr)] md:gap-6 lg:grid-cols-[240px_minmax(0,1fr)] lg:gap-10"><aside :aria-hidden="!showSidebar" :class="{ 'translate-x-0': showSidebar }" class="fixed inset-y-0 left-0 md:top-14 z-50 md:z-30 bg-background md:bg-transparent transition-all duration-100 -translate-x-full md:translate-x-0 ml-0 p-6 md:p-0 md:-ml-2 md:h-[calc(100vh-3.5rem)] w-5/6 md:w-full shrink-0 overflow-y-auto border-r border-border md:sticky" id="left-sidebar">
+<a class="!justify-start text-sm md:!hidden bg-background" href="../index.html"><span class="font-bold text-clip whitespace-nowrap">GeoCARET 1.0.0 documentation</span>
+</a>
+<div class="relative overflow-hidden md:overflow-auto my-4 md:my-0 h-[calc(100vh-8rem)] md:h-auto">
+<div class="overflow-y-auto h-full w-full relative pr-6"><nav class="table w-full min-w-full my-6 lg:my-8">
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l1" x-data="{ expanded: $el.classList.contains('current') ? true : false }"><a :class="{ 'expanded' : expanded }" @click="expanded = !expanded" class="reference internal expandable" href="../installation/index.html">Installation<button @click.prevent.stop="expanded = !expanded" type="button"><span class="sr-only"></span><svg fill="currentColor" height="18px" stroke="none" viewbox="0 0 24 24" width="18px" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg></button></a><ul x-show="expanded">
+<li class="toctree-l2"><a class="reference internal" href="../installation/install_package.html">Installation as a Python Package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation/using_docker.html">About Docker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation/building_image.html">Building the GeoCARET Docker Image</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation/using_image.html">Using the GeoCARET Docker Image</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation/additional_steps.html">Additional Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../algorithms.html">Algorithms</a></li>
+<li class="toctree-l1" x-data="{ expanded: $el.classList.contains('current') ? true : false }"><a :class="{ 'expanded' : expanded }" @click="expanded = !expanded" class="reference internal expandable" href="../running_geocaret/index.html">Running GeoCARET<button @click.prevent.stop="expanded = !expanded" type="button"><span class="sr-only"></span><svg fill="currentColor" height="18px" stroke="none" viewbox="0 0 24 24" width="18px" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg></button></a><ul x-show="expanded">
+<li class="toctree-l2"><a class="reference internal" href="../running_geocaret/running_python_package.html">Running the GeoCARET Script</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../running_geocaret/running_docker.html">Running the GeoCARET Docker Container</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current" x-data="{ expanded: $el.classList.contains('current') ? true : false }"><a :class="{ 'expanded' : expanded }" @click="expanded = !expanded" class="reference internal expandable" href="index.html">GHG Model Input Calculations<button @click.prevent.stop="expanded = !expanded" type="button"><span class="sr-only"></span><svg fill="currentColor" height="18px" stroke="none" viewbox="0 0 24 24" width="18px" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg></button></a><ul class="current" x-show="expanded">
+<li class="toctree-l2"><a class="reference internal" href="input_data.html">Preparing Input Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gis_assets.html">GIS Assets</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Output Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="output_data_exports.html">Exporting to Google Drive</a></li>
+<li class="toctree-l2"><a class="reference internal" href="alternative_outputs.html">Alternative Parameters and Definitions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="koppen_codes.html">Köppen-Geiger climate zone classification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="limitations.html">Limitations</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../config.html">Configuration Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/geocaret.html">Python API reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../acknowledgments.html">Acknowledgments</a></li>
+</ul>
+</nav>
+</div>
+</div>
+<button @click="showSidebar = false" class="absolute md:hidden right-4 top-4 rounded-sm opacity-70 transition-opacity hover:opacity-100" type="button">
+<svg class="h-4 w-4" fill="currentColor" height="24" stroke="none" viewbox="0 96 960 960" width="24" xmlns="http://www.w3.org/2000/svg">
+<path d="M480 632 284 828q-11 11-28 11t-28-11q-11-11-11-28t11-28l196-196-196-196q-11-11-11-28t11-28q11-11 28-11t28 11l196 196 196-196q11-11 28-11t28 11q11 11 11 28t-11 28L536 576l196 196q11 11 11 28t-11 28q-11 11-28 11t-28-11L480 632Z"></path>
+</svg>
+</button>
+</aside>
+<main class="relative py-6 lg:gap-10 lg:py-8 xl:grid xl:grid-cols-[1fr_300px]">
+<div class="w-full min-w-0 mx-auto">
+<nav aria-label="breadcrumbs" class="flex items-center mb-4 space-x-1 text-sm text-muted-foreground">
+<a class="overflow-hidden text-ellipsis whitespace-nowrap hover:text-foreground" href="../index.html">
+<span class="hidden md:inline">GeoCARET 1.0.0 documentation</span>
+<svg aria-label="Home" class="md:hidden" fill="currentColor" height="18" stroke="none" viewbox="0 96 960 960" width="18" xmlns="http://www.w3.org/2000/svg">
+<path d="M240 856h120V616h240v240h120V496L480 316 240 496v360Zm-80 80V456l320-240 320 240v480H520V696h-80v240H160Zm320-350Z"></path>
+</svg>
+</a>
+<div class="mr-1">/</div><a class="hover:text-foreground overflow-hidden text-ellipsis whitespace-nowrap" href="index.html">GHG Model Input Calculations</a>
+<div class="mr-1">/</div><span aria-current="page" class="font-medium text-foreground overflow-hidden text-ellipsis whitespace-nowrap">Output Data</span>
+</nav>
+<div id="content" role="main">
+<section id="output-data">
+<h1>Output Data</h1>
+<p>When GHG emission model input calculations are run in <a class="reference external" href="https://github.com/Reservoir-Research/geocaret">GeoCARET</a>, GeoCARET creates a number of outputs which are saved to several locations locally and on remote servers - see <a class="reference internal" href="#output-locations">Output Locations</a>.
+This document is a guide to the output datasets generated and their location.</p>
+<section id="run-folder">
+<h2>Run Folder</h2>
+<section id="key-points">
+<h3>Key Points</h3>
+<ul class="simple">
+<li><p>When the <a class="reference external" href="https://github.com/Reservoir-Research/geocaret">GeoCARET</a> is run for the first time, a folder <code class="docutils literal notranslate"><span class="pre">XHEET/tmp</span></code> is created in the top level of your <strong>Google Drive</strong> assets folder. This folder is written into by the currently running <code class="docutils literal notranslate"><span class="pre">GeoCARET</span></code> job.</p></li>
+<li><p>Initially, all output files are written to the <code class="docutils literal notranslate"><span class="pre">XHEET/tmp</span></code> folder.</p></li>
+<li><p>Once the analysis is complete, all output files are copied to the permanent <strong>Earth Engine assets folder</strong> and to <strong>Google Drive</strong> [optionally].</p></li>
+<li><p>All files are finally deleted from <code class="docutils literal notranslate"><span class="pre">XHEET/tmp</span></code>.</p></li>
+</ul>
+</section>
+</section>
+<section id="output-locations">
+<h2>Output Locations</h2>
+<p>The results are saved into three locations:</p>
+<ol class="arabic simple">
+<li><p>Google Earth Engine Cloud Project Assets folder</p></li>
+<li><p>Google Drive (optional)</p></li>
+<li><p>Local results folder on the user’s personal machine</p></li>
+</ol>
+<section id="google-earth-engine-cloud-project-assets-folder">
+<h3>1. Google Earth Engine Cloud Project Assets folder</h3>
+<p>All output files generated by GeoCARET are saved inside your Google Earth Engine Cloud Project Assets folder. They are saved in a folder called <code class="docutils literal notranslate"><span class="pre">XHEET</span></code>, which will be created inside the top-level folder of your cloud project.</p>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>If your cloud project contains <em>multiple</em> top-level folders,
+GeoCARET will use the <em>first folder it finds</em>, taking the folder
+names in alphabetical order.</p>
+</div>
+<p>Each time you run the analysis, a new sub-folder will be created to hold the outputs, with the name generated constructed from the <code class="docutils literal notranslate"><span class="pre">jobname</span></code> argument and the timestamp of the analysis: <code class="docutils literal notranslate"><span class="pre">XHEET/&lt;&lt;JOBNAME&gt;&gt;-&lt;&lt;TIMESTAMP&gt;&gt;</span></code></p>
+<p>For exmaple, if your cloud project is called <code class="docutils literal notranslate"><span class="pre">my-ee-project</span></code> and it has a top-level folder called <code class="docutils literal notranslate"><span class="pre">home</span></code>, and you started the analysis at 3pm on 2024-01-01 using the following command-line command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1">&gt;<span class="w"> </span>python<span class="w"> </span>heet_cli.py<span class="w"> </span>data/dams.csv<span class="w"> </span>my-ee-project<span class="w"> </span>job01<span class="w"> </span>standard
+</span></code></pre></div>
+</div>
+<p>the outputs would be stored in <code class="docutils literal notranslate"><span class="pre">my-ee-peoject/home/XHEET/JOB01-20240101-1300</span></code>.</p>
+<p>All outputs are native Earth Engine data structures: <em>feature collections</em>, <em>images</em> and <em>image collections</em>.</p>
+</section>
+<section id="google-drive-optional">
+<h3>2. Google Drive (Optional)</h3>
+<p>All output files can also be saved to a Google Drive folder under condition that the config option <code class="docutils literal notranslate"><span class="pre">export_to_drive</span> <span class="pre">=</span> <span class="pre">True</span></code> in <code class="docutils literal notranslate"><span class="pre">delineator/heet_config.py</span></code> - see <a class="reference internal" href="../config.html"><span class="doc">Configuration Options</span></a> for more information about configuration settings.
+For more information, please read: <a class="reference internal" href="output_data_exports.html"><span class="doc">Exporting to Google Drive</span></a>.</p>
+<section id="exported-data">
+<h4>Exported data</h4>
+<ul class="simple">
+<li><p>Catchment, Reservoir and River delineations (vectors, feature collections) are exported as shape files.</p></li>
+<li><p>Catchment areas and inundated areas (pixels, rasters, images) are exported GeoTiff images.</p></li>
+<li><p>Catchment, reservoir and other parameters (feature collections) are exported as csv files.</p></li>
+</ul>
+<p>For more information, please refer to <a class="reference internal" href="output_data_exports.html#exports-settings"><span class="std std-ref">Export Settings and Outputs</span></a>.</p>
+</section>
+</section>
+<section id="local-results-folder">
+<h3>3. Local Results Folder</h3>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>This destination is only for the calculated parameters, i.e. other outputs such as delineation shape files, are not saved to the local results folder. Instead they can be exported to Google Drive - see <a class="reference internal" href="#google-drive-optional">2. Google Drive (Optional)</a>.</p>
+</div>
+<p>When the analysis is complete, the calculated reservoir and catchment properties, i.e. the <code class="docutils literal notranslate"><span class="pre">output_parameters</span></code> are downloaded to a local results folder in the form of a CSV file called <code class="docutils literal notranslate"><span class="pre">output_parameters.csv</span></code>. The file will be stored in the folder</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1">outputs/&lt;&lt;JOBNAME&gt;&gt;-<span class="s">&lt;&lt;TIMEST</span>AMP&gt;&gt;
+</span></code></pre></div>
+</div>
+<p>e.g.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="n">outputs</span><span class="o">/</span><span class="n">JOB01</span><span class="o">-</span><span class="mi">20220130</span><span class="o">-</span><span class="mi">1450</span><span class="o">/</span><span class="n">output_parameters</span><span class="o">.</span><span class="n">csv</span>
+</span></code></pre></div>
+</div>
+<p>The values in <code class="docutils literal notranslate"><span class="pre">output_parameters.csv</span></code> are additionally validated against a set of constraints, e.g. minimum and maximum allowed value, defined in configuration file <code class="docutils literal notranslate"><span class="pre">outputs.resource.yaml</span></code>.
+The validation functions are defined in <code class="docutils literal notranslate"><span class="pre">heet_validate.py</span></code>.
+Any impossible or improbable calculated parameters are flagged in a CSV file <code class="docutils literal notranslate"><span class="pre">heet_output_report.csv</span></code>, also saved to the local results folder.
+A subset of data in <code class="docutils literal notranslate"><span class="pre">output_parameters.csv</span></code> is additionally saved as a specially formatted json file <code class="docutils literal notranslate"><span class="pre">output_parameters.json</span></code> that is designed to comply with the input file specifications of <a class="reference external" href="https://github.com/tomjanus/reemission">RE-Emission</a>. Alike the <strong>csv</strong> files, the <strong>json</strong> file will be stored in the folder</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1">outputs/&lt;&lt;JOBNAME&gt;&gt;-<span class="s">&lt;&lt;TIMEST</span>AMP&gt;&gt;
+</span></code></pre></div>
+</div>
+<p>e.g.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1">outputs/JOB01-20220130-1450/output_parameters.json
+</span></code></pre></div>
+</div>
+</section>
+</section>
+<section id="guide-to-output-files">
+<h2>Guide to Output Files</h2>
+<p>The produced outputs come in two forms: geospatial data and tabular data.
+The geospatial data is saved either in <code class="docutils literal notranslate"><span class="pre">.shp</span></code> or <code class="docutils literal notranslate"><span class="pre">.GeoTiff</span></code> format, depending whether it is in the form of vector(s) or raster(s), respectively.
+The tabular data representing the <em>user inputs</em> and the <em>output parameters</em> is saved in the <code class="docutils literal notranslate"><span class="pre">.csv</span></code> format.</p>
+<section id="output-file-inventory">
+<h3>Output File Inventory</h3>
+<p>The output data comes in different native Earth Engine formats (see <code class="docutils literal notranslate"><span class="pre">ee_type</span></code>) which later determines the type of the output file (see <code class="docutils literal notranslate"><span class="pre">drive_type</span></code>).
+The file names (<code class="docutils literal notranslate"><span class="pre">file_prefix</span></code>), their titles and descriptions and types are provided in the table below.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p><code class="docutils literal notranslate"><span class="pre">file_prefix</span></code></p></th>
+<th class="head"><p>title</p></th>
+<th class="head"><p>description</p></th>
+<th class="head"><p><code class="docutils literal notranslate"><span class="pre">ee_type</span></code></p></th>
+<th class="head"><p><code class="docutils literal notranslate"><span class="pre">drive_type</span></code></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">user_inputs</span></code></p></td>
+<td><p>User
+inputs</p></td>
+<td><p>User inputs</p></td>
+<td><p>Feature
+Collection</p></td>
+<td><p>CSV</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">P_*</span></code></p></td>
+<td><p>Raw dam
+location</p></td>
+<td><p>The raw dam location input by
+the user</p></td>
+<td><p>Feature
+Collection
+[Ftc-ft-pt]</p></td>
+<td><p>SHP</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">PS_*</span></code></p></td>
+<td><p>Snapped
+dam
+location</p></td>
+<td><p>Dam location snapped to nearest
+hydroriver</p></td>
+<td><p>Feature
+Collection
+[Ftc-ft-pt]</p></td>
+<td><p>SHP</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">WCPTS_</span></code></p></td>
+<td><p>Watershed
+candidate
+points</p></td>
+<td><p>Watershed search grid.
+Hydrobasins 12 subbasin of dam
+converted to a grid of point
+locations (15’ pixel centres).</p></td>
+<td><p>Feature
+Collection
+[Ftc-fts-pts]</p></td>
+<td><p>SHP</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">WDPTS_</span></code></p></td>
+<td><p>Watershed
+detected
+points</p></td>
+<td><p>Points on watershed search grid
+found by algorithm to belong to
+dam catchment.</p></td>
+<td><p>Feature
+Collection
+[Ftc-fts-pts]</p></td>
+<td><p>SHP</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">CX_</span></code></p></td>
+<td><p>Catchment
+pixels</p></td>
+<td><p>Catchment pixels</p></td>
+<td><p>Image</p></td>
+<td><p>GeoTiff</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">C_</span></code>
+<code class="docutils literal notranslate"><span class="pre">c_</span></code></p></td>
+<td><p>Catchment
+boundary</p></td>
+<td><p>Catchment boundary</p></td>
+<td><p>Feature
+Collection</p></td>
+<td><p>SHP</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">WBSX_</span></code></p></td>
+<td><p>Waterbodies
+pixels</p></td>
+<td><p>Waterbodies pixels</p></td>
+<td><p>Image</p></td>
+<td><p>GeoTiff</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">WBS_</span></code></p></td>
+<td><p>Waterbodies
+boundaries</p></td>
+<td><p>Waterbodies boundaries</p></td>
+<td><p>Feature
+Collection</p></td>
+<td><p>SHP</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">R_</span></code>
+<code class="docutils literal notranslate"><span class="pre">r_</span></code></p></td>
+<td><p>Reservoir
+boundary</p></td>
+<td><p>Reservoir boundary; boundary of
+waterbody which intersects the
+snapped dam location (or raw
+location for existing dams).</p></td>
+<td><p>Feature
+Collection</p></td>
+<td><p>SHP</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">rbz_</span></code></p></td>
+<td><p>Reservoir
+buffer
+zone</p></td>
+<td><p>Buffer zone around reservoir
+(used for landcover analysis of
+existing dams commissioned
+&lt;=1992)</p></td>
+<td><p>Feature
+Collection</p></td>
+<td><p>SHP</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">sr_</span></code></p></td>
+<td><p>Simplified
+implified
+reservoir
+boundary</p></td>
+<td><p>Simplified reservoir boundary
+(the outer boundary of the
+reservoir ignoring any islands).
+Used to determine inundated
+river.</p></td>
+<td><p>Feature
+Collection</p></td>
+<td><p>SHP</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">S_</span></code>
+<code class="docutils literal notranslate"><span class="pre">s_</span></code></p></td>
+<td><p>Inundated
+river
+reaches
+(streamline)</p></td>
+<td><p>Inundated river reaches (stream
+line)</p></td>
+<td><p>Feature
+Collection</p></td>
+<td><p>SHP</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">MS_</span></code>
+<code class="docutils literal notranslate"><span class="pre">ms_</span></code></p></td>
+<td><p>Main
+inundated
+river channel</p></td>
+<td><p>Main inundated river channel.</p></td>
+<td><p>Feature
+Collection</p></td>
+<td><p>SHP</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">N_</span></code>
+<code class="docutils literal notranslate"><span class="pre">n_</span></code></p></td>
+<td><p>Non-inundeted
+catchment</p></td>
+<td><p>Non inundated catchment</p></td>
+<td><p>Feature
+Collection</p></td>
+<td><p>SHP</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">output_parameters</span></code></p></td>
+<td><p>Calculated
+Parameters</p></td>
+<td><p>Calculated parematers</p></td>
+<td><p>Tabular</p></td>
+<td><p>CSV</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="output-data-specification">
+<span id="output-data-specs"></span><h3>Output Data Specification</h3>
+<p>The variables output by GeoCARET in the tabular format are listed and described in the table below.</p>
+<table class="docutils align-default" id="id1">
+<caption><span class="caption-text">Specification of output variables saved in the tabular output form.</span></caption>
+<tbody>
+<tr class="row-odd"><td><p>name</p></td>
+<td><p>title</p></td>
+<td><p>description</p></td>
+<td><p>type</p></td>
+<td><p>contraints</p></td>
+<td><p>required</p></td>
+<td><p>unique</p></td>
+<td><p>minimum</p></td>
+<td><p>maximum</p></td>
+<td><p>gis_layer</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">id</span></code></p></td>
+<td><p>Dam Identifier</p></td>
+<td><p>Dam identifier</p></td>
+<td><p>integer</p></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>TRUE</p></td>
+<td><p>1</p></td>
+<td></td>
+<td><p>NA</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">country</span></code></p></td>
+<td><p>Country Name</p></td>
+<td><p>The name of the country the dam is located in (the ISO 3166 official short name (EN))</p></td>
+<td><p>string</p></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td></td>
+<td></td>
+<td><p>NA</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">name</span></code></p></td>
+<td><p>Dam Name</p></td>
+<td><p>The name of the dam</p></td>
+<td><p>string</p></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td></td>
+<td></td>
+<td><p>NA</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">river</span></code></p></td>
+<td><p>River Name</p></td>
+<td><p>The name of the river the dam will be constructed on</p></td>
+<td><p>string</p></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td></td>
+<td></td>
+<td><p>NA</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">main_basin</span></code></p></td>
+<td><p>Main Basin Name</p></td>
+<td><p>The name of main river basin the dam will be located in</p></td>
+<td><p>string</p></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td></td>
+<td></td>
+<td><p>NA</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">dam_lat</span></code></p></td>
+<td><p>Dam Latitude</p></td>
+<td><p>The latitude of the dam location in decimal degrees (DD)</p></td>
+<td><p>number</p></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>-60</p></td>
+<td><p>60</p></td>
+<td><p>NA</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">dam_lon</span></code></p></td>
+<td><p>Dam Longitude</p></td>
+<td><p>The longitude of the dam location in decimal degrees (DD)</p></td>
+<td><p>number</p></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>-180</p></td>
+<td><p>180</p></td>
+<td><p>NA</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">dam_height</span></code></p></td>
+<td><p>Dam Height</p></td>
+<td><p>The dam height in metres (m)</p></td>
+<td><p>number</p></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>10</p></td>
+<td><p>300</p></td>
+<td><p>NA</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">year_commissioned</span></code></p></td>
+<td><p>Year Commissioned</p></td>
+<td><p>The year the dam was commissioned in</p></td>
+<td><p>number</p></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>0</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">fsl_msl</span></code></p></td>
+<td><p>Full Supply Level</p></td>
+<td><p>The full supply level of the reservoir (masl)</p></td>
+<td><p>number</p></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>-113</p></td>
+<td><p>9148</p></td>
+<td><p>NA</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">power_capacity</span></code></p></td>
+<td><p>Power Capacity</p></td>
+<td><p>The installed power capacity of the dam in megawatts (MW)</p></td>
+<td><p>number</p></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>0.001</p></td>
+<td><p>22500</p></td>
+<td><p>NA</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">turbine_efficiency</span></code></p></td>
+<td><p>Turbine Efficiency</p></td>
+<td><blockquote>
+<div><p>The efficiency of the dam’s turbines, percentage (%)</p>
+</div></blockquote>
+</td>
+<td><p>number</p></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>0</p></td>
+<td><p>100</p></td>
+<td><p>NA</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">plant_depth</span></code></p></td>
+<td><p>Power Plant Depth</p></td>
+<td><p>The depth of the power plant below the base of the dam wall in metres (m)</p></td>
+<td><p>number</p></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>0</p></td>
+<td><p>300</p></td>
+<td><p>NA</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ps_snap_displacement</span></code></p></td>
+<td><p>Snap Displacement</p></td>
+<td><p>The distance between the hydroriver-snapped dam location and the raw dam location (m</p></td>
+<td><p>number</p></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>0</p></td>
+<td></td>
+<td><p>NA</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ps_lat</span></code></p></td>
+<td><p>Snapped Dam Latitude</p></td>
+<td><p>The latitude of the snapped dam location in decimal degrees (DD)</p></td>
+<td><p>number</p></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>-90</p></td>
+<td><p>90</p></td>
+<td><p>NA</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ps_lon</span></code></p></td>
+<td><p>Snapped Dam Longitude</p></td>
+<td><p>The longitude of the snapped dam location in decimal degrees (DD)</p></td>
+<td><p>number</p></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>-180</p></td>
+<td><p>180</p></td>
+<td><p>NA</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">d_dam_elevation_analysis</span></code></p></td>
+<td><p>Dam Elevation (Analysis)</p></td>
+<td><p>The elevation at the  dam location used in reservoir delination</p></td>
+<td><p>number</p></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>-413</p></td>
+<td><p>8848</p></td>
+<td><p>USGS/SRTMGL1_003 OR WWF/HydroSHEDS/03CONDEM OR WWF/HydroSHEDS/15CONDEM</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">d_dam_elevation_snapped</span></code></p></td>
+<td><p>Dam Elevation (Snapped)</p></td>
+<td><p>The elevation at the snapped dam location</p></td>
+<td><p>number</p></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>-413</p></td>
+<td><p>8848</p></td>
+<td><p>USGS/SRTMGL1_003 OR WWF/HydroSHEDS/03CONDEM OR WWF/HydroSHEDS/15CONDEM</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">d_dam_elevation_raw</span></code></p></td>
+<td><p>Dam Elevation (Raw)</p></td>
+<td><p>The elevation at the raw dam location</p></td>
+<td><p>number</p></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>-413</p></td>
+<td><p>8848</p></td>
+<td><p>USGS/SRTMGL1_003 OR WWF/HydroSHEDS/03CONDEM OR WWF/HydroSHEDS/15CONDEM</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">c_area_km2</span></code></p></td>
+<td><p>Area [catchment]</p></td>
+<td><p>The area of the catchment (<span class="math notranslate nohighlight">\(km^2\)</span>)</p></td>
+<td><p>number</p></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>0</p></td>
+<td></td>
+<td><p>NA</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">c_mean_slope_pc</span></code></p></td>
+<td><p>Mean slope [catchment]</p></td>
+<td><p>The mean slope of the catchment (%)</p></td>
+<td><p>number</p></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>0</p></td>
+<td><p>241.41</p></td>
+<td><p>USGS/SRTMGL1_003 OR WWF/HydroSHEDS/03CONDEM OR WWF/HydroSHEDS/15CONDEM</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">c_biome</span></code></p></td>
+<td><p>Predominant biome [catchment]</p></td>
+<td><p>The predominant biome of the catchment</p></td>
+<td><p>string</p></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td></td>
+<td></td>
+<td><p>RESOLVE/ECOREGIONS/2017</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">c_climate_zone</span></code></p></td>
+<td><p>Predominant climate [catchment]</p></td>
+<td><p>The predominant climate zone of the catchment (koppen climate zones - see 99_koppen_codes.md)</p></td>
+<td><p>number</p></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td></td>
+<td></td>
+<td><p>XHEET_ASSETS/Beck_KG_V1_present_0p0083</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">c_population</span></code></p></td>
+<td><p>Population [catchment]</p></td>
+<td><p>The population of the catchment (persons)</p></td>
+<td><p>number</p></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>0</p></td>
+<td></td>
+<td><p>CIESIN/GPWv411/GPW_Population_Density</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">c_population_density</span></code></p></td>
+<td><p>Population density [catchment]</p></td>
+<td><p>The population density of the catchment (<span class="math notranslate nohighlight">\(persons/km^2\)</span>)</p></td>
+<td><p>number</p></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>0</p></td>
+<td><p>78683</p></td>
+<td><p>CIESIN/GPWv411/GPW_Population_Density</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">c_landcover_0</span></code></p></td>
+<td><p>Landcover category 0 fraction [catchment]</p></td>
+<td><p>The landcover category 0  (‘No Data’) fraction of the catchment</p></td>
+<td><p>number</p></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>XHEET_ASSETS/ESACCI-LC-L4-LCCS-Map-300m-P1Y-2010-v2-0-7cds-lccs_class</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">c_landcover_1</span></code></p></td>
+<td><p>Landcover category 1 fraction [catchment]</p></td>
+<td><p>The landcover category 1 (‘Croplands’) fraction of the catchment</p></td>
+<td><p>number</p></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>XHEET_ASSETS/ESACCI-LC-L4-LCCS-Map-300m-P1Y-2010-v2-0-7cds-lccs_class</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">c_landcover_2</span></code></p></td>
+<td><p>Landcover category 2 fraction [catchment]</p></td>
+<td><p>The landcover category 2 (‘Grassland/Shrubland’)  fraction of the catchment</p></td>
+<td><p>number</p></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>XHEET_ASSETS/ESACCI-LC-L4-LCCS-Map-300m-P1Y-2010-v2-0-7cds-lccs_class</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">c_landcover_3</span></code></p></td>
+<td><p>Landcover category 3 fraction [catchment]</p></td>
+<td><p>The landcover category 3 (‘Forest’) fraction of the catchment</p></td>
+<td><p>number</p></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>XHEET_ASSETS/ESACCI-LC-L4-LCCS-Map-300m-P1Y-2010-v2-0-7cds-lccs_class</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">c_landcover_4</span></code></p></td>
+<td><p>Landcover category 4 fraction [catchment]</p></td>
+<td><p>The landcover category 4 (‘Wetlands’) fraction of the catchment</p></td>
+<td><p>number</p></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>XHEET_ASSETS/ESACCI-LC-L4-LCCS-Map-300m-P1Y-2010-v2-0-7cds-lccs_class</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">c_landcover_5</span></code></p></td>
+<td><p>Landcover category 5 fraction [catchment]</p></td>
+<td><p>The landcover category 5 (‘Settlements’) fraction of the catchment</p></td>
+<td><p>number</p></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>XHEET_ASSETS/ESACCI-LC-L4-LCCS-Map-300m-P1Y-2010-v2-0-7cds-lccs_class</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">c_landcover_6</span></code></p></td>
+<td><p>Landcover category 6 fraction [catchment]</p></td>
+<td><p>The landcover category 6 (‘Bare Areas’)  fraction of the catchment</p></td>
+<td><p>number</p></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>XHEET_ASSETS/ESACCI-LC-L4-LCCS-Map-300m-P1Y-2010-v2-0-7cds-lccs_class</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">c_landcover_7</span></code></p></td>
+<td><p>Landcover category 7 fraction [catchment]</p></td>
+<td><p>The landcover category 7 (‘Water Bodies’) fraction of the catchment</p></td>
+<td><p>number</p></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>XHEET_ASSETS/ESACCI-LC-L4-LCCS-Map-300m-P1Y-2010-v2-0-7cds-lccs_class</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">c_landcover_8</span></code></p></td>
+<td><p>Landcover category 8 fraction [catchment]</p></td>
+<td><p>The landcover category 8 (‘Permanent snow and ice’)  fraction of the catchment</p></td>
+<td><p>number</p></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>XHEET_ASSETS/ESACCI-LC-L4-LCCS-Map-300m-P1Y-2010-v2-0-7cds-lccs_class</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">c_mpet_mm</span></code></p></td>
+<td><p>Mean annual evapotranspiration [catchment]</p></td>
+<td><p>The mean annual evapotranspiration for the catchment (mm/year)</p></td>
+<td><p>number</p></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>0</p></td>
+<td><p>2500</p></td>
+<td><p>IDAHO_EPSCOR/TERRACLIMATE</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">c_mpet_mm_alt1</span></code></p></td>
+<td><p>Mean annual evapotranspiration [catchment] alt1</p></td>
+<td><p>The mean annual evapotranspiration for the catchment (mm/year) alt1</p></td>
+<td><p>number</p></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>0</p></td>
+<td><p>2500</p></td>
+<td><p>﻿XHEET_ASSETS/Eo150_clim_xyz_updated</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">c_map_mm</span></code></p></td>
+<td><p>Mean annual precipitation [catchment]</p></td>
+<td><p>The mean annual precipitation for the catchment (mm/year)</p></td>
+<td><p>number</p></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>0</p></td>
+<td><p>6000</p></td>
+<td><p>XHEET_ASSETS/wc2-1_30s_bio_12</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">c_map_mm_alt1</span></code></p></td>
+<td><p>Mean annual precipitation [catchment]</p></td>
+<td><p>The mean annual precipitation for the catchment (mm/year)</p></td>
+<td><p>number</p></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>0</p></td>
+<td><p>6000</p></td>
+<td><p>IDAHO_EPSCOR/TERRACLIMATE</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">c_mar_mm</span></code></p></td>
+<td><p>Mean annual runoff [catchment] default</p></td>
+<td><p>The mean annual runoff for the catchment (mm/year). Default definition using UNH/GRDC Composite Runoff Fields V1.0 - Fekete(2002)</p></td>
+<td><p>number</p></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>0</p></td>
+<td><p>6000</p></td>
+<td><p>XHEET_ASSETS/cmp_ro_grdc</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">c_mar_mm_alt2</span></code></p></td>
+<td><p>Mean annual runoff alt2 [catchment]</p></td>
+<td><p>The mean annual runoff for the catchment (mm/year). Alternative definition 2: Long term mean (2000-2019) of TerraClimate total runoff (mm) per calendar year</p></td>
+<td><p>number</p></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>0</p></td>
+<td><p>6000</p></td>
+<td><p>IDAHO_EPSCOR/TERRACLIMATE</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">c_mmr_mm_alt2</span></code></p></td>
+<td><p>Mean monthly runoff alt2 [catchment]</p></td>
+<td><p>The mean monthly runoff for the catchment (mm/year). Alternative definition 2: Long term mean (2000-2019) of TerraClimate total runoff (mm) per calendar month</p></td>
+<td><p>number</p></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>0</p></td>
+<td><p>500</p></td>
+<td><p>IDAHO_EPSCOR/TERRACLIMATE</p></td>
+</tr>
+<tr class="row-odd"><td><p>﻿``c_mad_m3_peryr``</p></td>
+<td><p>Mean annual discharge [catchment] default</p></td>
+<td><p>The mean annual discharge for the catchment (m3/year). Default definition using UNH/GRDC Composite Runoff Fields V1.0 - Fekete(2002)</p></td>
+<td><p>number</p></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>0</p></td>
+<td></td>
+<td><p>XHEET_ASSETS/cmp_ro_grdc</p></td>
+</tr>
+<tr class="row-even"><td><p>﻿``c_mad_m3_pers``</p></td>
+<td><p>Mean annual discharge [catchment] default</p></td>
+<td><p>The mean annual discharge for the catchment (m3/s). Default definition using UNH/GRDC Composite Runoff Fields V1.0 - Fekete(2002)</p></td>
+<td><p>number</p></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>0</p></td>
+<td></td>
+<td><p>XHEET_ASSETS/cmp_ro_grdc</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">c_msocs_kgperm2</span></code></p></td>
+<td><p>Mean soil organic carbon stocks  [catchment]</p></td>
+<td><p>The mean soil organic carbon stocks of the catchment (0-30cm; <span class="math notranslate nohighlight">\(kg C m^2\)</span>)</p></td>
+<td><p>number</p></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>0</p></td>
+<td></td>
+<td><p>projects/soilgrids-isric/ocs_mean</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">c_msocc_perc</span></code></p></td>
+<td><p>Mean soil organic carbon content [catchment]</p></td>
+<td><p>The mean soil organic carbon content of the catchment (0-30cm; <span class="math notranslate nohighlight">\(%\)</span>)</p></td>
+<td></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>0</p></td>
+<td></td>
+<td><p>projects/soilgrids-isric/soc_mean</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">c_msocc_gperkg</span></code></p></td>
+<td><p>Mean soil organic carbon content [catchment]</p></td>
+<td><p>The mean soil organic carbon content of the catchment (0-30cm; <span class="math notranslate nohighlight">\(g/kg\)</span>)</p></td>
+<td></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>0</p></td>
+<td></td>
+<td><p>projects/soilgrids-isric/soc_mean</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">c_msnc_gperkg</span></code></p></td>
+<td><p>Mean soil total nitrogen content [catchment]</p></td>
+<td><p>The mean soil nitrogen content of the catchment (0-30cm; <span class="math notranslate nohighlight">\(g/kg\)</span>)</p></td>
+<td></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>0</p></td>
+<td></td>
+<td><p>projects/soilgrids-isric/nitrogen_mean</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">c_msbdod_kgperdm3</span></code></p></td>
+<td><p>Mean soil bulk density [catchment]</p></td>
+<td><p>The mean soil bulk of the catchment (0-30cm; <span class="math notranslate nohighlight">\(kg/dm^3\)</span>)</p></td>
+<td></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>0</p></td>
+<td></td>
+<td><p>projects/soilgrids-isric/bdod_mean</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">c_doc_export</span></code></p></td>
+<td><p>DOC export [non-inundated catchment]</p></td>
+<td><p>The dissolved organic carbon (DOC) export [non-inundated catchment] (kg y-1)</p></td>
+<td><p>number</p></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td></td>
+<td></td>
+<td><p>projects/soilgrids-isric/soc_mean; projects/soilgrids-isric/nitrogen_mean</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">c_mswn_molperkg</span></code></p></td>
+<td><p>Mean strata_weighted mols N /kg [catchment]</p></td>
+<td><p>Mean strata_weighted mols N /kg [catchment]</p></td>
+<td><p>number</p></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>0</p></td>
+<td><p>71</p></td>
+<td><p>projects/soilgrids-isric/nitrogen_mean</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">c_mswc_molperkg</span></code></p></td>
+<td><p>Mean strata_weighted mols C/kg  [catchment]</p></td>
+<td><p>Mean strata_weighted mols C /kg  [catchment]</p></td>
+<td><p>number</p></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>0</p></td>
+<td><p>83</p></td>
+<td><p>projects/soilgrids-isric/soc_mean</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">c_soil_type</span></code></p></td>
+<td><p>Soil Type [catchment]</p></td>
+<td><p>The predominant soil type (mineral/organic) of the catchment area</p></td>
+<td><p>string</p></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td></td>
+<td></td>
+<td><p>projects/soilgrids-isric/ocs_mean</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">c_masm_mm</span></code></p></td>
+<td><p>Mean soil moisture [catchment]</p></td>
+<td><p>The nean soil moisture of the catchment (mm/m soil depth)</p></td>
+<td><p>number</p></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>0</p></td>
+<td></td>
+<td><p>NASA_USDA/HSL/SMAP10KM_soil_moisture</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">c_mean_olsen</span></code></p></td>
+<td><p>Soil Olsen P [catchment]</p></td>
+<td><p>The soil Olsen P of the catchment (kg ha-1)</p></td>
+<td><p>number</p></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>0</p></td>
+<td></td>
+<td><p>XHEET_ASSETS/OlsenP_kgha1_World</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">n_population</span></code></p></td>
+<td><p>Population [non-inundated catchment]</p></td>
+<td><p>The population of non-inundated catchment (persons)</p></td>
+<td><p>number</p></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>0</p></td>
+<td></td>
+<td><p>CIESIN/GPWv411/GPW_Population_Density</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">n_population_density</span></code></p></td>
+<td><p>Population density [non-inundated catchment]</p></td>
+<td><p>The population of non-inundated catchment (<span class="math notranslate nohighlight">\(persons/km^2\)</span>)</p></td>
+<td><p>number</p></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>0</p></td>
+<td><p>78683</p></td>
+<td><p>CIESIN/GPWv411/GPW_Population_Density</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">n_doc_export</span></code></p></td>
+<td><p>DOC export [non-inundated catchment]</p></td>
+<td><p>The dissolved organic carbon (DOC) export [non-inundated catchment] (kg y-1)</p></td>
+<td><p>number</p></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td></td>
+<td></td>
+<td><p>projects/soilgrids-isric/soc_mean; projects/soilgrids-isric/nitrogen_mean</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">n_mswn_molperkg</span></code></p></td>
+<td><p>Mean strata_weighted mols N /kg [ni catchment]</p></td>
+<td><p>Mean strata_weighted mols N /kg [ni catchment]</p></td>
+<td><p>number</p></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>0</p></td>
+<td><p>71</p></td>
+<td><p>projects/soilgrids-isric/nitrogen_mean</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">n_mswc_molperkg</span></code></p></td>
+<td><p>Mean strata_weighted mols C/kg  [ni catchment]</p></td>
+<td><p>Mean strata_weighted mols C /kg  [ni catchment]</p></td>
+<td><p>number</p></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>0</p></td>
+<td><p>83</p></td>
+<td><p>projects/soilgrids-isric/soc_mean</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">r_imputed_water_level</span></code></p></td>
+<td><p>Imputed water level</p></td>
+<td><p>The imputed water level (m) relative to the base of the dam</p></td>
+<td><p>number</p></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>0</p></td>
+<td></td>
+<td><p>NA</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">r_imputed_water_level_prov</span></code></p></td>
+<td><p>Imputed water level provenance</p></td>
+<td><p>The imputed water level provenance (0 - inputted water level, 1 - inputted dam height , 2- calculated dam height )</p></td>
+<td><p>number</p></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>0</p></td>
+<td></td>
+<td><p>NA</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">r_area_km2</span></code></p></td>
+<td><p>Area [reservoir]</p></td>
+<td><p>The area of the reservoir (<span class="math notranslate nohighlight">\(km^2\)</span>)</p></td>
+<td><p>number</p></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>0</p></td>
+<td></td>
+<td><p>NA</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">r_volume_m3</span></code></p></td>
+<td><p>Volume [reservoir]</p></td>
+<td><p>The volume of the reservoir (<span class="math notranslate nohighlight">\(m^3\)</span>)</p></td>
+<td><p>number</p></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>0</p></td>
+<td></td>
+<td><p>USGS/SRTMGL1_003 OR WWF/HydroSHEDS/03CONDEM OR WWF/HydroSHEDS/15CONDEM</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">r_mean_depth_m</span></code></p></td>
+<td><p>Mean depth [reservoir]</p></td>
+<td><p>The mean depth of the reservoir (m)</p></td>
+<td><p>number</p></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>0</p></td>
+<td></td>
+<td><p>USGS/SRTMGL1_003 OR WWF/HydroSHEDS/03CONDEM OR WWF/HydroSHEDS/15CONDEM</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">r_maximum_depth_m</span></code></p></td>
+<td><p>Maximum depth [reservoir]</p></td>
+<td><p>The maximum depth of the reservoir (m); Default definition 1: max(Water Elevation(res) - Land Elevation(res))</p></td>
+<td><p>number</p></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>0</p></td>
+<td></td>
+<td><p>USGS/SRTMGL1_003 OR WWF/HydroSHEDS/03CONDEM OR WWF/HydroSHEDS/15CONDEM</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">r_maximum_depth_m_alt1</span></code></p></td>
+<td><p>Maximum depth [reservoir] alt 1</p></td>
+<td><p>The maximum depth of the reservoir (m); Alternative definition 1: Max Elevation(res) - Min Elevation(dam) NB: this definition assumes that the deepest point of the reservoir is at the dam wall</p></td>
+<td><p>number</p></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>0</p></td>
+<td></td>
+<td><p>USGS/SRTMGL1_003 OR WWF/HydroSHEDS/03CONDEM OR WWF/HydroSHEDS/15CONDEM</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">r_maximum_depth_m_alt2</span></code></p></td>
+<td><p>Maximum depth [reservoir] alt 2</p></td>
+<td><p>The maximum depth of the reservoir (m); Alternative 2: Max Elevation(res) - Min Elevation(res)</p></td>
+<td><p>number</p></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>0</p></td>
+<td></td>
+<td><p>USGS/SRTMGL1_003 OR WWF/HydroSHEDS/03CONDEM OR WWF/HydroSHEDS/15CONDEM</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">r_landcover_bysoil_0</span></code></p></td>
+<td><p>Landcover/soil type category 0 fraction [reservoir]</p></td>
+<td><p>The landcover/soil type category (‘Mineral - No Data’) fraction of the reservoir</p></td>
+<td><p>number</p></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>Derived</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">r_landcover_bysoil_1</span></code></p></td>
+<td><p>Landcover/soil type category 1 fraction [reservoir]</p></td>
+<td><p>The landcover/soil type category 1 (‘Mineral - Croplands’) fraction of the reservoir</p></td>
+<td><p>number</p></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>Derived</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">r_landcover_bysoil_2</span></code></p></td>
+<td><p>Landcover/soil type category 2 fraction [reservoir]</p></td>
+<td><p>The landcover/soil type category 2 (‘Mineral - Grassland/Shrubland’) fraction of the reservoir</p></td>
+<td><p>number</p></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>Derived</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">r_landcover_bysoil_3</span></code></p></td>
+<td><p>Landcover/soil type category 3 fraction [reservoir]</p></td>
+<td><p>The landcover/soil type category 3 (‘Mineral - Forest’)  fraction of the reservoir</p></td>
+<td><p>number</p></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>Derived</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">r_landcover_bysoil_4</span></code></p></td>
+<td><p>Landcover/soil type category 4 fraction [reservoir]</p></td>
+<td><p>The landcover/soil type category 4 (‘Mineral - Wetlands’) fraction of the reservoir</p></td>
+<td><p>number</p></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>Derived</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">r_landcover_bysoil_5</span></code></p></td>
+<td><p>Landcover/soil type category 5 fraction [reservoir]</p></td>
+<td><p>The landcover/soil type category 5 (‘Mineral - Settlements’) fraction of the reservoir</p></td>
+<td><p>number</p></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>Derived</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">r_landcover_bysoil_6</span></code></p></td>
+<td><p>Landcover/soil type category 6 fraction [reservoir]</p></td>
+<td><p>The landcover/soil type category 6 (‘Mineral - Bare Areas’) fraction of the reservoir</p></td>
+<td><p>number</p></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>Derived</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">r_landcover_bysoil_7</span></code></p></td>
+<td><p>Landcover/soil type category 7 fraction [reservoir]</p></td>
+<td><p>The landcover/soil type category 7 (‘Mineral - Water Bodies’) fraction of the reservoir</p></td>
+<td><p>number</p></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>Derived</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">r_landcover_bysoil_8</span></code></p></td>
+<td><p>Landcover/soil type category 8 fraction [reservoir]</p></td>
+<td><p>The landcover/soil type category 8 (‘Mineral - Permanent snow and ice’) fraction of the reservoir</p></td>
+<td><p>number</p></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>Derived</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">r_landcover_bysoil_9</span></code></p></td>
+<td><p>Landcover/soil type category 9 fraction [reservoir]</p></td>
+<td><p>The landcover/soil type category 9 (‘Organic - No Data’) fraction of the reservoir</p></td>
+<td><p>number</p></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>Derived</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">r_landcover_bysoil_10</span></code></p></td>
+<td><p>Landcover/soil type category 10 fraction [reservoir]</p></td>
+<td><p>The landcover/soil type category 10 (‘Organic - Croplands’)  fraction of the reservoir</p></td>
+<td><p>number</p></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>Derived</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">r_landcover_bysoil_11</span></code></p></td>
+<td><p>Landcover/soil type category 11 fraction [reservoir]</p></td>
+<td><p>The landcover/soil type category 11 (‘Organic - Grassland/Shrubland’) fraction of the reservoir</p></td>
+<td><p>number</p></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>Derived</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">r_landcover_bysoil_12</span></code></p></td>
+<td><p>Landcover/soil type category 12 fraction [reservoir]</p></td>
+<td><p>The landcover/soil type category 12 (‘Organic - Forest’) fraction of the reservoir</p></td>
+<td><p>number</p></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>Derived</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">r_landcover_bysoil_13</span></code></p></td>
+<td><p>Landcover/soil type category 13 fraction [reservoir]</p></td>
+<td><p>The landcover/soil type category 13 (‘Organic - Wetlands’)  fraction of the reservoir</p></td>
+<td><p>number</p></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>Derived</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">r_landcover_bysoil_14</span></code></p></td>
+<td><p>Landcover/soil type category 14 fraction [reservoir]</p></td>
+<td><p>The landcover/soil type category 14 (‘Organic - Settlements’)  fraction of the reservoir</p></td>
+<td><p>number</p></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>Derived</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">r_landcover_bysoil_15</span></code></p></td>
+<td><p>Landcover/soil type category 15 fraction [reservoir]</p></td>
+<td><p>The landcover/soil type category 15 (‘Organic - Bare Areas’) fraction  of the reservoir</p></td>
+<td><p>number</p></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>Derived</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">r_landcover_bysoil_16</span></code></p></td>
+<td><p>Landcover/soil type category 16 fraction [reservoir]</p></td>
+<td><p>The landcover/soil type category 16 (‘Organic - Water Bodies’) fraction of the reservoir</p></td>
+<td><p>number</p></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>Derived</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">r_landcover_bysoil_17</span></code></p></td>
+<td><p>Landcover/soil type category 17 fraction [reservoir]</p></td>
+<td><p>The landcover/soil type category 17 (‘Organic - Permanent snow and ice’) fraction of the reservoir</p></td>
+<td><p>number</p></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>Derived</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">r_landcover_bysoil_18</span></code></p></td>
+<td><p>Landcover/soil type category 18 fraction [reservoir]</p></td>
+<td><p>The landcover/soil type category 18 (‘No Data - No Data’) fraction of the reservoir</p></td>
+<td></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>Derived</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">r_landcover_bysoil_19</span></code></p></td>
+<td><p>Landcover/soil type category 19 fraction [reservoir]</p></td>
+<td><p>The landcover/soil type category 19 (‘No Data - Croplands’) fraction of the reservoir</p></td>
+<td></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>Derived</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">r_landcover_bysoil_20</span></code></p></td>
+<td><p>Landcover/soil type category 20 fraction [reservoir]</p></td>
+<td><p>The landcover/soil type category 20 (‘No Data - Grassland/Shrubland’) fraction of the reservoir</p></td>
+<td></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>Derived</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">r_landcover_bysoil_21</span></code></p></td>
+<td><p>Landcover/soil type category 21 fraction [reservoir]</p></td>
+<td><p>The landcover/soil type category 21 (‘No Data - Forest’)  fraction of the reservoir</p></td>
+<td></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>Derived</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">r_landcover_bysoil_22</span></code></p></td>
+<td><p>Landcover/soil type category 22 fraction [reservoir]</p></td>
+<td><p>The landcover/soil type category 22 (‘No Data - Wetlands’) fraction of the reservoir</p></td>
+<td></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>Derived</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">r_landcover_bysoil_23</span></code></p></td>
+<td><p>Landcover/soil type category 23 fraction [reservoir]</p></td>
+<td><p>The landcover/soil type category 23 (‘No Data - Settlements’) fraction of the reservoir</p></td>
+<td></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>Derived</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">r_landcover_bysoil_24</span></code></p></td>
+<td><p>Landcover/soil type category 24 fraction [reservoir]</p></td>
+<td><p>The landcover/soil type category 24 (‘No Data - Bare Areas’) fraction of the reservoir</p></td>
+<td></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>Derived</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">r_landcover_bysoil_25</span></code></p></td>
+<td><p>Landcover/soil type category 25 fraction [reservoir]</p></td>
+<td><p>The landcover/soil type category 25 (‘No Data - Water Bodies’) fraction of the reservoir</p></td>
+<td></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>Derived</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">r_landcover_bysoil_26</span></code></p></td>
+<td><p>Landcover/soil type category 26 fraction [reservoir]</p></td>
+<td><p>The landcover/soil type category 26 (‘No Data - Permanent snow and ice’) fraction of the reservoir</p></td>
+<td></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>Derived</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">r_mean_temp_1</span></code></p></td>
+<td><p>Mean monthly temperature (Jan) [reservoir]</p></td>
+<td><p>Mean monthly temperature (Jan)  for reservoir (degrees C)</p></td>
+<td><p>number</p></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>-90</p></td>
+<td><p>57</p></td>
+<td><p>XHEET_ASSETS/wc2-1_30s_tavg</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">r_mean_temp_2</span></code></p></td>
+<td><p>Mean monthly temperature (Feb) [reservoir]</p></td>
+<td><p>Mean monthly temperature (Feb) for reservoir (degrees C)</p></td>
+<td><p>number</p></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>-90</p></td>
+<td><p>57</p></td>
+<td><p>XHEET_ASSETS/wc2-1_30s_tavg</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">r_mean_temp_3</span></code></p></td>
+<td><p>Mean monthly temperature (Mar) [reservoir]</p></td>
+<td><p>Mean monthly temperature (Mar) for reservoir (degrees C)</p></td>
+<td><p>number</p></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>-90</p></td>
+<td><p>57</p></td>
+<td><p>XHEET_ASSETS/wc2-1_30s_tavg</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">r_mean_temp_4</span></code></p></td>
+<td><p>Mean monthly temperature (Apr) [reservoir]</p></td>
+<td><p>Mean monthly temperature (Apr) for reservoir (degrees C)</p></td>
+<td><p>number</p></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>-90</p></td>
+<td><p>57</p></td>
+<td><p>XHEET_ASSETS/wc2-1_30s_tavg</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">r_mean_temp_5</span></code></p></td>
+<td><p>Mean monthly temperature (May) [reservoir]</p></td>
+<td><p>Mean monthly temperature (May) for reservoir (degrees C)</p></td>
+<td><p>number</p></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>-90</p></td>
+<td><p>57</p></td>
+<td><p>XHEET_ASSETS/wc2-1_30s_tavg</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">r_mean_temp_6</span></code></p></td>
+<td><p>Mean monthly temperature (Jun) [reservoir]</p></td>
+<td><p>Mean monthly temperature (Jun) for reservoir (degrees C)</p></td>
+<td><p>number</p></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>-90</p></td>
+<td><p>57</p></td>
+<td><p>XHEET_ASSETS/wc2-1_30s_tavg</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">r_mean_temp_7</span></code></p></td>
+<td><p>Mean monthly temperature (Jul) [reservoir]</p></td>
+<td><p>Mean monthly temperature (Jul) for reservoir (degrees C)</p></td>
+<td><p>number</p></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>-90</p></td>
+<td><p>57</p></td>
+<td><p>XHEET_ASSETS/wc2-1_30s_tavg</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">r_mean_temp_8</span></code></p></td>
+<td><p>Mean monthly temperature (Aug) [reservoir]</p></td>
+<td><p>Mean monthly temperature (Aug) for reservoir (degrees C)</p></td>
+<td><p>number</p></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>-90</p></td>
+<td><p>57</p></td>
+<td><p>XHEET_ASSETS/wc2-1_30s_tavg</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">r_mean_temp_9</span></code></p></td>
+<td><p>Mean monthly temperature (Sep) [reservoir]</p></td>
+<td><p>Mean monthly temperature (Sep) for reservoir (degrees C)</p></td>
+<td><p>number</p></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>-90</p></td>
+<td><p>57</p></td>
+<td><p>XHEET_ASSETS/wc2-1_30s_tavg</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">r_mean_temp_10</span></code></p></td>
+<td><p>Mean monthly temperature (Oct) [reservoir]</p></td>
+<td><p>Mean monthly temperature (Oct) for reservoir (degrees C)</p></td>
+<td><p>number</p></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>-90</p></td>
+<td><p>57</p></td>
+<td><p>XHEET_ASSETS/wc2-1_30s_tavg</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">r_mean_temp_11</span></code></p></td>
+<td><p>Mean monthly temperature (Nov) [reservoir]</p></td>
+<td><p>Mean monthly temperature (Nov) for reservoir (degrees C)</p></td>
+<td><p>number</p></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>-90</p></td>
+<td><p>57</p></td>
+<td><p>XHEET_ASSETS/wc2-1_30s_tavg</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">r_mean_temp_12</span></code></p></td>
+<td><p>Mean monthly temperature (Dec) [reservoir]</p></td>
+<td><p>Mean monthly temperature (Dec) for reservoir (degrees C)</p></td>
+<td><p>number</p></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>-90</p></td>
+<td><p>57</p></td>
+<td><p>XHEET_ASSETS/wc2-1_30s_tavg</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">r_mghr_all_kwhperm2perday</span></code></p></td>
+<td><p>Mean global horizonal radiance [reservoir]</p></td>
+<td><p>Mean global horizontal radiance, reservoir (<span class="math notranslate nohighlight">\(kWh m^2 d^-1\)</span>); Default definition from NASA/SSE Irradiance Data 1983-2005</p></td>
+<td><p>number</p></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>0</p></td>
+<td></td>
+<td><p>XHEET_ASSETS/GHI_NASA_low</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">r_mghr_all_kwhperm2perday_alt1</span></code></p></td>
+<td><p>Mean global horizonal radiance, alt1 [reservoir]</p></td>
+<td><p>Mean global horizontal radiance (<span class="math notranslate nohighlight">\(kWh m^2 d^-1\)</span>); Alternative definition 1: Long term annual mean (2000-2019) of downward surface shortwave radiation (srad) from TerraClimate [UNAVAILABLE].</p></td>
+<td><p>number</p></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>0</p></td>
+<td></td>
+<td><p>XHEET_ASSETS/GHI_NASA_low</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">r_mghr_may_sept_kwhperm2perday</span></code></p></td>
+<td><p>Mean global horizonal radiance May-Sept [reservoir]</p></td>
+<td><p>Mean global horizontal radiance May-Sept, reservoir (<span class="math notranslate nohighlight">\(kWh m^2 d^-1\)</span>); Default definition from NASA/SSE Irradiance Data 1983-2005</p></td>
+<td><p>number</p></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>0</p></td>
+<td></td>
+<td><p>XHEET_ASSETS/GHI_NASA_low</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">r_mghr_may_sept_kwhperm2perday_alt1</span></code></p></td>
+<td><p>Mean global horizonal radiance May-Sept [reservoir]</p></td>
+<td><p>Mean global horizontal radiance May-Sept, reservoir (<span class="math notranslate nohighlight">\(kWh m^2 d^-1\)</span>); Alternative definition 1: Long term annual mean (2000-2019) of downward surface shortwave radiation (srad) from TerraClimate [UNAVAILABLE].</p></td>
+<td><p>number</p></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>0</p></td>
+<td></td>
+<td><p>XHEET_ASSETS/GHI_NASA_low</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">r_mghr_nov_mar_kwhperm2perday</span></code></p></td>
+<td><p>Mean global horizonal radiance Nov-Mar [reservoir]</p></td>
+<td><p>Mean global horizontal radiance Nov-Mar, reservoir (<span class="math notranslate nohighlight">\(kWh m^2 d^-1\)</span>); Alternative definition 1: Default definition from NASA/SSE Irradiance Data 1983-2005</p></td>
+<td><p>number</p></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>0</p></td>
+<td></td>
+<td><p>XHEET_ASSETS/GHI_NASA_low</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">r_mghr_nov_mar_kwhperm2perday_alt1</span></code></p></td>
+<td><p>Mean global horizonal radiance Nov-Mar [reservoir]</p></td>
+<td><p>Mean global horizontal radiance Nov-Mar, reservoir (<span class="math notranslate nohighlight">\(kWh m^2 d^-1\)</span>); Alternative definition 1: Long term annual mean (2000-2019) of downward surface shortwave radiation (srad) from TerraClimate [UNAVAILABLE].</p></td>
+<td><p>number</p></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>0</p></td>
+<td></td>
+<td><p>XHEET_ASSETS/GHI_NASA_low</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">r_msocs_kgperm2</span></code></p></td>
+<td><p>Mean soil organic carbon stocks [reservoir]</p></td>
+<td><p>The mean soil organic carbon stocks of the reservoir (0-30cm; <span class="math notranslate nohighlight">\(kg C m^2\)</span>)</p></td>
+<td><p>number</p></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>0</p></td>
+<td></td>
+<td><p>projects/soilgrids-isric/ocs_mean</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">r_msocc_perc</span></code></p></td>
+<td><p>Mean soil organic carbon content [reservoir]</p></td>
+<td><p>The mean soil organic carbon content of the reservoir (0-30cm; <span class="math notranslate nohighlight">\(%\)</span>)</p></td>
+<td></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>0</p></td>
+<td></td>
+<td><p>projects/soilgrids-isric/soc_mean</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">r_msocc_gperkg</span></code></p></td>
+<td><p>Mean soil organic carbon content [reservoir]</p></td>
+<td><p>The mean soil organic carbon content of the reservoir (0-30cm; <span class="math notranslate nohighlight">\(g/kg\)</span>)</p></td>
+<td></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>0</p></td>
+<td></td>
+<td><p>projects/soilgrids-isric/soc_mean</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">r_msnc_gperkg</span></code></p></td>
+<td><p>Mean soil total nitrogen content [reservoir]</p></td>
+<td><p>The mean soil nitrogen content of the reservoir (0-30cm; <span class="math notranslate nohighlight">\(g/kg\)</span>)</p></td>
+<td></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>0</p></td>
+<td></td>
+<td><p>projects/soilgrids-isric/nitrogen_mean</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">r_msbdod_kgperdm3</span></code></p></td>
+<td><p>Mean soil bulk density [reservoir]</p></td>
+<td><p>The mean soil bulk of the reservoir (0-30cm; <span class="math notranslate nohighlight">\(kg/dm^3\)</span>)</p></td>
+<td></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>0</p></td>
+<td></td>
+<td><p>projects/soilgrids-isric/bdod_mean</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">r_mean_annual_windspeed_mpers</span></code></p></td>
+<td><p>Mean annual wind speed [reservoir]</p></td>
+<td><p>Mean annual wind speed at the reservoir (<span class="math notranslate nohighlight">\(m s^-1\)</span>)</p></td>
+<td><p>number</p></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>0</p></td>
+<td></td>
+<td><p>IDAHO_EPSCOR/TERRACLIMATE</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ms_length</span></code></p></td>
+<td><p>Length of inundated river [reservoir]</p></td>
+<td><p>Length of inundated river (km)</p></td>
+<td><p>number</p></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>0</p></td>
+<td></td>
+<td><p>XHEET_ASSETS/HydroRIVERS_v10</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">t_landcover_analysis_yr</span></code></p></td>
+<td><p>Landcover data year (landcover analysis)</p></td>
+<td><p>Date of landcover data used in landcover analysis</p></td>
+<td><p>number</p></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">t_landcover_delineation_yr</span></code></p></td>
+<td><p>Landcover data year (reservoir delineation)</p></td>
+<td><p>Date of landcover data used in delineation of existing reservoirs</p></td>
+<td><p>number</p></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">t_landcover_buffer_method</span></code></p></td>
+<td><p>Buffer method indicator</p></td>
+<td><p>Buffer method used in landcover analysis?</p></td>
+<td><p>number</p></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">error_code</span></code></p></td>
+<td><p>Error codes</p></td>
+<td><p>Error code;</p></td>
+<td><p>number</p></td>
+<td></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>0</p></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>The specification can be also downloaded in a CSV file format by clicking on the icon below.</p>
+<a class="reference external image-reference" href="../_static/files/99_output_specification1.csv"><img alt="Spreadsheet file icon" src="../_images/spreadsheet-2127832_640.png" style="width: 100px;"/>
+</a>
+</section>
+</section>
+<section id="guide-to-codes">
+<h2>Guide to Codes</h2>
+<section id="error-codes">
+<h3>Error Codes</h3>
+<p>If the analysis of a dam location fails part way through, all output files and parameters calculated up to the point of failure will be saved and exported.
+Any parameters that cannot be calculated are assigned a missing value using the codes below.
+An error code is assigned to each dam to indicate whether the analysis completed successfully or not.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Code</p></th>
+<th class="head"><p>Definition</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>No Error (complete analysis)</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>Analysis failed at snapping dam to hydroriver</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>Analysis failed at catchment delineation or
+catchment parameter generation</p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>Analysis failed at reservoir delineation or
+reservoir parameter generation</p></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>Analysis failed at non-inundated catchment
+delineation or non-inundated catchment
+parameter generation</p></td>
+</tr>
+<tr class="row-odd"><td><p>5</p></td>
+<td><p>Analysis failed at river delineation or river
+parameter generation</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="missing-data-codes">
+<h3>Missing Data Codes</h3>
+<p>Missing data, e.g. data that could not be calculated for some reason or the calculation method is still under development, is handled in several ways depending on the root cause of the data being missing. See below</p>
+<ol class="arabic simple">
+<li><p>Missing numerical/string parameters, which are still “under development” are assigned a string value of “UD”.</p></li>
+<li><p>Missing numerical parameters (which are not under developemnt) are assigned a string value of “NA” (happens when delineation has failed).</p></li>
+<li><p>Missing parameters are assigned a string value of “NONE” (happens when delineation has failed).</p></li>
+<li><p>Missing numerical parameters are assigned a string value of “ND” when calculation evaluates to None, e.g. if there is missing data in GIS layer.</p></li>
+<li><p>Missing string parameters are assigned a string value of “NODATA” when calculation evaluates to None e.g. if there is missing data in GIS layer.</p></li>
+</ol>
+</section>
+<section id="provenance-codes">
+<h3>Provenance Codes</h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Applies to future dams only.</p>
+</div>
+<p>The variable <code class="docutils literal notranslate"><span class="pre">r_imputed_water_elevation_prov</span></code> is a key variable that is used to indicate how water elevation of the future dam has been derived for delineation.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Code</p></th>
+<th class="head"><p>Definition</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>User input full supply level</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>User input dam height</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>Dam height estimated from power capacity
+(user inputted turbine efficiency)</p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>Dam height estimated from power capacity
+(assuming turbine efficiency of 85%)</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>Plant depth is assumed to be “0” unless the user-specified a different value.</p>
+</div>
+</section>
+</section>
+<section id="handling-existing-dams">
+<h2>Handling existing dams</h2>
+<p>When modelling existing dams, the following parameters cannot be generated due to the lack of elevation data that pre-dates commissioning:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">r_imputed_water_elevation</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">r_volume_m3</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">r_mean_depth_m</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">r_maximum_depth_m</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">r_maximum_depth_m_alt1</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">r_maximum_depth_m_alt2</span></code></p></li>
+</ul>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>This data needs to be provided manually, e.g. obtained from different data sources.</p>
+</div>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>For the purpose of GHG emission estimation we need: <strong>reservoir volume</strong>, <strong>mean dept h</strong> and <strong>max depth</strong>. Additional knowledge of bathymetry is very helpful for estimating CH4 emissions as it allows a more accurate estimation of the littoral zone, but it is not mandatory. Rather a luxury to have.</p>
+</div>
+</section>
+</section>
+</div><div class="flex justify-between items-center pt-6 mt-12 border-t border-border gap-4">
+<div class="mr-auto">
+<a class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-input hover:bg-accent hover:text-accent-foreground py-2 px-4" href="gis_assets.html">
+<svg class="mr-2 h-4 w-4" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<polyline points="15 18 9 12 15 6"></polyline>
+</svg>
+        GIS Assets
+      </a>
+</div>
+<div class="ml-auto">
+<a class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-input hover:bg-accent hover:text-accent-foreground py-2 px-4" href="output_data_exports.html">
+        Exporting to Google Drive
+        <svg class="ml-2 h-4 w-4" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<polyline points="9 18 15 12 9 6"></polyline>
+</svg>
+</a>
+</div>
+</div></div><aside class="hidden text-sm xl:block" id="right-sidebar">
+<div class="sticky top-16 -mt-10 max-h-[calc(100vh-5rem)] overflow-y-auto pt-6 space-y-2"><p class="font-medium">On this page</p>
+<ul>
+<li><a :data-current="activeSection === '#run-folder'" class="reference internal" href="#run-folder">Run Folder</a><ul>
+<li><a :data-current="activeSection === '#key-points'" class="reference internal" href="#key-points">Key Points</a></li>
+</ul>
+</li>
+<li><a :data-current="activeSection === '#output-locations'" class="reference internal" href="#output-locations">Output Locations</a><ul>
+<li><a :data-current="activeSection === '#google-earth-engine-cloud-project-assets-folder'" class="reference internal" href="#google-earth-engine-cloud-project-assets-folder">1. Google Earth Engine Cloud Project Assets folder</a></li>
+<li><a :data-current="activeSection === '#google-drive-optional'" class="reference internal" href="#google-drive-optional">2. Google Drive (Optional)</a><ul>
+<li><a :data-current="activeSection === '#exported-data'" class="reference internal" href="#exported-data">Exported data</a></li>
+</ul>
+</li>
+<li><a :data-current="activeSection === '#local-results-folder'" class="reference internal" href="#local-results-folder">3. Local Results Folder</a></li>
+</ul>
+</li>
+<li><a :data-current="activeSection === '#guide-to-output-files'" class="reference internal" href="#guide-to-output-files">Guide to Output Files</a><ul>
+<li><a :data-current="activeSection === '#output-file-inventory'" class="reference internal" href="#output-file-inventory">Output File Inventory</a></li>
+<li><a :data-current="activeSection === '#output-data-specification'" class="reference internal" href="#output-data-specification">Output Data Specification</a></li>
+</ul>
+</li>
+<li><a :data-current="activeSection === '#guide-to-codes'" class="reference internal" href="#guide-to-codes">Guide to Codes</a><ul>
+<li><a :data-current="activeSection === '#error-codes'" class="reference internal" href="#error-codes">Error Codes</a></li>
+<li><a :data-current="activeSection === '#missing-data-codes'" class="reference internal" href="#missing-data-codes">Missing Data Codes</a></li>
+<li><a :data-current="activeSection === '#provenance-codes'" class="reference internal" href="#provenance-codes">Provenance Codes</a></li>
+</ul>
+</li>
+<li><a :data-current="activeSection === '#handling-existing-dams'" class="reference internal" href="#handling-existing-dams">Handling existing dams</a></li>
+</ul>
+</div>
+</aside>
+</main>
+</div>
+</div><footer class="py-6 border-t border-border md:py-0">
+<div class="container flex flex-col items-center justify-between gap-4 md:h-24 md:flex-row">
+<div class="flex flex-col items-center gap-4 px-8 md:flex-row md:gap-2 md:px-0">
+<p class="text-sm leading-loose text-center text-muted-foreground md:text-left">© 2024, Tomasz Janus, University of Manchester, United Kingdom Built with <a class="font-medium underline underline-offset-4" href="https://www.sphinx-doc.org" rel="noreferrer">Sphinx 7.3.7</a></p>
+</div>
+</div>
+</footer>
+</div>
+<script src="../_static/documentation_options.js?v=8d563738"></script>
+<script src="../_static/doctools.js?v=9a2dae69"></script>
+<script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+<script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+<script src="../_static/copybutton.js?v=f281be69"></script>
+<script src="../_static/toggleprompt.js?v=5801b3bb"></script>
+<script defer="defer" src="../_static/theme.js?v=e82a16a3"></script>
+<script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</body>
+</html>
