@@ -10,6 +10,7 @@ env:
   
 permissions:
   contents: write
+  pages: write
 
 jobs:
 
@@ -40,8 +41,8 @@ jobs:
 
       - name: Deploy docs 🚀
         uses: JamesIves/github-pages-deploy-action@3.7.1
-        # Only publish on master
-        if: github.ref == 'refs/heads/master'
+        # Only publish on main
+        if: github.ref == 'refs/heads/main'
         with:
           BRANCH: gh-pages # The branch the action should deploy to.
           FOLDER: docs/_build/html # The folder the action should deploy.
