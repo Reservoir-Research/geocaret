@@ -13,3 +13,4 @@ sphinxcontrib-jsmath
 sphinxcontrib-napoleon
 sphinxcontrib-qthelp
 sphinxcontrib-serializinghtml
+sphinxcontrib-email
