@@ -1,0 +1,15 @@
+nbsphinx
+sphinx-copybutton
+sphinx-math-dollar
+sphinx-tabs
+sphinx-toggleprompt
+sphinxawesome-theme
+sphinxcontrib-applehelp
+sphinxcontrib-bibtex
+sphinxcontrib-devhelp
+sphinxcontrib-htmlhelp
+sphinxcontrib-jquery
+sphinxcontrib-jsmath
+sphinxcontrib-napoleon
+sphinxcontrib-qthelp
+sphinxcontrib-serializinghtml
