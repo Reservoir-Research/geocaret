@@ -1,7 +1,9 @@
 Köppen-Geiger climate zone classification
 =========================================
 
-The predominant (modal) climate zone of the catchments is coded using the following Köppen-Geiger classes from data published in [Beck2018]_. Climate zone for each reservoir/catchment is stored in the variable ``c_climate_zone``. The table is reproduced from supplementary materials/associated data of [Beck2018]_.
+The predominant (modal) climate zone of the catchments is coded using Köppen-Geiger classification published in [Beck2018]_ and given below. 
+The climate zone for each reservoir/catchment is stored in the variable ``c_climate_zone``. 
+The below table is reproduced from the supplementary materials/associated data in [Beck2018]_.
 
 ::
 

@@ -1,16 +1,102 @@
+GIS Assets
+==========
+
+Calculations in GeoCARET rely on access to various GIS assets (layer) which are used for reservoir and catchment delineations and calculating reservoir and catchment characteristics, such as population density, surface runoff, mean monthly temperatures, etc.
+
+The abbreviated table of GIS assets with data URLs in Google Earth Engine (GEE), Web links to the data and its documentations, and literature references, is provided below.
+
+.. note::
+   **[home-folder]** in the *GEE Data URL* column refers to the location of private assets that we have uploaded to GEE and which would not have been accessible in GEE otherwise. The **[home-folder]** variable is **projects/ee-future-dams**.
+
+Access to Private Assets
+------------------------
+
+.. important::
+   The users need to request permission from us to use those private assets before they can make successful runs with GeoCARET. 
+   Please refer to the :doc:`../installation/index` for further instructions.
+   To request access to those assets please send email to: `Tomasz Janus - Email 1 <mailto:tomasz.k.janus@gmail.com?subject=%5BGeoCARET%5D%20Request%20Asset%20Access>`__ or `Tomasz Janus - Email 2 <mailto:tjanus.heet@gmail.com?subject=%5BGeoCARET%5D%20Request%20Asset%20Access>`__ with your email address registered with the Google Earth Engine.
+
+
+Asset Table
+-----------
+
+.. csv-table:: GIS Assets used for calculation of GHG emission model inputs
+   :file: gis_assets.csv
+   :delim: ,
+   
+GIS Assets with Metadata
+------------------------
+
+A fuller datasets of GIS assets containing additional metadata can be downloaded in a CSV file format by clicking on the icon below.
+
+.. image:: ../_static/images/spreadsheet-2127832_640.png
+   :width: 100
+   :alt: Spreadsheet file icon
+   :target: ../_static/files/gis_layer_metadata.csv
+
+-  The information about which GIS layer data source (layer and variable (band/feature)) is used for calculating each output parameter, is documented in :ref:`output_data_specs`.
+
+
+The legend to the metadata fields is provided below.
+
++---------------------------+------------------------------------------+
+| metadata_field            | description                              |
++===========================+==========================================+
+| gis_layer_title           | GIS layer title                          |
++---------------------------+------------------------------------------+
+| gis_layer_location        | GIS layer storage location on Google     |
+|                           | Earth Engine                             |
++---------------------------+------------------------------------------+
+| ee_url                    | URL of GIS Layer Entry in Google Earth   |
+|                           | Engine                                   |
++---------------------------+------------------------------------------+
+| ee_asset_type             | Google Earth Engine asset type           |
++---------------------------+------------------------------------------+
+| ee_asset_vars             | Band/feature used from Google Earth      |
+|                           | Engine asset                             |
++---------------------------+------------------------------------------+
+| tool_data_usage           | Description of how the GIS layer is      |
+|                           | utilised by this tool                    |
++---------------------------+------------------------------------------+
+| tool_data_year            | Which years of data are utilised from    |
+|                           | the GIS layer                            |
++---------------------------+------------------------------------------+
+| temporal_resolution       | Temporal resolution of the data          |
+|                           | e.g. daily, monthly, yearly values etc   |
++---------------------------+------------------------------------------+
+| temporal_coverage         | Temporal coverage of the GIS layer       |
++---------------------------+------------------------------------------+
+| dataset_provider          | Dataset provider                         |
++---------------------------+------------------------------------------+
+| dataset_provider_link     | Dataset provider url                     |
++---------------------------+------------------------------------------+
+| pixel_resolution          | Pixel Resolution                         |
++---------------------------+------------------------------------------+
+| terms_of_use              | Terms of Use                             |
++---------------------------+------------------------------------------+
+| citations                 | Citations                                |
++---------------------------+------------------------------------------+
+| paper_url                 | Link to relevant publication             |
++---------------------------+------------------------------------------+
+| notes                     | Additional notes                         |
++---------------------------+------------------------------------------+
+
+
 Private Assets
-==============
+--------------
 
 .. _code: http://maps.elie.ucl.ac.be/CCI/viewer/download.php#ftp_dwl
 
 GeoCARET relies on a number of data sources that were unavailable in Google Earth Engine catalog at the time of development.
-
 These assets are hosted on our Google Earth Engine account at ``projects/ee-future-dams/XHEET_ASSETS``. 
-In order to use GeoCARET the users need to obtain privileges to access (read) the asset files individually.
-Please check :doc:`01_install.rst`_ for more details.
+In order to use GeoCARET the users need to obtain privileges to access (read) the asset files individually -see `Access to Private Assets`_.
+Please check :doc:`../installation/install_package` for more details`.
 
 Locations of Private Assets
----------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. note::
+   The data below duplicates the data provided in `Asset Table`_ and `GIS Assets with Metadata`_. We have kept it in the documentation for now because we have not had time to check that there are no discrepancies between the two sources of the same data.
 
 1. ``projects/ee-future-dams/XHEET_ASSETS/HydroRIVERS_v10`` - shp file.
 2. ``projects/ee-future-dams/XHEET_ASSETS/ESACCI-LC-L4-LCCS-Map-300m-P1Y-[Year]-v2-0-7cds`` [#]_ - nc file
@@ -31,7 +117,7 @@ Locations of Private Assets
 
 
 Asset Sources
--------------
+*************
 
 .. _weblink1: http://www.gloh2o.org/koppen/
 .. _dataurl1: https://figshare.com/articles/dataset/Present_and_future_K_ppen-Geiger_climate_classification_maps_at_1-km_resolution/6396959/2
@@ -80,7 +166,7 @@ Asset Sources
 +---------+----------------+-----------------------+
 
 Preparation/Pre-processing
---------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Some of the assets had to be pre-processed before uploading them to GEE, such that their file formats and data conform to GEE's specifications. These pre-processing steps are listed below.
 
@@ -155,8 +241,14 @@ Some of the assets had to be pre-processed before uploading them to GEE, such th
 |        |                 |                                  | values         |
 +--------+-----------------+----------------------------------+----------------+
 
-References
-----------
+.. rubric:: Footnotes
 
 .. [1] https://poles.tpdc.ac.cn/en/data/c205fc4f-4847-4a7d-bb04-7c60f27438ae/
 .. [2] http://maps.elie.ucl.ac.be/CCI/viewer/download.php#ftp_dwl
+
+Literature
+----------
+
+|
+
+.. bibliography:: ../_static/references.bib

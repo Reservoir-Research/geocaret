@@ -1,0 +1,27 @@
+.docutils.align-default {
+    width: 100%;
+    display: block; /* Needed to apply overflow properties */
+    overflow-x: auto; /* Horizontal scrollbar */
+    overflow-y: auto; /* Vertical scrollbar */
+    max-height: 750px; /* Optional: Limits the height of the table container */
+}
+
+/* Optional: Style the table itself to make it more readable */
+.docutils.align-default table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.docutils.align-default th, .docutils.align-default td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.docutils.align-default th {
+    background-color: #f2f2f2;
+    text-align: left;
+}
+
+.wide-table {
+  width: 200%;
+}

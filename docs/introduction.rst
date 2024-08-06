@@ -35,9 +35,12 @@ The communication is facilitated via the designated *Python API* and with the he
 .. image:: _static/images/geocaret-gee-connections.drawio-scaled.png
   :width: 800
   :alt: GeoCARET overview
+
 **Figure 1** Functional diagram illustrating connections between **GeoCARET**, **Google Earth Engine** and **Google Drive** for uploading inputs, scheduling calculations and saving outputs to Google Drive and local folders.
 
 The usage of GeoCARET_ follows the following steps: (1) Uploading input data from the local folder to GEE_, (2) Running Calculations on GEE_, (3) Fetching Outputs from Google Drive to the local folder.
+
+.. _Origins:
 
 Origins
 -------
@@ -49,8 +52,7 @@ G-Res_ requires a significant amount of input data, including environmental and 
 GeoCARET_ was developed to automate the process of calculating input data for G-Res_ (and Re-Emission_) by streamlining the delineation of reservoirs and catchments and the calculation of their parameters. This automation leverages global geospatial data layers related to hydrological, geomorphological, climatic, and land characteristics.
 
 .. note::
-   GeoCARET is currently used solely for its intended initial purpose, albeit it's undergoing active (re)development to enable more applications - see Vision_.
-
+   GeoCARET is currently used solely for its intended initial purpose, albeit it is undergoing active (re)development to enable more applications - see Vision_.
 
 .. _Vision:
 

@@ -43,4 +43,6 @@ COPY --chown=appuser:appuser . .
 ENTRYPOINT [ "/bin/bash", "./docker_entrypoint.sh" ]
 
 # Default command if no arguments supplied 
-CMD [ "echo", "You must specify a command to run. See README.Docker.md for details." ]
+CMD [ "echo", "You must specify a command to run. See You must specify a command to run. See https://Reservoir-Research.github.io/geocaret/running_geocaret/running_docker.html for details." ]
+
+# https://Reservoir-Research.github.io/reemission/

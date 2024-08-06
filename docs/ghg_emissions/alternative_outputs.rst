@@ -1,84 +1,122 @@
-Alternative Parameter values
-============================
+Alternative Parameters and Definitions
+======================================
 
-   Some of GeoCARET’s output parameters can be calculated using more than one approach e.g. if the parameter is available from more than one data source (**alternative data**) or can be calculated via different routes (**alternative implementation**).
+.. _G-Res: https://www.hydropower.org/publications/the-ghg-reservoir-tool-g-res-technical-documentation
 
-Where alternative values for a parameter are available in the output, they are suffixed with ``_alt1``, ``_alt2`` etc. and further information about the different parameter variants is provided in the description column of the Output Specification.
+Some of GeoCARET’s output parameters can be calculated with more than one methododology, i.e. **alternative implementation**, or from different input data, i.e. **alternative data**. 
+What follows, these output parameters have one or more alternative values.
+Where such alternative values are available, these names of those additional output parameters are suffixed with the suffix ``_alt`` followed by a number, e.g. ``_alt1``, ``_alt2`` etc. 
+Further information about the different parameter variants is provided in the description column in :ref:`output_data_specs`.
 
-Parameters with alternative values are discussed below. Please note:
+The parameters with alternative values are discussed below.
 
--  Some alternative parameter values are currently implemented in the code, but are not output to users as they have been withdrawn. These are designated DEPRECATED below. These may be of interest to future developers.
+.. note::
+   * Some alternative parameter values are currently implemented in the code, but are not output to users as they have been withdrawn. These are designated as **DEPRECATED**. Nevertheless, they may be of interest to future developers.
+   * Alternative values are implemented in the code for some parameters, but they are automatically assigned a value of UD (undefined) for the reason being that they are still under development. These paramters are designated as **DEV**. As in the previous point, they may be of interest to future developers.
 
--  Some alternative parameter values are currently implemented in the code, but automatically assigned a value of UD (undefined) on output to users as they are still under development. These are designated DEV below. These may be of interest to future developers. These are designated DEV below.
+1. Mean Annual Runoff
+---------------------
 
-Mean Annual Runoff (Catchment)
-------------------------------
+.. hint::
+   Catchment parameter
 
-Three alternative methods for calculating the mean annual runoff of the catchment area are supported by the tool:
+Three alternative methods are supported:
 
 Default Definition
 ~~~~~~~~~~~~~~~~~~
 
-The default calculation of mean annual runoff, ``c_mar_mm`` (:math:`mm/year`) is extracted and spatially averaged from global
-composite runoff fields provided by `Fekete(2002) <https://www.compositerunoff.sr.unh.edu/>`__.
+By deafault, mean annual runoff, ``c_mar_mm`` [mm/year] is extracted and spatially averaged from the global composite runoff fields provided by `Fekete(2002) <https://www.compositerunoff.sr.unh.edu/>`__.
 
-Alternative Definition 1 (DEP)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Alternative Definition 1
+~~~~~~~~~~~~~~~~~~~~~~~~
 
-Alternative definition 1, ``c_mar_mm_alt1`` is the long term annual mean of `GLDAS <https://developers.google.com/earth-engine/datasets/catalog/NASA_GLDAS_V021_NOAH_G025_T3H#bands>`__ mean annual total runoff (sum of of storm surface runoff, baseflow-groundwater runoff and snow melt).
+.. warning::
+   DEPRECATED
 
-This calculation method has been deprecated due to long calculation times (the dataset is a 3 hr time series and computationally intensive to aggregate over many years). Uses calendar, NOT hydrological year.
+``c_mar_mm_alt1`` is the long term mean annual total runoff (sum of of storm surface runoff, baseflow-groundwater runoff and snow melt) provided in `GLDAS <https://developers.google.com/earth-engine/datasets/catalog/NASA_GLDAS_V021_NOAH_G025_T3H#bands>`__.
+
+This calculation method has been deprecated due to long calculation times due to the dataset's very fine temporal resolution.
+The dataset in the form of time series is provided at a 3hr period, what adds to the computational burden during aggregation over many years. 
+
+.. note::
+   The data uses calendar, NOT hydrological year.
 
 Alternative Definition 2
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-Alternative definition 2, c_mar_mm_alt2 is the long term annual mean (2000-2019) of
-`TerraClimate <https://developers.google.com/earth-engine/datasets/catalog/IDAHO_EPSCOR_TERRACLIMATE#citations>`__
-runoff variable (mm). Uses calendar, NOT hydrological year.
+``c_mar_mm_alt2`` is the long term annual mean (2000-2019) of the runoff variable in [mm] provided by `TerraClimate <https://developers.google.com/earth-engine/datasets/catalog/IDAHO_EPSCOR_TERRACLIMATE#citations>`__
 
-Maximum Depth (Reservoir)
--------------------------
+.. note::
+   The data uses calendar, NOT hydrological year.
 
-Three alternative methods for calculating the maximum reservoir depth are supported by the tool:
+2. Maximum Depth
+----------------
+
+.. hint::
+   Reservoir parameter
+
+Three alternative methods are supported:
 
 Default Definition 1
 ~~~~~~~~~~~~~~~~~~~~
 
 The default calculation of the maximum depth of the reservoir, ``r_max_depth`` uses the following approach:
 
-.. math:: Maximum\\;Depth = Max(Water\\;Surface\\;Elevation\\;-\\;Land\\;Elevation)
+.. math:: 
+   :nowrap:
+   
+   \begin{equation}
+     Maximum \; Depth = \textrm{Max}(Water \; Surface \; Elevation - Land \; Elevation)
+   \end{equation}
+   
+where:
 
-Where:
+.. math:: Water \; Surface \; Elevation = Elevation_{dam} + Water \; Level_{reservoir}
 
-.. math:: Water\\;Surface\\;Elevation = Elevation_{dam} + Water\\;Level_{res}
+The elevation of the reservoir water surface is estimated from either:
 
-In this approach, the elevation of the reservoir water surface is estimated from either (i) full supply level (m.a.s.l) (ii) the elevation of the base of the dam + the dam height (or dam height from power supply).
+(i) full supply level (m.a.s.l) 
+(ii) the elevation of the base of the dam + the dam height.
+
+.. hint::
+   For some hydroelectric dams, we can back-calculate the dam height from the power equation if e.g. flow and power production are given.
 
 The depth at each point on the reservoir is determined by subtracting the land elevation from the water surface elevation at each pixel.
-
 The maximum depth is then taken as the maximum of theses values.
 
 Alternative Definition 1
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-In this alternative implementation (``r_max_depth_alt1``), the deepest location on the reservoir is assumed to be at the dam wall. NB: This assumption is made in the GRES calculation of maximum depth. The minimum elevation at the dam point location is subtracted from the maximum elevation over the area of the reservoir to provide the maximum depth of the reservoir:
+In this alternative implementation (``r_max_depth_alt1``), the deepest location on the reservoir is assumed to be at the dam wall. 
 
-.. math:: Maximum\\;Depth = Maximum\\;Elevation_{res}-\\;Elevation_{dam}
+.. note:: 
+   This assumption is also made in the calculation of reservoir's 'maximum depth in G-Res_. 
+   
+The minimum elevation at the dam point location is subtracted from the maximum elevation over the area of the reservoir to provide the maximum depth of the reservoir:
+
+.. math:: 
+   Maximum \; Depth = Maximum \; Elevation_{reservoir} - Elevation_{dam}
 
 .. _alternative-definition-2-1:
 
 Alternative Definition 2
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-In this alternative implementation (r_max_depth_alt2), the deepest location on the reservoir is taken as the difference between the highest and lowest elevation determined over the area of the reservoir:
+In this alternative implementation (```r_max_depth_alt2``), the deepest location on the reservoir is taken as the difference between the highest and the lowest elevation determined over the area of the reservoir:
 
-.. math:: Maximum\\;Depth = Maximum\\;Elevation_{res}-Minimum\\;Elevation_{res}
+.. math:: 
+   Maximum \; Depth = Maximum \; Elevation_{reservoir} - Minimum \; Elevation_{reservoir}
 
-This calculation should provide identical results to the default calculation, but is a simpler Earth Engine calculation. Developers
-should consider replacing ``r_max_depth_alt`` with ``r_max_depth_alt2``.
+This calculation should provide identical results to the default calculation methods, but at the benefit of requiring a simpler Earth Engine calculation method. 
 
-Mean Global Horizontal Radiance (Reservoir)
--------------------------------------------
+.. hint::
+   Developers should consider replacing ``r_max_depth_alt`` with ``r_max_depth_alt2``.
+
+3. Mean Global Horizontal Radiance
+----------------------------------
+
+.. hint::
+   Reservoir parameter
 
 Two different implementations of mean annual global horizontal radiance are supported:
 
@@ -87,56 +125,71 @@ Two different implementations of mean annual global horizontal radiance are supp
 Default Definition
 ~~~~~~~~~~~~~~~~~~
 
-The default definition of mean annual global horizontal radiance (``r_mghr_*`` variables) extracts the mean GHR for the reservoir directly from the NASA/SSE Irradiance Data 1983-2005 GIS layer.
+By default the mean annual global horizontal radiance (``r_mghr_*``) values are extracted from the NASA/SSE Irradiance Data 1983-2005 GIS layer.
 
-Alternative Definition 1 - DEV
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Alternative Definition 1
+~~~~~~~~~~~~~~~~~~~~~~~~
 
-The alternative definition of mean annual global horizontal radiance (r_mghr_*_alt1 variables) calculates the MGHR (:math:`kWh\;m^2\;d^{-1}`) from the long term annual mean (2000-2019) of downward surface shortwave radiation (srad, :math:`W/m^{2}`) from TerraClimate via a series of unit conversions.
+.. warning::
+   DEV
 
-Soil moisture (Catchment)
--------------------------
+The alternative definition of mean annual global horizontal radiance (``r_mghr_*_alt1``) is calculated as the MGHR [:math:`kWh\;m^{-2}\;d^{-1}`] from the long term annual mean (2000-2019) of downward surface shortwave radiation (srad) [:math:`W/m^{2}`] from TerraClimate. The procedure requires a series of unit conversions.
 
-Two implementations of soil moisture, using two different data sources are supported.
+4. Soil Moisture
+----------------
+
+.. hint::
+   Catchment parameter
+
+Calculation of soil moisture is done with two alternative methods that use two different data sources.
 
 .. _default-definition-3:
 
 Default Definition
 ~~~~~~~~~~~~~~~~~~
 
-The default definition (c_masm_mm) calculates mean annual soil moisture as a long term mean (2000-2019) of monthly values from the soil field of TerraClimate “Soil moisture, derived using a one-dimensional soil water balance model” (mm/m).
+``c_masm_mm``, i.e. mean annual soil moisture, is calculated as a long term mean (2000-2019) of monthly values from the soil field of TerraClimate *“Soil moisture, derived using a one-dimensional soil water balance model”* [mm/m].
 
-Alternative Definition 1 - DEP
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Alternative Definition 1
+~~~~~~~~~~~~~~~~~~~~~~~~
 
-This alternative definition (``c_masm_mm_alt1``) calculates mean annual soil moisture as the long term mean (2016-2021) of monthly values from the smp (Soil moisture profile (fraction)) of the NASA-USDA Enhanced SMAP Global Soil Moisture Dataset.
+.. warning::
+   DEPRECATED
 
-Precipitation (Catchment)
--------------------------
+This alternative definition (``c_masm_mm_alt1``) calculates the mean annual soil moisture as the long term mean (2016-2021) of monthly values from the ``smp`` field (Soil moisture profile (fraction)) of the NASA-USDA Enhanced SMAP Global Soil Moisture Dataset.
+
+5. Precipitation
+----------------
+
+.. hint::
+   Catchment parameter
 
 .. _default-definition-4:
 
 Default Definition
 ~~~~~~~~~~~~~~~~~~
 
-The default definition (``c_map_mm``) calculates mean annual precipitation from mean monthly WorldClim2 bioclimatic variables.
+By default, the mean annual precipitation ``c_map_mm`` is calculated from mean monthly WorldClim2 bioclimatic variables.
 
 .. _alternative-definition-1-1:
 
 Alternative Definition 1
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-This alternative definition (``c_map_mm_alt1``) calculates mean annual precipitation as a long term mean (2000-2019) of monthly values from the Precipitation accumulation field of TerraClimate.
+The alternative for the mean annual precipitation (``c_map_mm_alt1``) is calculated as the long term mean (2000-2019) of monthly values from the Precipitation accumulation field of TerraClimate.
 
-Evapotranspiration (Catchment)
-------------------------------
+6. Evapotranspiration
+---------------------
+
+.. hint::
+   Catchment parameter
 
 .. _default-definition-5:
 
 Default Definition
 ~~~~~~~~~~~~~~~~~~
 
-This default definition (``c_mpet_mm``) calculates mean annual evapotranspiration as a long term mean (2000-2019) of monthly values
+By default, mean annual evapotranspiration ``c_mpet_mm`` is calculated as a long term mean (2000-2019) of monthly values
 from Reference evapotranspiration (ASCE Penman-Montieth) field of TerraClimate.
 
 .. _alternative-definition-1-2:
@@ -144,4 +197,4 @@ from Reference evapotranspiration (ASCE Penman-Montieth) field of TerraClimate.
 Alternative Definition 1
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-This alternative definition (``c_mpet_mm_alt1``) calculates mean annual evapotranspiration from Regridded Monthly Terrestrial Water Balance Climatologies from the University of Delaware http://climate.geog.udel.edu/~climate/html_pages/download_whc150_2.html
+This alternative (``c_mpet_mm_alt1``) is calculated from Regridded Monthly Terrestrial Water Balance Climatologies from the University of Delaware http://climate.geog.udel.edu/~climate/html_pages/download_whc150_2.html

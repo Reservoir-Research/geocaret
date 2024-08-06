@@ -4,27 +4,39 @@ Running the GeoCARET Docker Container
 Run a GeoCARET analysis
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-First, copy your input data file to the ``data`` sub-folder and then start the GeoCARET tool by typing the following:
+First, copy your input data file to the ``data`` sub-folder and then start GeoCARET by typing the following:
 
 .. code-block:: bash
 
-   $ docker compose run --rm geocaret python heet_cli.py data/input-filename.csv projectname jobname dataset
+   $ docker compose run --rm geocaret python heet_cli.py [input-file.csv] [projectname] [jobname] [output-option]
 
-Where: \* ``data/input-filename.csv`` is the input file. **Note for Windows users:** ensure you use a / and not a  when specifying the path to the data file. \* ``projectname`` is the name of your Earth Engine project \* ``jobname`` is a short 10 character jobname to be used when creating output folders. May only contain the following characters A-Z, a-z, 0-9, -. \* ``dataset`` is the output dataset required: ``standard``, ``extended``, ``diagnostic``, ``diagnostic-catch``, ``diagnostic-res``, ``diagnostic-riv``
+where:
 
-See the main GeoCARET documentation, `Preparing Your Input File <docs/03_input_data.md>`__ and `Running The GeoCARET
-Script <docs/04_run.md>`__ for full details of input data files and all of the arguments that are passed to the GeoCARET tool.
+* ``[input-file.csv]`` is the path to the user input file.
+* ``[projectname]`` is the name of your Google Earth Engine project
+* ``[jobname]`` is a short 10 character jobname to be used when creating output folders. May only contain the following characters **A-Z, a-z, 0-9, -**. 
+* ``[output-option]`` is the output data option defining the amount of output data: *standard*, *extended*, *diagnostic*, *diagnostic-catch*, *diagnostic-res*, *diagnostic-riv*. - see :doc:`../ghg_emissions/output_data` for details.
 
-Google cloud authentication
+Alternatively, you can run the analysis with the input data in one of the files in the ``tests/data`` folder, and assuming your project name is called ``test_project``, job name is called ``job01`` and data is output in the **standard** configuration.
+
+.. code-block:: bash
+
+   $ docker compose run --rm geocaret python heet_cli.py tests/data/dams.csv test_project job01 standard
+
+See :doc:`../ghg_emissions/input_data` and :doc:`running_python_package` to read about input data file specification and about the usage of GeoCARET's command-line interface (CLI) arguments, respectively.
+
+Google Cloud authentication
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-If this is the first time you’ve run GeoCARET, you will be asked to
-authenticate with Google’s cloud services:
+.. hint::
+   Needed when running GeoCARET for the first time only.
+
+If this is the first time you’ve run the GeoCARET tool, you will be asked to authenticate with Google’s cloud services:
 
 1. You’ll be shown a URL, which you should copy and paste into a web browser. In Windows PowerShell you can hold down the ``Ctrl`` key and click the URL to open it automatically.
 2. Follow the instructions to authenticate with Google
 3. After authenticating, you’ll be given a token, which you should paste back into the GeoCARET tool command line.
-4. Press enter to continue the GeoCARET analysis.
+4. Press enter to start the analysis.
 
 ..
 .. note::
@@ -42,7 +54,9 @@ You can use your existing credentials to avoid the need to authenticate when run
 
 .. code-block:: bash
 
-   GEOCARET_AUTH_PATH=/home/username/.config docker compose run --rm geocaret python heet_cli.py data/input-filename.csv projectname jobname dataset
+   GEOCARET_AUTH_PATH=/home/[username]/.config docker compose run --rm geocaret python heet_cli.py tests/data/dams.csv test_project job01 standard
+   
+where [``username``] refers to your user name.
 
 Analysis Outputs
 ~~~~~~~~~~~~~~~~
@@ -51,10 +65,13 @@ When the GeoCARET analysis is complete, all output files generated are saved to 
 
 .. code-block:: bash
 
-   XHEET/<<JOBNAME>>-<<TIMESTAMP>> e.g. XHEET/MYANMAR01-20220130-1450
+   XHEET/<<JOBNAME>>-<<TIMESTAMP>> e.g. XHEET/JOB01-20220130-1450
+   
+The timestamp represents the date and time of when the calculations have been started, e.g. the timestamp in the code block above indicated that *JOB01* was started on the 30th of January 2020 at 14:50.
 
-Calculated properties (output_parameters) are also downloaded to a local results sub-folder, named ``outputs``, as a CSV file
-(output_parameters.csv).
+The calculated outputs, i.e. **output_parameters** are downloaded to a local directory in a CSV text format and stored under ``outputs/output_parameters.csv``.
 
-Please see the main GeoCARET documentation, `GeoCARET Output data <docs/05A_output_data.md>`__ for full details of the GeoCARET
-analysis outputs.
+Please see :doc:`../ghg_emissions/output_data` for full details of the GeoCARET analysis outputs.
+
+.. note::
+   :doc:`../ghg_emissions/output_data` refers to the outputs created in the process of attaining input data for estimating reservoir greenhouse emissions. This is the primary application of GeoCARET for which GeoCARET been designed at its inception. We are now expending GeoCARET to function more as a generic tool for analysing reservoirs and catchments using geospatial data. Each application will have different input and output data specification. We will document these new features and all the code changes in due time.

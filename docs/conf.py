@@ -111,8 +111,12 @@ html_permalinks = False
 theme_options = ThemeOptions(
    # Add your theme options. For example:
    show_breadcrumbs=True,
+   show_scrolltop=True
 )
 html_theme_options = asdict(theme_options)
+
+html_static_path = ["_static"]
+html_css_files = ["css/custom.css"]
 
 # The name of the Pygments (syntax highlighting) style to use.
 # Select theme for both light and dark mode
