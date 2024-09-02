@@ -1,0 +1,1 @@
+"""GeoCARET's test suite."""
