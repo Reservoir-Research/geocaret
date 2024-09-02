@@ -20,6 +20,9 @@ import sys
 sys.path.append("..")
 import lib
 
+# Use the installation folder as a root folder for referencing files
+root_folder = lib.get_package_file("")
+
 # =============================================================================
 #  Set up logger
 # =============================================================================
@@ -427,7 +430,7 @@ def valid_output_fields(df: pd.DataFrame) -> Tuple[bool, str]:
     fields_valid = True
     fields_detected = df.columns.to_list()
     # Required fields
-    yaml_file_path = Path("utils", "outputs.resource.yaml")
+    yaml_file_path = Path(root_folder, "utils", "outputs.resource.yaml")
     with yaml_file_path.open("r", encoding="utf-8") as ymlfile:
         profile = yaml.safe_load(ymlfile)
     required_output_fields = [e["name"] for e in profile["schema"]["fields"]]
@@ -485,10 +488,10 @@ def valid_input(
     df: pd.DataFrame, input_file_path: str, output_folder_path: str
 ) -> Tuple[bool, str]:
     """Validate the input dataframe using custom schema (profile)
-    defined in utils/input.resource.yaml and adapted with
+    defined in ../utils/input.resource.yaml and adapted with
     adapt_validation_schema function
     Write input validation report in csv"""
-    yaml_file_path = Path("utils", "inputs.resource.yaml")
+    yaml_file_path = Path(root_folder, "utils", "inputs.resource.yaml")
     with yaml_file_path.open("r", encoding="utf-8") as ymlfile:
         profile = yaml.safe_load(ymlfile)
     custom_profile = adapt_validation_schema(df, profile)
@@ -524,10 +527,10 @@ def valid_output(
     df: pd.DataFrame, output_file_path: str, output_folder_path: str
 ) -> Tuple[bool, str]:
     """Validate the output dataframe using custom schema (profile)
-    defined in utils/output.resource.yaml and NOT adapted with
+    defined in ../utils/output.resource.yaml and NOT adapted with
     adapt_validation_schema function
     Write output validation report in csv"""
-    yaml_file_path = Path("utils", "outputs.resource.yaml")
+    yaml_file_path = Path(root_folder, "utils", "outputs.resource.yaml")
     with yaml_file_path.open("r", encoding="utf-8") as ymlfile:
         profile = yaml.safe_load(ymlfile)
     custom_profile = adapt_validation_schema(df, profile)
@@ -577,7 +580,7 @@ def valid_output(
 def prepare_input_table(df: pd.DataFrame) -> pd.DataFrame:
     """Prepare a valid input dataframe"""
     d_lookup = {"any": "str", "string": "str", "number": "float", "integer": "int"}
-    yaml_file_path = Path("utils", "inputs.resource.yaml")
+    yaml_file_path = Path(root_folder, "utils", "inputs.resource.yaml")
     with yaml_file_path.open("r", encoding="utf-8") as ymlfile:
         profile = yaml.safe_load(ymlfile)
     # Add missing fields
