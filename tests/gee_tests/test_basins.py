@@ -23,7 +23,7 @@ def test_get_trailA(A, B, expected_result) -> None:
         B (str): The Pfafstetter ID 'B'.
         expected_result (str): The expected trailing digits of 'A' relative to 'B'.
     """
-    from heet_basins import get_trailA
+    from geocaret.basins import get_trailA
     test_input = {
         'A': ee.String(A),
         'B': ee.String(B)}
@@ -49,7 +49,7 @@ def test_all_odd_or_zero(digit_string, expected_result) -> None:
         digit_string (str): The string of digits to check.
         expected_result (int): The expected result (1 if all digits are odd, 0 otherwise).
     """
-    from heet_basins import all_odd_or_zero
+    from geocaret.basins import all_odd_or_zero
     test_input = {'digit_string': ee.String(digit_string),}
     result = all_odd_or_zero(**test_input).getInfo()
     assert result == expected_result

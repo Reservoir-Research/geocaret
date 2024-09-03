@@ -5,6 +5,8 @@ import sys
 import os
 from datetime import datetime
 
+ee.Initialize()
+
 
 # ==============================================================================
 # Developer Options
@@ -70,7 +72,7 @@ exportMainRiver = True
 # ==============================================================================
 
 # Define name of the folder for storing temporary files/assets in EE
-heet_folder = "XHEET/tmp"
+geocaret_folder = "XHEET/tmp"
 # Define folder names (Must come after ee authentication check)
 # Find the list of root folders the user owns in the Earth Engine
 
@@ -91,9 +93,9 @@ else:
 
 
 # Define names of folders inside the home folder in EE
-ps_heet_folder = root_folder + "/" + heet_folder
-dams_table_path = ps_heet_folder + "/" + "user_inputs"
+ps_geocaret_folder = root_folder + "/" + geocaret_folder
+dams_table_path = ps_geocaret_folder + "/" + "user_inputs"
 
-# Set in heet_cli
+# Set in geocaret_cli
 output_drive_folder = ""
 output_asset_folder_name = ""

@@ -9,16 +9,20 @@ from typing import Tuple, Iterator, Union
 from frictionless import validate
 from frictionless import errors
 from datetime import date
+import ee
 
+import_exceptions = (ModuleNotFoundError, ee.ee_exception.EEException)
 try:
-    from delineator import heet_log as lg
-except ModuleNotFoundError:
-    import heet_log as lg
+    from geocaret import log as lg
+    from geocaret import lib
+except import_exceptions:
+    import geocaret.log as lg
+    import geocaret.lib as lib
 
 # Import asset locations from config
 import sys
 sys.path.append("..")
-import lib
+
 
 # Use the installation folder as a root folder for referencing files
 root_folder = lib.get_package_file("")
@@ -372,10 +376,10 @@ def csv_to_df(file_path: str) -> Tuple[bool, Union[pd.DataFrame, str]]:
     try:
         df = pd.read_csv(file_path)
     except FileNotFoundError:
-        logger.exception("HEET could not locate the input file")
+        logger.exception("GeoCARET could not locate the input file")
         return False, ""
     except (UnicodeDecodeError, pd.errors.ParserError, pd.errors.EmptyDataError):
-        logger.exception("HEET encountered a fatal error loading input file")
+        logger.exception("GeoCARET encountered a fatal error loading input file")
         return False, ""
     df = df.applymap(lambda x: x.strip() if isinstance(x, str) else x)
     df = clean_field_names(df)
@@ -430,7 +434,7 @@ def valid_output_fields(df: pd.DataFrame) -> Tuple[bool, str]:
     fields_valid = True
     fields_detected = df.columns.to_list()
     # Required fields
-    yaml_file_path = Path(root_folder, "utils", "outputs.resource.yaml")
+    yaml_file_path = Path(root_folder, "csv-schemas", "outputs.resource.yaml")
     with yaml_file_path.open("r", encoding="utf-8") as ymlfile:
         profile = yaml.safe_load(ymlfile)
     required_output_fields = [e["name"] for e in profile["schema"]["fields"]]
@@ -488,10 +492,10 @@ def valid_input(
     df: pd.DataFrame, input_file_path: str, output_folder_path: str
 ) -> Tuple[bool, str]:
     """Validate the input dataframe using custom schema (profile)
-    defined in ../utils/input.resource.yaml and adapted with
+    defined in [root-folder]/csv-schemas/input.resource.yaml and adapted with
     adapt_validation_schema function
     Write input validation report in csv"""
-    yaml_file_path = Path(root_folder, "utils", "inputs.resource.yaml")
+    yaml_file_path = Path(root_folder, "csv-schemas", "inputs.resource.yaml")
     with yaml_file_path.open("r", encoding="utf-8") as ymlfile:
         profile = yaml.safe_load(ymlfile)
     custom_profile = adapt_validation_schema(df, profile)
@@ -515,7 +519,7 @@ def valid_input(
             ],
         )
         df_validation.to_csv(
-            Path(output_folder_path, "heet_input_report.csv"), index=False
+            Path(output_folder_path, "geocaret_input_report.csv"), index=False
         )
         error_messages = ["  - " + e for e in df_validation["error_message"].to_list()]
         emsg = "\n".join(error_messages)
@@ -527,10 +531,10 @@ def valid_output(
     df: pd.DataFrame, output_file_path: str, output_folder_path: str
 ) -> Tuple[bool, str]:
     """Validate the output dataframe using custom schema (profile)
-    defined in ../utils/output.resource.yaml and NOT adapted with
+    defined in [root-folder]/csv-schemas/output.resource.yaml and NOT adapted with
     adapt_validation_schema function
     Write output validation report in csv"""
-    yaml_file_path = Path(root_folder, "utils", "outputs.resource.yaml")
+    yaml_file_path = Path(root_folder, "csv-schemas", "outputs.resource.yaml")
     with yaml_file_path.open("r", encoding="utf-8") as ymlfile:
         profile = yaml.safe_load(ymlfile)
     custom_profile = adapt_validation_schema(df, profile)
@@ -564,7 +568,7 @@ def valid_output(
             ],
         )
         df_validation.to_csv(
-            Path(output_folder_path, "heet_output_report.csv"), index=False
+            Path(output_folder_path, "geocaret_output_report.csv"), index=False
         )
         error_messages = ["  - " + e for e in df_validation["error_message"].to_list()]
         emsg = "\n".join(error_messages)
@@ -580,7 +584,7 @@ def valid_output(
 def prepare_input_table(df: pd.DataFrame) -> pd.DataFrame:
     """Prepare a valid input dataframe"""
     d_lookup = {"any": "str", "string": "str", "number": "float", "integer": "int"}
-    yaml_file_path = Path(root_folder, "utils", "inputs.resource.yaml")
+    yaml_file_path = Path(root_folder, "csv-schemas", "inputs.resource.yaml")
     with yaml_file_path.open("r", encoding="utf-8") as ymlfile:
         profile = yaml.safe_load(ymlfile)
     # Add missing fields

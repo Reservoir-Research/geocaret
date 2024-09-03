@@ -47,7 +47,7 @@ def test_predominant_biome(get_logger) -> None:
     Asserts:
         The calculated biome is correctly identified as "Temperate Conifer Forests".
     """
-    from heet_params import predominant_biome
+    from geocaret.params import predominant_biome
     logger = get_logger
     biome_poly_1090 = ee.FeatureCollection(
         "projects/ee-future-dams/assets/XHEET_TEST_POLYS/biome_poly_1090"
@@ -82,7 +82,7 @@ def test_twbda_annual_mean_pet(get_logger) -> None:
     Asserts:
         The calculated PET is approximately equal to the expected result within a relative tolerance of 0.05%.
     """
-    from heet_params import twbda_annual_mean_pet
+    from geocaret.params import twbda_annual_mean_pet
     logger = get_logger
     twbda_poly_px2 = ee.FeatureCollection(
         "projects/ee-future-dams/assets/XHEET_TEST_POLYS/twbda_poly_px2"
@@ -116,7 +116,7 @@ def test_population(get_logger) -> None:
     Asserts:
         The calculated population is approximately equal to the expected result within a relative tolerance of 0.05%.
     """
-    from heet_params import population
+    from geocaret.params import population
     logger = get_logger
     pop_poly_px4 = ee.FeatureCollection(
         "projects/ee-future-dams/assets/XHEET_TEST_POLYS/pop_poly_px4"
@@ -144,7 +144,7 @@ def test_population_density(get_logger) -> None:
     Asserts:
         The calculated population density is approximately equal to the expected result within a relative tolerance of 0.05%.
     """
-    from heet_params import population_density
+    from geocaret.params import population_density
     logger = get_logger
     pop_poly_px4 = ee.FeatureCollection(
         "projects/ee-future-dams/assets/XHEET_TEST_POLYS/pop_poly_px4"
@@ -179,8 +179,8 @@ def test_fekete_crossref_ro(get_logger) -> None:
     Asserts:
         The calculated Fekete runoff is within an order of magnitude of the reference value from HydroAtlas.
     """
-    from heet_params import mean_annual_runoff_mm
-    import heet_data as dta
+    from geocaret.params import mean_annual_runoff_mm
+    import geocaret.data as dta
     logger = get_logger
     REFDATA = ee.FeatureCollection(
         "projects/ee-future-dams/assets/XHEET_TEST_ASSETS/BasinATLAS_v10_lev12"

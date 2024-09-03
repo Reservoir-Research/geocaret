@@ -21,7 +21,7 @@ def test_area(get_logger) -> None:
         AssertionError: If the calculated area does not match the expected value within 
                         the allowable relative difference.
     """
-    from heet_params import area
+    from geocaret.params import area
     # Reference the target area as a FeatureCollection stored in a GEE folder
     target_roi = ee.FeatureCollection(
         "projects/ee-future-dams/assets/XHEET_TEST_ASSETS/CTY_DEC_2021_EN_BUC").first() 
@@ -61,7 +61,7 @@ def test_degrees_to_perc_slope(get_logger, mean_slope_degrees: int, expected_slo
         AssertionError: If the calculated percent slope does not match the expected value 
                         within the allowable absolute difference.
     """
-    from heet_params import degrees_to_perc_slope
+    from geocaret.params import degrees_to_perc_slope
     
     test_input = {
         'mean_slope_degrees_value': ee.Number(mean_slope_degrees),
@@ -91,7 +91,7 @@ def test_reservoir_volume(get_logger) -> None:
     Raises:
         AssertionError: If the calculated volume does not match the expected value.
     """
-    from heet_params import reservoir_volume
+    from geocaret.params import reservoir_volume
     
     test_input = {
         'surface_area': ee.Number(1),
@@ -122,7 +122,7 @@ def test_km2_to_m2(get_logger) -> None:
     Raises:
         AssertionError: If the calculated area in square meters does not match the expected value.
     """
-    from heet_params import km2_to_m2
+    from geocaret.params import km2_to_m2
     
     test_input = {'surface_area': ee.Number(1)}
      

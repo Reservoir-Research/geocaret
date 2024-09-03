@@ -8,22 +8,22 @@ import yaml
 import polling2
 from pathlib import Path
 
-
+import_exceptions = (ModuleNotFoundError, ee.ee_exception.EEException)
 try:
-    from delineator import heet_config as cfg
-    from delineator import heet_monitor as mtr
-    from delineator import heet_task
-    from delineator import heet_log as lg
+    from geocaret import config as cfg
+    from geocaret import monitor as mtr
+    from geocaret import task
+    from geocaret import log as lg
 
-except ModuleNotFoundError:
+except import_exceptions:
 
     if not ee.data._credentials:
         ee.Initialize()
 
-    import heet_config as cfg
-    import heet_monitor as mtr
-    import heet_task
-    import heet_log as lg
+    import geocaret.config as cfg
+    import geocaret.monitor as mtr
+    import geocaret.task
+    import geocaret.log as lg
 
 # Gets or creates a logger
 logger = logging.getLogger(__name__)
@@ -230,7 +230,7 @@ def prepare_output_table(df):
 
 def download_output_parameters(output_folder_path):
     try:
-        asset_name = cfg.ps_heet_folder + "/" + "output_parameters"
+        asset_name = cfg.ps_geocaret_folder + "/" + "output_parameters"
         output_parameters_ftc = ee.FeatureCollection(asset_name)
         df = ftc_to_df(output_parameters_ftc)
         df = prepare_output_table(df)
@@ -293,7 +293,7 @@ def asset_to_drive(asset_mta):
         task = ee.batch.Export.image.toDrive(**task_config)
 
     try:
-        heet_task.robust_task_start(task)
+        task.robust_task_start(task)
     except polling2.MaxCallException:
         logger.error(
             f"[export_ftc] Several attempts to start export {item_name} \
@@ -306,7 +306,7 @@ def asset_to_drive(asset_mta):
 
 def upload_user_inputs(inputs_ftc):
 
-    asset_id = cfg.ps_heet_folder + "/" + "user_inputs"
+    asset_id = cfg.ps_geocaret_folder + "/" + "user_inputs"
 
     task_config = {
         "collection": inputs_ftc,
@@ -317,7 +317,7 @@ def upload_user_inputs(inputs_ftc):
     task = ee.batch.Export.table.toAsset(**task_config)
 
     try:
-        heet_task.robust_task_start(task)
+        task.robust_task_start(task)
     except polling2.MaxCallException:
         logger.error(
             f"[export_ftc] Several attempts to start upload of {asset_id} failed. \
@@ -336,9 +336,9 @@ def export_ftc(location_ftc, c_dam_id_str, jobtype):
     job_taskcode = export_job_specs[jobtype]["taskcode"]
 
     if c_dam_id_str == "0":
-        asset_id = cfg.ps_heet_folder + "/" + job_fileprefix
+        asset_id = cfg.ps_geocaret_folder + "/" + job_fileprefix
     else:
-        asset_id = cfg.ps_heet_folder + "/" + job_fileprefix + c_dam_id_str
+        asset_id = cfg.ps_geocaret_folder + "/" + job_fileprefix + c_dam_id_str
 
     task_config = {
         "collection": location_ftc,
@@ -349,7 +349,7 @@ def export_ftc(location_ftc, c_dam_id_str, jobtype):
     task = ee.batch.Export.table.toAsset(**task_config)
 
     try:
-        heet_task.robust_task_start(task)
+        task.robust_task_start(task)
     except polling2.MaxCallException:
         logger.error(
             f"[export_ftc] Several attempts to start export {asset_id} failed. \
@@ -372,7 +372,7 @@ def export_image(location_img, c_dam_id_str, jobtype):
     job_taskcode = export_job_specs[jobtype]["taskcode"]
 
     projection = location_img.select([0]).projection().getInfo()
-    asset_id = cfg.ps_heet_folder + "/" + job_fileprefix + c_dam_id_str
+    asset_id = cfg.ps_geocaret_folder + "/" + job_fileprefix + c_dam_id_str
 
     task_config = {
         "image": location_img,
@@ -385,7 +385,7 @@ def export_image(location_img, c_dam_id_str, jobtype):
     task = ee.batch.Export.image.toAsset(**task_config)
 
     try:
-        heet_task.robust_task_start(task)
+        task.robust_task_start(task)
     except polling2.MaxCallException:
         logger.error(
             f"[export_ftc] Several attempts to start export {asset_id} failed. \
@@ -649,7 +649,7 @@ def batch_export_to_json(output_folder_path):
 
     # Load output datasets
     # Catchment
-    output_asset_name = cfg.ps_heet_folder + "/" + "output_parameters"
+    output_asset_name = cfg.ps_geocaret_folder + "/" + "output_parameters"
 
     out_ftc = ee.FeatureCollection(output_asset_name)
 

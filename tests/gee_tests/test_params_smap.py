@@ -24,8 +24,8 @@ def test_smap_crossref_soil(get_logger) -> None:
         The ratio of the calculated soil moisture value to the reference value should be between 0.1 and 10, 
         ensuring that the values are within the same order of magnitude.
     """
-    from heet_params import smap_monthly_mean
-    import heet_data as dta
+    from geocaret.params import smap_monthly_mean
+    import geocaret.data as dta
     target_var = "smp"
     REFDATA = ee.FeatureCollection(
         "projects/ee-future-dams/assets/XHEET_TEST_ASSETS/BasinATLAS_v10_lev12"

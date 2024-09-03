@@ -1,26 +1,27 @@
-debug_mode = False
-
+""" """
 import ee
 import re
 import logging
 
+debug_mode = False
+import_exceptions = (ModuleNotFoundError, ee.ee_exception.EEException)
 try:
-    from delineator import heet_config as cfg
-    from delineator import heet_data as dta
-    from delineator import heet_export
-    from delineator import heet_monitor as mtr
-    from delineator import uihi_watershed as watershed
-    from delineator import heet_log as lg
-except ModuleNotFoundError:
+    from geocaret import config as cfg
+    from geocaret import data as dta
+    from geocaret import export
+    from geocaret import monitor as mtr
+    from geocaret import uihi_watershed as watershed
+    from geocaret import log as lg
+except import_exceptions:
     if not ee.data._credentials:
         ee.Initialize()
 
-    import heet_config as cfg
-    import heet_data as dta
-    import heet_export
-    import heet_monitor as mtr
-    import uihi_watershed as watershed
-    import heet_log as lg
+    import geocaret.config as cfg
+    import geocaret.data as dta
+    import geocaret.export
+    import geocaret.monitor as mtr
+    import geocaret.uihi_watershed as watershed
+    import geocaret.log as lg
 
 # ==============================================================================
 #  Set up logger
@@ -206,7 +207,7 @@ def vectorise_catchment(damFeat, watershedDptsFtc, c_dam_id_str):
     catchmentPixels = outputImg.updateMask(mask)
 
     if cfg.exportCatchmentPixels == True:
-        heet_export.export_image(catchmentPixels, c_dam_id_str, "catchment_pixels")
+        export.export_image(catchmentPixels, c_dam_id_str, "catchment_pixels")
 
     # ==================================================================
     # Convert watershed raster to vector
@@ -227,7 +228,7 @@ def vectorise_catchment(damFeat, watershedDptsFtc, c_dam_id_str):
 
     catchmentVectorGeom = catchmentVector.geometry()
 
-    # heet_export.export_ftc(ee.FeatureCollection(catchmentVectorGeom), c_dam_id_str, "debugging_vector")
+    # export.export_ftc(ee.FeatureCollection(catchmentVectorGeom), c_dam_id_str, "debugging_vector")
 
     # catchment vector has double boundaries as a result of working only
     # with edge pixels for the upstream catchments
@@ -478,8 +479,8 @@ def batch_delineate_nicatchments(c_dam_ids):
         dam_id = ee.Number(c_dam_id)
         c_dam_id_str = str(c_dam_id)
 
-        catchment_vector = cfg.ps_heet_folder + "/" + "C_" + c_dam_id_str
-        reservoir_vector = cfg.ps_heet_folder + "/" + "R_" + c_dam_id_str
+        catchment_vector = cfg.ps_geocaret_folder + "/" + "C_" + c_dam_id_str
+        reservoir_vector = cfg.ps_geocaret_folder + "/" + "R_" + c_dam_id_str
 
         catch_geom = ee.FeatureCollection(catchment_vector).geometry()
         res_geom = ee.FeatureCollection(reservoir_vector).geometry()
@@ -514,7 +515,7 @@ def batch_delineate_nicatchments(c_dam_ids):
         try:
             logger.info(f"{msg} {c_dam_id_str}")
             if cfg.exportNiCatchmentVector == True:
-                heet_export.export_ftc(
+                export.export_ftc(
                     ee.FeatureCollection(ee.Feature(niCatchFeat)),
                     c_dam_id_str,
                     "ni_catchment_vector",
@@ -546,7 +547,7 @@ def batch_delineate_catchments(c_dam_ids):
         dam_id = ee.Number(c_dam_id)
         c_dam_id_str = str(c_dam_id)
 
-        snapped_point_name = cfg.ps_heet_folder + "/" + "PS_" + c_dam_id_str
+        snapped_point_name = cfg.ps_geocaret_folder + "/" + "PS_" + c_dam_id_str
 
         # First OK (always single feature)
         damFeat = ee.FeatureCollection(snapped_point_name).first()
@@ -579,7 +580,7 @@ def batch_delineate_catchments(c_dam_ids):
             logger.info(f"{msg} {c_dam_id_str}")
 
             if cfg.exportWatershedCpts == True:
-                heet_export.export_ftc(
+                export.export_ftc(
                     watershedCptsFtc, c_dam_id_str, "candidate_watershed_pts"
                 )
 
@@ -683,7 +684,7 @@ def batch_delineate_catchments(c_dam_ids):
             logger.info(f"{msg} {c_dam_id_str}")
 
             if cfg.exportWatershedDpts == True:
-                heet_export.export_ftc(
+                export.export_ftc(
                     watershedDptsFtc, c_dam_id_str, "detected_watershed_pts"
                 )
 
@@ -731,7 +732,7 @@ def batch_delineate_catchments(c_dam_ids):
                     **{"source": damFeat, "exclude": ["ancestor_ids"]}
                 )
 
-                heet_export.export_ftc(
+                export.export_ftc(
                     ee.FeatureCollection(ee.Feature(catchmentVectorFeat)),
                     c_dam_id_str,
                     "catchment_vector",
@@ -758,7 +759,7 @@ if __name__ == "__main__":
     # print("File one executed when ran directly")
 
     # cfg.root_folder = ee.data.getAssetRoots()[0]['id']
-    # cfg.ps_heet_folder = cfg.root_folder + "/" +  cfg.heet_folder
+    # cfg.ps_geocret_folder = cfg.root_folder + "/" +  cfg.geocret_folder
 
     # c_dam_id = 12
     # c_dam_id_str = "12"

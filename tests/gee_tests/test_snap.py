@@ -42,7 +42,7 @@ def test_snap_pt_to_line(
     Asserts:
         - The calculated snapped point should be approximately equal to the expected result.
     """
-    from heet_snap import snap_pt_to_line
+    from geocaret.snap import snap_pt_to_line
     test_input = {
         "P": ee.Array(list(point)),
         "A": ee.Array(list(start_of_line_segment)),
@@ -77,8 +77,8 @@ def test_snap_intersects_hydroriver(get_logger) -> None:
         - Input:
             - Dam location: Point(98.580461, 26.051936)
     """
-    from heet_snap import jensen_snap_hydroriver
-    import heet_data as dta
+    from geocaret.snap import jensen_snap_hydroriver
+    import geocaret.data as dta
     damFeat = ee.Feature(ee.Geometry.Point(ee.Number(98.580461), ee.Number(26.051936)))
     snappedDamFeat = jensen_snap_hydroriver(damFeat)
     interReaches = dta.HYDRORIVERS.filterBounds(snappedDamFeat.geometry())

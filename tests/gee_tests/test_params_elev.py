@@ -1,13 +1,13 @@
 """
-Module for testing slope, elevation, and depth calculations using the `heet_params` library.
+Module for testing slope, elevation, and depth calculations using the `params` library.
 
 This module includes a series of test functions designed to verify the correctness of various geospatial computations
-performed using the `heet_params` library. The tests cover calculations for mean slope in degrees and percentage,
+performed using the `params` library. The tests cover calculations for mean slope in degrees and percentage,
 minimum and maximum elevations, and mean and maximum depths. These tests are performed by comparing computed values
 against known ground truth values.
 
 The `monkeypatch` utility is used extensively throughout these tests to modify configuration parameters for the 
-`heet_params` library, allowing for different testing scenarios.
+`params` library, allowing for different testing scenarios.
 
 Dependencies:
 - ee: Earth Engine Python API for interacting with Google Earth Engine datasets.
@@ -30,7 +30,7 @@ Test Functions:
 Each test function:
 - Sets up necessary configuration using monkeypatch.
 - Loads appropriate test data from Google Earth Engine.
-- Performs a calculation using the `heet_params` library.
+- Performs a calculation using the `params` library.
 - Compares the result to a known ground truth value.
 - Logs the result and checks that it is within an acceptable range of the ground truth.
 
@@ -72,15 +72,15 @@ def test_mean_slope_degrees(monkeypatch, get_logger, feature_collection, expecte
         The calculated mean slope is approximately equal to the expected value within
         a relative tolerance of 0.05%.
     """
-    from heet_params import mean_slope_degrees
+    from geocaret.params import mean_slope_degrees
     logger = get_logger
     # Monkey patch the config parameters
-    monkeypatch.setattr("heet_params.cfg.jensen_search_radius", 1000)
-    monkeypatch.setattr("heet_params.cfg.upstreamMethod", 3)
-    monkeypatch.setattr("heet_params.cfg.paramHydroDEM", False)
-    monkeypatch.setattr("heet_params.cfg.resHydroDEM", False)
-    monkeypatch.setattr("heet_params.cfg.hydrodataset", "03")
-    monkeypatch.setattr("heet_params.cfg.delineate_snapped", True)
+    monkeypatch.setattr("geocaret.params.cfg.jensen_search_radius", 1000)
+    monkeypatch.setattr("geocaret.params.cfg.upstreamMethod", 3)
+    monkeypatch.setattr("geocaret.params.cfg.paramHydroDEM", False)
+    monkeypatch.setattr("geocaret.params.cfg.resHydroDEM", False)
+    monkeypatch.setattr("geocaret.params.cfg.hydrodataset", "03")
+    monkeypatch.setattr("geocaret.params.cfg.delineate_snapped", True)
     # Set up the feature collection from the parameter
     catchment_ftc = ee.FeatureCollection(feature_collection)
     test_input = {"catchment_ftc": catchment_ftc}
@@ -112,15 +112,15 @@ def test_mean_slope(monkeypatch, get_logger) -> None:
         The calculated mean slope is approximately equal to the expected value (3.67%),
         within a relative tolerance of 0.05%.
     """
-    from heet_params import mean_slope
+    from geocaret.params import mean_slope
     logger = get_logger
     # Monkey patch the config parameters
-    monkeypatch.setattr("heet_params.cfg.jensen_search_radius", 1000)
-    monkeypatch.setattr("heet_params.cfg.upstreamMethod", 3)
-    monkeypatch.setattr("heet_params.cfg.paramHydroDEM", False)
-    monkeypatch.setattr("heet_params.cfg.resHydroDEM", False)
-    monkeypatch.setattr("heet_params.cfg.hydrodataset", "03")
-    monkeypatch.setattr("heet_params.cfg.delineate_snapped", True)
+    monkeypatch.setattr("geocaret.params.cfg.jensen_search_radius", 1000)
+    monkeypatch.setattr("geocaret.params.cfg.upstreamMethod", 3)
+    monkeypatch.setattr("geocaret.params.cfg.paramHydroDEM", False)
+    monkeypatch.setattr("geocaret.params.cfg.resHydroDEM", False)
+    monkeypatch.setattr("geocaret.params.cfg.hydrodataset", "03")
+    monkeypatch.setattr("geocaret.params.cfg.delineate_snapped", True)
 
     slope_poly_px4 = ee.FeatureCollection(
         "projects/ee-future-dams/assets/XHEET_TEST_POLYS/slope_poly_px4")
@@ -161,15 +161,15 @@ def test_minimum_elevation(monkeypatch, get_logger) -> None:
         The calculated minimum elevation is approximately equal to the expected value (96 meters),
         within a relative tolerance of 0.05%.
     """
-    from heet_params import minimum_elevation
+    from geocaret.params import minimum_elevation
     logger = get_logger
     # Monkey patch the config parameters
-    monkeypatch.setattr("heet_params.cfg.jensen_search_radius", 1000)
-    monkeypatch.setattr("heet_params.cfg.upstreamMethod", 3)
-    monkeypatch.setattr("heet_params.cfg.paramHydroDEM", False)
-    monkeypatch.setattr("heet_params.cfg.resHydroDEM", False)
-    monkeypatch.setattr("heet_params.cfg.hydrodataset", "03")
-    monkeypatch.setattr("heet_params.cfg.delineate_snapped", True)
+    monkeypatch.setattr("geocaret.params.cfg.jensen_search_radius", 1000)
+    monkeypatch.setattr("geocaret.params.cfg.upstreamMethod", 3)
+    monkeypatch.setattr("geocaret.params.cfg.paramHydroDEM", False)
+    monkeypatch.setattr("geocaret.params.cfg.resHydroDEM", False)
+    monkeypatch.setattr("geocaret.params.cfg.hydrodataset", "03")
+    monkeypatch.setattr("geocaret.params.cfg.delineate_snapped", True)
 
     elev_poly_px4_ft = ee.Feature(
         ee.FeatureCollection(
@@ -208,15 +208,15 @@ def test_maximum_elevation(monkeypatch, get_logger) -> None:
         The calculated maximum elevation is approximately equal to the expected value (175 meters),
         within a relative tolerance of 0.05%.
     """
-    from heet_params import maximum_elevation
+    from geocaret.params import maximum_elevation
     logger = get_logger
     # Monkey patch the config parameters
-    monkeypatch.setattr("heet_params.cfg.jensen_search_radius", 1000)
-    monkeypatch.setattr("heet_params.cfg.upstreamMethod", 3)
-    monkeypatch.setattr("heet_params.cfg.paramHydroDEM", False)
-    monkeypatch.setattr("heet_params.cfg.resHydroDEM", False)
-    monkeypatch.setattr("heet_params.cfg.hydrodataset", "03")
-    monkeypatch.setattr("heet_params.cfg.delineate_snapped", True)
+    monkeypatch.setattr("geocaret.params.cfg.jensen_search_radius", 1000)
+    monkeypatch.setattr("geocaret.params.cfg.upstreamMethod", 3)
+    monkeypatch.setattr("geocaret.params.cfg.paramHydroDEM", False)
+    monkeypatch.setattr("geocaret.params.cfg.resHydroDEM", False)
+    monkeypatch.setattr("geocaret.params.cfg.hydrodataset", "03")
+    monkeypatch.setattr("geocaret.params.cfg.delineate_snapped", True)
 
     elev_poly_px4_ft = ee.Feature(
         ee.FeatureCollection(
@@ -260,15 +260,15 @@ def test_maximum_depth(monkeypatch, get_logger) -> None:
         The calculated maximum depth is approximately equal to the expected value (14 meters),
         within a relative tolerance of 0.05%.
     """
-    from heet_params import maximum_depth
+    from geocaret.params import maximum_depth
     logger = get_logger
     # Monkey patch the config parameters
-    monkeypatch.setattr("heet_params.cfg.jensen_search_radius", 1000)
-    monkeypatch.setattr("heet_params.cfg.upstreamMethod", 3)
-    monkeypatch.setattr("heet_params.cfg.paramHydroDEM", False)
-    monkeypatch.setattr("heet_params.cfg.resHydroDEM", False)
-    monkeypatch.setattr("heet_params.cfg.hydrodataset", "03")
-    monkeypatch.setattr("heet_params.cfg.delineate_snapped", True)
+    monkeypatch.setattr("geocaret.params.cfg.jensen_search_radius", 1000)
+    monkeypatch.setattr("geocaret.params.cfg.upstreamMethod", 3)
+    monkeypatch.setattr("geocaret.params.cfg.paramHydroDEM", False)
+    monkeypatch.setattr("geocaret.params.cfg.resHydroDEM", False)
+    monkeypatch.setattr("geocaret.params.cfg.hydrodataset", "03")
+    monkeypatch.setattr("geocaret.params.cfg.delineate_snapped", True)
 
     elev_poly_px4_ft = ee.Feature(
         ee.FeatureCollection(
@@ -307,15 +307,15 @@ def test_maximum_depth_alt1(monkeypatch, get_logger) -> None:
         The calculated maximum depth is approximately equal to the expected value (14 meters),
         within a relative tolerance of 0.05%.
     """
-    from heet_params import maximum_depth_alt1
+    from geocaret.params import maximum_depth_alt1
     logger = get_logger
     # Monkey patch the config parameters
-    monkeypatch.setattr("heet_params.cfg.jensen_search_radius", 1000)
-    monkeypatch.setattr("heet_params.cfg.upstreamMethod", 3)
-    monkeypatch.setattr("heet_params.cfg.paramHydroDEM", False)
-    monkeypatch.setattr("heet_params.cfg.resHydroDEM", False)
-    monkeypatch.setattr("heet_params.cfg.hydrodataset", "03")
-    monkeypatch.setattr("heet_params.cfg.delineate_snapped", True)
+    monkeypatch.setattr("geocaret.params.cfg.jensen_search_radius", 1000)
+    monkeypatch.setattr("geocaret.params.cfg.upstreamMethod", 3)
+    monkeypatch.setattr("geocaret.params.cfg.paramHydroDEM", False)
+    monkeypatch.setattr("geocaret.params.cfg.resHydroDEM", False)
+    monkeypatch.setattr("geocaret.params.cfg.hydrodataset", "03")
+    monkeypatch.setattr("geocaret.params.cfg.delineate_snapped", True)
 
     elev_poly_px4_ft = ee.Feature(
         ee.FeatureCollection(
@@ -353,15 +353,15 @@ def test_maximum_depth_alt2(monkeypatch, get_logger) -> None:
         The calculated maximum depth is approximately equal to the expected value (14 meters),
         within a relative tolerance of 0.05%.
     """
-    from heet_params import maximum_depth_alt2
+    from geocaret.params import maximum_depth_alt2
     logger = get_logger
     # Monkey patch the config parameters
-    monkeypatch.setattr("heet_params.cfg.jensen_search_radius", 1000)
-    monkeypatch.setattr("heet_params.cfg.upstreamMethod", 3)
-    monkeypatch.setattr("heet_params.cfg.paramHydroDEM", False)
-    monkeypatch.setattr("heet_params.cfg.resHydroDEM", False)
-    monkeypatch.setattr("heet_params.cfg.hydrodataset", "03")
-    monkeypatch.setattr("heet_params.cfg.delineate_snapped", True)
+    monkeypatch.setattr("geocaret.params.cfg.jensen_search_radius", 1000)
+    monkeypatch.setattr("geocaret.params.cfg.upstreamMethod", 3)
+    monkeypatch.setattr("geocaret.params.cfg.paramHydroDEM", False)
+    monkeypatch.setattr("geocaret.params.cfg.resHydroDEM", False)
+    monkeypatch.setattr("geocaret.params.cfg.hydrodataset", "03")
+    monkeypatch.setattr("geocaret.params.cfg.delineate_snapped", True)
 
     elev_poly_px4_ft = ee.Feature(
         ee.FeatureCollection(
@@ -400,15 +400,15 @@ def test_mean_depth(monkeypatch, get_logger) -> None:
         The calculated mean depth is approximately equal to the expected value (5.9 meters),
         within a relative tolerance of 0.05%.
     """
-    from heet_params import mean_depth
+    from geocaret.params import mean_depth
     logger = get_logger
     # Monkey patch the config parameters
-    monkeypatch.setattr("heet_params.cfg.jensen_search_radius", 1000)
-    monkeypatch.setattr("heet_params.cfg.upstreamMethod", 3)
-    monkeypatch.setattr("heet_params.cfg.paramHydroDEM", False)
-    monkeypatch.setattr("heet_params.cfg.resHydroDEM", False)
-    monkeypatch.setattr("heet_params.cfg.hydrodataset", "03")
-    monkeypatch.setattr("heet_params.cfg.delineate_snapped", True)
+    monkeypatch.setattr("geocaret.params.cfg.jensen_search_radius", 1000)
+    monkeypatch.setattr("geocaret.params.cfg.upstreamMethod", 3)
+    monkeypatch.setattr("geocaret.params.cfg.paramHydroDEM", False)
+    monkeypatch.setattr("geocaret.params.cfg.resHydroDEM", False)
+    monkeypatch.setattr("geocaret.params.cfg.hydrodataset", "03")
+    monkeypatch.setattr("geocaret.params.cfg.delineate_snapped", True)
 
     elev_poly_px4_ft = ee.Feature(
         ee.FeatureCollection(
@@ -448,15 +448,15 @@ def test_minimum_elevation_null(monkeypatch, get_logger) -> None:
     Asserts:
         The calculated minimum elevation is equal None.
     """
-    from heet_params import minimum_elevation
+    from geocaret.params import minimum_elevation
     logger = get_logger
     # Monkey patch the config parameters
-    monkeypatch.setattr("heet_params.cfg.jensen_search_radius", 1000)
-    monkeypatch.setattr("heet_params.cfg.upstreamMethod", 3)
-    monkeypatch.setattr("heet_params.cfg.paramHydroDEM", False)
-    monkeypatch.setattr("heet_params.cfg.resHydroDEM", False)
-    monkeypatch.setattr("heet_params.cfg.hydrodataset", "03")
-    monkeypatch.setattr("heet_params.cfg.delineate_snapped", True)
+    monkeypatch.setattr("geocaret.params.cfg.jensen_search_radius", 1000)
+    monkeypatch.setattr("geocaret.params.cfg.upstreamMethod", 3)
+    monkeypatch.setattr("geocaret.params.cfg.paramHydroDEM", False)
+    monkeypatch.setattr("geocaret.params.cfg.resHydroDEM", False)
+    monkeypatch.setattr("geocaret.params.cfg.hydrodataset", "03")
+    monkeypatch.setattr("geocaret.params.cfg.delineate_snapped", True)
 
     null_elev_poly_px4_ft = ee.Feature(
         ee.FeatureCollection(
@@ -487,16 +487,16 @@ def test_null_formatter(monkeypatch, get_logger) -> None:
     Asserts:
         The `minimum_elevation` function with a null value input returns 'ND' after being formatted by `metric_formatter`.
     """
-    from heet_params import minimum_elevation
-    from heet_params import metric_formatter
+    from geocaret.params import minimum_elevation
+    from geocaret.params import metric_formatter
     logger = get_logger
     # Monkey patch the config parameters
-    monkeypatch.setattr("heet_params.cfg.jensen_search_radius", 1000)
-    monkeypatch.setattr("heet_params.cfg.upstreamMethod", 3)
-    monkeypatch.setattr("heet_params.cfg.paramHydroDEM", False)
-    monkeypatch.setattr("heet_params.cfg.resHydroDEM", False)
-    monkeypatch.setattr("heet_params.cfg.hydrodataset", "03")
-    monkeypatch.setattr("heet_params.cfg.delineate_snapped", True)
+    monkeypatch.setattr("geocaret.params.cfg.jensen_search_radius", 1000)
+    monkeypatch.setattr("geocaret.params.cfg.upstreamMethod", 3)
+    monkeypatch.setattr("geocaret.params.cfg.paramHydroDEM", False)
+    monkeypatch.setattr("geocaret.params.cfg.resHydroDEM", False)
+    monkeypatch.setattr("geocaret.params.cfg.hydrodataset", "03")
+    monkeypatch.setattr("geocaret.params.cfg.delineate_snapped", True)
 
     null_elev_poly_px4_ft = ee.Feature(
         ee.FeatureCollection(
@@ -530,15 +530,15 @@ def test_maximum_elevation_null(monkeypatch, get_logger) -> None:
     Asserts:
         The `maximum_elevation` function with a null value input returns None.
     """
-    from heet_params import maximum_elevation
+    from geocaret.params import maximum_elevation
     logger = get_logger
     # Monkey patch the config parameters
-    monkeypatch.setattr("heet_params.cfg.jensen_search_radius", 1000)
-    monkeypatch.setattr("heet_params.cfg.upstreamMethod", 3)
-    monkeypatch.setattr("heet_params.cfg.paramHydroDEM", False)
-    monkeypatch.setattr("heet_params.cfg.resHydroDEM", False)
-    monkeypatch.setattr("heet_params.cfg.hydrodataset", "03")
-    monkeypatch.setattr("heet_params.cfg.delineate_snapped", True)
+    monkeypatch.setattr("geocaret.params.cfg.jensen_search_radius", 1000)
+    monkeypatch.setattr("geocaret.params.cfg.upstreamMethod", 3)
+    monkeypatch.setattr("geocaret.params.cfg.paramHydroDEM", False)
+    monkeypatch.setattr("geocaret.params.cfg.resHydroDEM", False)
+    monkeypatch.setattr("geocaret.params.cfg.hydrodataset", "03")
+    monkeypatch.setattr("geocaret.params.cfg.delineate_snapped", True)
 
     null_elev_poly_px4_ft = ee.Feature(
         ee.FeatureCollection(
@@ -571,17 +571,17 @@ def test_maximum_depth_null(monkeypatch, get_logger) -> None:
     Asserts:
         The `maximum_depth` function with a null value input returns None.
     """
-    from heet_params import maximum_depth
-    from heet_params import metric_formatter
+    from geocaret.params import maximum_depth
+    from geocaret.params import metric_formatter
     logger = get_logger
     # Monkey patch the config parameters
-    monkeypatch.setattr("heet_params.cfg.jensen_search_radius", 1000)
-    monkeypatch.setattr("heet_params.cfg.upstreamMethod", 3)
-    monkeypatch.setattr("heet_params.cfg.paramHydroDEM", False)
-    monkeypatch.setattr("heet_params.cfg.resHydroDEM", False)
+    monkeypatch.setattr("geocaret.params.cfg.jensen_search_radius", 1000)
+    monkeypatch.setattr("geocaret.params.cfg.upstreamMethod", 3)
+    monkeypatch.setattr("geocaret.params.cfg.paramHydroDEM", False)
+    monkeypatch.setattr("geocaret.params.cfg.resHydroDEM", False)
     ## Not utilised
-    monkeypatch.setattr("heet_params.cfg.hydrodataset", "03")
-    monkeypatch.setattr("heet_params.cfg.delineate_snapped", True)
+    monkeypatch.setattr("geocaret.params.cfg.hydrodataset", "03")
+    monkeypatch.setattr("geocaret.params.cfg.delineate_snapped", True)
 
     null_elev_poly_px4_ft = ee.Feature(
         ee.FeatureCollection(
@@ -609,15 +609,15 @@ def test_maximum_depth_alt1_null(monkeypatch, get_logger) -> None:
     Asserts:
         The `maximum_depth_alt1` function with a null value input returns None.
     """
-    from heet_params import maximum_depth_alt1
+    from geocaret.params import maximum_depth_alt1
     logger = get_logger
     # Monkey patch the config parameters
-    monkeypatch.setattr("heet_params.cfg.jensen_search_radius", 1000)
-    monkeypatch.setattr("heet_params.cfg.upstreamMethod", 3)
-    monkeypatch.setattr("heet_params.cfg.paramHydroDEM", False)
-    monkeypatch.setattr("heet_params.cfg.resHydroDEM", False)
-    monkeypatch.setattr("heet_params.cfg.hydrodataset", "03")
-    monkeypatch.setattr("heet_params.cfg.delineate_snapped", True)
+    monkeypatch.setattr("geocaret.params.cfg.jensen_search_radius", 1000)
+    monkeypatch.setattr("geocaret.params.cfg.upstreamMethod", 3)
+    monkeypatch.setattr("geocaret.params.cfg.paramHydroDEM", False)
+    monkeypatch.setattr("geocaret.params.cfg.resHydroDEM", False)
+    monkeypatch.setattr("geocaret.params.cfg.hydrodataset", "03")
+    monkeypatch.setattr("geocaret.params.cfg.delineate_snapped", True)
 
     null_elev_poly_px4_ft = ee.Feature(
         ee.FeatureCollection(
@@ -645,15 +645,15 @@ def test_maximum_depth_alt2_null(monkeypatch, get_logger) -> None:
     Asserts:
         The `maximum_depth_alt2` function with a null value input returns a value within 0.05% of None.
     """
-    from heet_params import maximum_depth_alt2
+    from geocaret.params import maximum_depth_alt2
     logger = get_logger
     # Monkey patch the config parameters
-    monkeypatch.setattr("heet_params.cfg.jensen_search_radius", 1000)
-    monkeypatch.setattr("heet_params.cfg.upstreamMethod", 3)
-    monkeypatch.setattr("heet_params.cfg.paramHydroDEM", False)
-    monkeypatch.setattr("heet_params.cfg.resHydroDEM", False)
-    monkeypatch.setattr("heet_params.cfg.hydrodataset", "03")
-    monkeypatch.setattr("heet_params.cfg.delineate_snapped", True)
+    monkeypatch.setattr("geocaret.params.cfg.jensen_search_radius", 1000)
+    monkeypatch.setattr("geocaret.params.cfg.upstreamMethod", 3)
+    monkeypatch.setattr("geocaret.params.cfg.paramHydroDEM", False)
+    monkeypatch.setattr("geocaret.params.cfg.resHydroDEM", False)
+    monkeypatch.setattr("geocaret.params.cfg.hydrodataset", "03")
+    monkeypatch.setattr("geocaret.params.cfg.delineate_snapped", True)
 
     null_elev_poly_px4_ft = ee.Feature(
         ee.FeatureCollection(
@@ -683,15 +683,15 @@ def test_mean_depth_null(monkeypatch, get_logger) -> None:
         The `mean_depth` function with a null value input returns None.
     """
 
-    from heet_params import mean_depth
+    from geocaret.params import mean_depth
     logger = get_logger
     # Monkey patch the config parameters
-    monkeypatch.setattr("heet_params.cfg.jensen_search_radius", 1000)
-    monkeypatch.setattr("heet_params.cfg.upstreamMethod", 3)
-    monkeypatch.setattr("heet_params.cfg.paramHydroDEM", False)
-    monkeypatch.setattr("heet_params.cfg.resHydroDEM", False)
-    monkeypatch.setattr("heet_params.cfg.hydrodataset", "03")
-    monkeypatch.setattr("heet_params.cfg.delineate_snapped", True)
+    monkeypatch.setattr("geocaret.params.cfg.jensen_search_radius", 1000)
+    monkeypatch.setattr("geocaret.params.cfg.upstreamMethod", 3)
+    monkeypatch.setattr("geocaret.params.cfg.paramHydroDEM", False)
+    monkeypatch.setattr("geocaret.params.cfg.resHydroDEM", False)
+    monkeypatch.setattr("geocaret.params.cfg.hydrodataset", "03")
+    monkeypatch.setattr("geocaret.params.cfg.delineate_snapped", True)
 
     null_elev_poly_px4_ft = ee.Feature(
         ee.FeatureCollection(

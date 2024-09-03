@@ -1,5 +1,5 @@
 """
-This module contains test cases for various functions from the `heet_params` package.
+This module contains test cases for various functions from the `params` package.
 These functions are designed to calculate environmental and hydrological parameters
 for specific geographical features such as catchments and reservoirs. The tests
 compare the outputs of these functions against ground truth values to ensure accuracy.
@@ -31,7 +31,7 @@ def test_mean_slope_perc_gres(get_logger) -> None:
     Test that the mean slope function produces the same value as GRES for GAWLAN catchment (W_12_Catchment).
 
     This test compares the calculated mean slope percentage of a catchment with a known ground truth value
-    to verify the accuracy of the `mean_slope_perc` function from the `heet_params` package.
+    to verify the accuracy of the `mean_slope_perc` function from the `params` package.
 
     Args:
         get_logger: A pytest fixture for logging messages during testing.
@@ -39,7 +39,7 @@ def test_mean_slope_perc_gres(get_logger) -> None:
     Asserts:
         The calculated result is approximately equal to the ground truth value within a tolerance of 0.005.
     """
-    from heet_params import mean_slope_perc
+    from geocaret.params import mean_slope_perc
     logger = get_logger
     W_12_Catchment = ee.FeatureCollection(
         "projects/ee-future-dams/assets/XHEET_TEST_POLYS/W_12_Catchment")
@@ -66,7 +66,7 @@ def test_mghr_gres(get_logger) -> None:
     Test that mghr reproduces a ground truth value (W_12_Catchment).
 
     This test checks the MGHR calculation of a reservoir to ensure it matches a known ground truth value
-    using the `mghr` function from the `heet_params` package.
+    using the `mghr` function from the `params` package.
 
     Args:
         get_logger: A pytest fixture for logging messages during testing.
@@ -74,7 +74,7 @@ def test_mghr_gres(get_logger) -> None:
     Asserts:
         The calculated result is approximately equal to the ground truth value within a tolerance of 0.005.
     """
-    from heet_params import mghr
+    from geocaret.params import mghr
     logger = get_logger
     W_12_Reservoir = ee.FeatureCollection(
         "projects/ee-future-dams/assets/XHEET_TEST_POLYS/W_12_Reservoir_Annotated")
@@ -97,7 +97,7 @@ def test_mean_annual_runoff_mm_gres(get_logger) -> None:
     Test that mean runoff function reproduces a ground truth value (W_12_Catchment).
 
     This test checks the mean annual runoff calculation for a catchment to ensure it matches
-    a known ground truth value using the `mean_annual_runoff_mm` function from the `heet_params` package.
+    a known ground truth value using the `mean_annual_runoff_mm` function from the `params` package.
 
     Args:
         get_logger: A pytest fixture for logging messages during testing.
@@ -105,7 +105,7 @@ def test_mean_annual_runoff_mm_gres(get_logger) -> None:
     Asserts:
         The calculated result is approximately equal to the ground truth value within a relative tolerance of 0.05%.
     """
-    from heet_params import mean_annual_runoff_mm
+    from geocaret.params import mean_annual_runoff_mm
     logger = get_logger
     W_12_Catchment = ee.FeatureCollection(
         "projects/ee-future-dams/assets/XHEET_TEST_POLYS/W_12_Catchment")
@@ -132,7 +132,7 @@ def test_population_gres(get_logger) -> None:
     Test that population function reproduces a ground truth value (W_12_Catchment).
 
     This test checks the population count and density calculations for a catchment to ensure
-    they match known ground truth values using the `population` function from the `heet_params` package.
+    they match known ground truth values using the `population` function from the `params` package.
 
     Args:
         get_logger: A pytest fixture for logging messages during testing.
@@ -140,7 +140,7 @@ def test_population_gres(get_logger) -> None:
     Asserts:
         The calculated results are approximately equal to the ground truth values within a relative tolerance of 0.05%.
     """
-    from heet_params import population
+    from geocaret.params import population
     logger = get_logger
     W_12_Catchment = ee.FeatureCollection(
         "projects/ee-future-dams/assets/XHEET_TEST_POLYS/W_12_Catchment")
@@ -186,15 +186,15 @@ def test_maximum_depth_alt1_gres(monkeypatch, get_logger) -> None:
     Asserts:
         The calculated result is approximately equal to the ground truth value within a relative tolerance of 0.05%.
     """
-    from heet_params import maximum_depth_alt1
+    from geocaret.params import maximum_depth_alt1
     logger = get_logger
     # Set config parameters
-    monkeypatch.setattr("heet_params.cfg.jensen_search_radius", 1000)
-    monkeypatch.setattr("heet_params.cfg.upstreamMethod", 3)
-    monkeypatch.setattr("heet_params.cfg.paramHydroDEM", False)
-    monkeypatch.setattr("heet_params.cfg.resHydroDEM", False)
-    monkeypatch.setattr("heet_params.cfg.hydrodataset", "03")
-    monkeypatch.setattr("heet_params.cfg.delineate_snapped", True)
+    monkeypatch.setattr("geocaret.params.cfg.jensen_search_radius", 1000)
+    monkeypatch.setattr("geocaret.params.cfg.upstreamMethod", 3)
+    monkeypatch.setattr("geocaret.params.cfg.paramHydroDEM", False)
+    monkeypatch.setattr("geocaret.params.cfg.resHydroDEM", False)
+    monkeypatch.setattr("geocaret.params.cfg.hydrodataset", "03")
+    monkeypatch.setattr("geocaret.params.cfg.delineate_snapped", True)
     W_12_Reservoir = ee.FeatureCollection(
         "projects/ee-future-dams/assets/XHEET_TEST_POLYS/W_12_Reservoir_Annotated"
     )
@@ -222,7 +222,7 @@ def test_mean_depth_gres(get_logger) -> None:
     Test that mean depth function reproduces a ground truth value (W_12_Reservoir).
 
     This test checks the mean depth calculation for a reservoir to ensure it matches
-    a known ground truth value using the `mean_depth` function from the `heet_params` package.
+    a known ground truth value using the `mean_depth` function from the `params` package.
 
     Args:
         get_logger: A pytest fixture for logging messages during testing.
@@ -230,7 +230,7 @@ def test_mean_depth_gres(get_logger) -> None:
     Asserts:
         The calculated result is approximately equal to the ground truth value within a relative tolerance of 0.05%.
     """
-    from heet_params import mean_depth
+    from geocaret.params import mean_depth
     logger = get_logger
     W_12_Reservoir = ee.FeatureCollection(
         "projects/ee-future-dams/assets/XHEET_TEST_POLYS/W_12_Reservoir_Annotated")

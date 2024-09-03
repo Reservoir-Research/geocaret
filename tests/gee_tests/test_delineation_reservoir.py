@@ -1,6 +1,6 @@
 """
 This module contains test cases for delineating future reservoirs using the 
-`delineate_future_reservoir` function from the `heet_reservoir` package. The tests 
+`delineate_future_reservoir` function from the `reservoir` package. The tests 
 ensure that the function behaves consistently under different input scenarios by 
 comparing the geometries of the delineated reservoirs.
 
@@ -44,15 +44,15 @@ def test_delineate_future_reservoir_input_we(monkeypatch, get_logger) -> None:
     Asserts:
         The calculated difference in area between two delineated reservoirs is less than 0.001 sq km.
     """
-    from heet_reservoir import delineate_future_reservoir
+    from geocaret.reservoir import delineate_future_reservoir
     logger=get_logger
     # Set config parameters
-    monkeypatch.setattr("heet_reservoir.cfg.jensen_search_radius", 1000)
-    monkeypatch.setattr("heet_reservoir.cfg.upstreamMethod", 3)
-    monkeypatch.setattr("heet_reservoir.cfg.paramHydroDEM", False)
-    monkeypatch.setattr("heet_reservoir.cfg.resHydroDEM", False)
-    monkeypatch.setattr("heet_reservoir.cfg.hydrodataset", "03")
-    monkeypatch.setattr("heet_reservoir.cfg.delineate_snapped", True)
+    monkeypatch.setattr("geocaret.reservoir.cfg.jensen_search_radius", 1000)
+    monkeypatch.setattr("geocaret.reservoir.cfg.upstreamMethod", 3)
+    monkeypatch.setattr("geocaret.reservoir.cfg.paramHydroDEM", False)
+    monkeypatch.setattr("geocaret.reservoir.cfg.resHydroDEM", False)
+    monkeypatch.setattr("geocaret.reservoir.cfg.hydrodataset", "03")
+    monkeypatch.setattr("geocaret.reservoir.cfg.delineate_snapped", True)
     catchmentAssetName = "projects/ee-future-dams/assets/XHEET_TEST_EXAMPLE/C_1201"
     catchment_ftc = ee.FeatureCollection(catchmentAssetName)
     #print(catchment_ftc.getInfo())
@@ -132,14 +132,14 @@ def test_delineate_future_reservoir_input_pc(monkeypatch, get_logger) -> None:
     Asserts:
         The calculated difference in area between two delineated reservoirs is less than 0.001 sq km.
     """
-    from heet_reservoir import delineate_future_reservoir
+    from geocaret.reservoir import delineate_future_reservoir
     logger=get_logger
-    monkeypatch.setattr("heet_reservoir.cfg.jensen_search_radius", 1000)
-    monkeypatch.setattr("heet_reservoir.cfg.upstreamMethod", 3)
-    monkeypatch.setattr("heet_reservoir.cfg.paramHydroDEM", False)
-    monkeypatch.setattr("heet_reservoir.cfg.resHydroDEM", False)
-    monkeypatch.setattr("heet_reservoir.cfg.hydrodataset", "03")
-    monkeypatch.setattr("heet_reservoir.cfg.delineate_snapped", True)
+    monkeypatch.setattr("geocaret.reservoir.cfg.jensen_search_radius", 1000)
+    monkeypatch.setattr("geocaret.reservoir.cfg.upstreamMethod", 3)
+    monkeypatch.setattr("geocaret.reservoir.cfg.paramHydroDEM", False)
+    monkeypatch.setattr("geocaret.reservoir.cfg.resHydroDEM", False)
+    monkeypatch.setattr("geocaret.reservoir.cfg.hydrodataset", "03")
+    monkeypatch.setattr("geocaret.reservoir.cfg.delineate_snapped", True)
     catchmentAssetName = "projects/ee-future-dams/assets/XHEET_TEST_EXAMPLE/C_1201"
     catchment_ftc = ee.FeatureCollection(catchmentAssetName)
     # Input priority:
@@ -215,15 +215,15 @@ def test_delineate_future_reservoir_input_dh(monkeypatch, get_logger) -> None:
     Asserts:
         The calculated difference in area between two delineated reservoirs is less than 0.001 sq km.
     """
-    from heet_reservoir import delineate_future_reservoir
+    from geocaret.reservoir import delineate_future_reservoir
     logger=get_logger
     # Set config options explicitly for this test
-    monkeypatch.setattr("heet_reservoir.cfg.jensen_search_radius", 1000)
-    monkeypatch.setattr("heet_reservoir.cfg.upstreamMethod", 3)
-    monkeypatch.setattr("heet_reservoir.cfg.paramHydroDEM", False)
-    monkeypatch.setattr("heet_reservoir.cfg.resHydroDEM", False)
-    monkeypatch.setattr("heet_reservoir.cfg.hydrodataset", "03")
-    monkeypatch.setattr("heet_reservoir.cfg.delineate_snapped", True)
+    monkeypatch.setattr("geocaret.reservoir.cfg.jensen_search_radius", 1000)
+    monkeypatch.setattr("geocaret.reservoir.cfg.upstreamMethod", 3)
+    monkeypatch.setattr("geocaret.reservoir.cfg.paramHydroDEM", False)
+    monkeypatch.setattr("geocaret.reservoir.cfg.resHydroDEM", False)
+    monkeypatch.setattr("geocaret.reservoir.cfg.hydrodataset", "03")
+    monkeypatch.setattr("geocaret.reservoir.cfg.delineate_snapped", True)
     catchmentAssetName = "projects/ee-future-dams/assets/XHEET_TEST_EXAMPLE/C_1201"
     catchment_ftc = ee.FeatureCollection(catchmentAssetName)
     reservoirAssetName = "projects/ee-future-dams/assets/XHEET_TEST_EXAMPLE/R_1201"

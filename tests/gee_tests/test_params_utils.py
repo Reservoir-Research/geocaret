@@ -2,7 +2,7 @@
 Module for testing imputed dam height calculations.
 
 This module includes unit tests to verify the accuracy of functions related to 
-imputed dam height calculations in the `heet_reservoir` module.
+imputed dam height calculations in the `reservoir` module.
 """
 import ee
 import os
@@ -14,7 +14,7 @@ def test_impute_dam_height(get_logger) -> None:
     Test that imputed dam height calculations are accurate for a set of test values.
 
     This function verifies that the dam height calculated using the `impute_dam_height` function
-    from the `heet_reservoir` module matches the expected result. It checks the correctness of the
+    from the `reservoir` module matches the expected result. It checks the correctness of the
     imputed height based on predefined input parameters and compares it with a known correct value.
 
     Args:
@@ -31,7 +31,7 @@ def test_impute_dam_height(get_logger) -> None:
             - mad_m3_pers: 24 (cubic meters per second)
         - Expected Result: 49.969 (unit not specified)
     """
-    from heet_reservoir import impute_dam_height
+    from geocaret.reservoir import impute_dam_height
     test_input = {
         'power_capacity': ee.Number(10),
         'turbine_efficiency': ee.Number(85),

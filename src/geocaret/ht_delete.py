@@ -34,10 +34,10 @@ def find_assets(search_list: list, asset_collection: list) -> list:
 
 def delete_folder(target_folder: str) -> None:
     """Delete assets in target folder in Earth Engine"""
-    heet_assets = ee.data.listAssets({"parent": target_folder})
-    asset_collection = heet_assets["assets"]
+    geocaret_assets = ee.data.listAssets({"parent": target_folder})
+    asset_collection = geocaret_assets["assets"]
     if len(asset_collection) > 0:
-        assets_to_delete = find_assets(heet_assets["assets"], asset_collection)
+        assets_to_delete = find_assets(geocaret_assets["assets"], asset_collection)
         # print(assets_to_delete)
         assets_to_delete.reverse()
         for target_asset in assets_to_delete:

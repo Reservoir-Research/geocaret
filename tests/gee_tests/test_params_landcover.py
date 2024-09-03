@@ -1,6 +1,6 @@
 """
 This module contains unit tests for functions related to landcover analysis
-in the heet_params module.
+in the params module.
 """
 import ee
 import os
@@ -47,7 +47,7 @@ def test_landcover(get_logger, feature_collection, expected_result, test_descrip
         Calculated landcover fractions are approximately equal to the expected test result
         within a small tolerance.
     """
-    from heet_params import landcover
+    from geocaret.params import landcover
     logger = get_logger
     test_input = {
         'land_ftc': ee.FeatureCollection(feature_collection),
@@ -113,7 +113,7 @@ def test_landcover_bysoil(get_logger, feature_collection, expected_result) -> No
         Calculated landcover fractions are approximately equal to the test result
         within a small tolerance.
     """
-    from heet_params import landcover_bysoil
+    from geocaret.params import landcover_bysoil
     logger = get_logger
     landcover_bysoil_poly = ee.FeatureCollection(feature_collection)
     test_input = {
@@ -141,7 +141,7 @@ def test_soc_percent(get_logger, target_ftc = None) -> None:
     Asserts:
         The calculated %SOC is approximately equal to the expected result within a relative tolerance of 0.05%.
     """
-    from heet_params import soc_percent
+    from geocaret.params import soc_percent
     logger = get_logger
     psoc_poly_org_px1 = ee.FeatureCollection("projects/ee-future-dams/assets/XHEET_TEST_POLYS/psoc_poly_org_px1")
     test_input = {'target_ftc': psoc_poly_org_px1}
@@ -178,7 +178,7 @@ def test_soil_type(get_logger, feature_collection, expected_result) -> None:
     Asserts:
         The identified soil type is correctly labeled as expected.
     """
-    from heet_params import soil_type
+    from geocaret.params import soil_type
     logger = get_logger
     # Set up the feature collection from the parameter
     target_ftc = ee.FeatureCollection(feature_collection)

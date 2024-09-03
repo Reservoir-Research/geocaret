@@ -44,7 +44,7 @@ from frictionless import Resource
 def test_validate_output_profile(root_folder) -> None:
     """Test that the live frictionless output profile is valid.
 
-    This test checks if the output profile defined in 'utils/outputs.resource.yaml'
+    This test checks if the output profile defined in 'csv-schemas/outputs.resource.yaml'
     is a valid Frictionless resource. It attempts to create a Resource object 
     from the YAML definition and asserts that it is valid.
     
@@ -58,7 +58,7 @@ def test_validate_output_profile(root_folder) -> None:
         Exception: If the resource definition is not valid, 
         an exception is raised and caught.
     """
-    resource_definition = Resource(root_folder / "utils" / "outputs.resource.yaml")
+    resource_definition = Resource(root_folder / "csv-schemas" / "outputs.resource.yaml")
     try:
         Resource(resource_definition)
         test_result = True
@@ -73,8 +73,8 @@ def test_validate_output_profile(root_folder) -> None:
 @pytest.mark.parametrize(
     "output_file_path, expected_validity",
     [
-        ("tests/data/output_parameters_valid_fields.csv", True),
-        ("tests/data/output_parameters_invalid_fields.csv", False),
+        ("../../tests/data/output_parameters_valid_fields.csv", True),
+        ("../../tests/data/output_parameters_invalid_fields.csv", False),
     ],
 )
 def test_valid_output_fields(get_logger, root_folder, output_file_path, expected_validity) -> None:
@@ -93,8 +93,8 @@ def test_valid_output_fields(get_logger, root_folder, output_file_path, expected
     Asserts:
         True if the output fields match the expected validity, otherwise False.
     """
-    from heet_validate import valid_output_fields
-    from heet_validate import csv_to_df
+    from geocaret.validate import valid_output_fields
+    from geocaret.validate import csv_to_df
     df_output = csv_to_df(root_folder / output_file_path)
     test_input = {"df": df_output}
     calc_return = valid_output_fields(**test_input)
@@ -113,8 +113,8 @@ def test_valid_output_fields(get_logger, root_folder, output_file_path, expected
 @pytest.mark.parametrize(
     "output_file_path, expected_validity, report_name_suffix",
     [
-        ("tests/data/output_parameters_valid.csv", True, "true"),
-        ("tests/data/output_parameters_invalid.csv", False, "false"),
+        ("../../tests/data/output_parameters_valid.csv", True, "true"),
+        ("../../tests/data/output_parameters_invalid.csv", False, "false"),
     ],
 )
 def test_valid_output(get_logger, root_folder, output_file_path, expected_validity, report_name_suffix) -> None:
@@ -133,20 +133,20 @@ def test_valid_output(get_logger, root_folder, output_file_path, expected_validi
     Asserts:
         True if the output matches the expected validity, otherwise False.
     """
-    from heet_validate import valid_output
-    from heet_validate import csv_to_df
+    from geocaret.validate import valid_output
+    from geocaret.validate import csv_to_df
     df_output = csv_to_df(root_folder / output_file_path)
     test_input = {
         "df": df_output,
         "output_file_path": root_folder / output_file_path,
-        "output_folder_path": root_folder / "tests/tmp",
+        "output_folder_path": root_folder / "../../tests/tmp",
     }
     calc_result = valid_output(**test_input)["valid"]
     
     if calc_result != expected_validity:
         os.rename(
-            root_folder / "tests/tmp/heet_output_report.csv", 
-            root_folder / f"tests/tmp/heet_output_report_{report_name_suffix}.csv"
+            root_folder / "../../tests/tmp/geocaret_output_report.csv", 
+            root_folder / f"../../tests/tmp/geocaret_output_report_{report_name_suffix}.csv"
         )
     logger = get_logger
     logger.info(
@@ -166,7 +166,7 @@ def test_valid_output(get_logger, root_folder, output_file_path, expected_validi
 def test_validate_input_profile(root_folder) -> None:
     """Test that the frictionless input profile is valid.
 
-    This test checks if the input profile defined in 'utils/inputs.resource.yaml'
+    This test checks if the input profile defined in 'csv-schemas/inputs.resource.yaml'
     is a valid Frictionless resource. It attempts to create a Resource object 
     from the YAML definition and asserts that it is valid.
 
@@ -177,7 +177,7 @@ def test_validate_input_profile(root_folder) -> None:
         Exception: If the resource definition is not valid, 
         an exception is raised and caught.
     """
-    resource_definition = Resource(root_folder / "utils" / "inputs.resource.yaml")
+    resource_definition = Resource(root_folder / "csv-schemas" / "inputs.resource.yaml")
     try:
         Resource(resource_definition)
         test_result = True
@@ -192,8 +192,8 @@ def test_validate_input_profile(root_folder) -> None:
 @pytest.mark.parametrize(
     "input_file_path, expected_validity",
     [
-        ("tests/data/dams_valid.csv", True),
-        ("tests/data/dams_invalid_fields.csv", False),
+        ("../../tests/data/dams_valid.csv", True),
+        ("../../tests/data/dams_invalid_fields.csv", False),
     ],
 )
 def test_valid_input_fields(get_logger, root_folder, input_file_path, expected_validity) -> None:
@@ -211,8 +211,8 @@ def test_valid_input_fields(get_logger, root_folder, input_file_path, expected_v
     Asserts:
         True if the input matches the expected validity, otherwise False.
     """
-    from heet_validate import valid_input_fields
-    from heet_validate import csv_to_df
+    from geocaret.validate import valid_input_fields
+    from geocaret.validate import csv_to_df
     df_input = csv_to_df(root_folder / input_file_path)
     test_input = {"df": df_input}
     calc_result = valid_input_fields(**test_input)["valid"]
@@ -227,8 +227,8 @@ def test_valid_input_fields(get_logger, root_folder, input_file_path, expected_v
 @pytest.mark.parametrize(
     "input_file_path, expected_result",
     [
-        ("tests/data/dams_valid.csv", True),
-        ("tests/data/dams_invalid_input.csv", False),
+        ("../../tests/data/dams_valid.csv", True),
+        ("../../tests/data/dams_invalid_input.csv", False),
     ]
 )
 def test_valid_input(get_logger, root_folder, input_file_path, expected_result) -> None:
@@ -246,13 +246,13 @@ def test_valid_input(get_logger, root_folder, input_file_path, expected_result) 
     Asserts:
         The result of the input validation matches the expected_result.
     """
-    from heet_validate import valid_input
-    from heet_validate import csv_to_df
+    from geocaret.validate import valid_input
+    from geocaret.validate import csv_to_df
     df_input = csv_to_df(root_folder / input_file_path)
     test_input = {
         "df": df_input,
         "input_file_path": input_file_path,
-        "output_folder_path": root_folder / "tests/tmp",
+        "output_folder_path": root_folder / "../../tests/tmp",
     }
     calc_result = valid_input(**test_input)["valid"]
     logger = get_logger
@@ -313,7 +313,7 @@ def test_generate_json_output(get_logger) -> None:
     Raises:
         AssertionError: If the generated JSON output is not valid.
     """
-    from heet_export import generate_json_output
+    from geocaret.export import generate_json_output
     out_ft = ee.FeatureCollection(
         "projects/ee-future-dams/assets/XHEET_TEST_EXAMPLE/output_parameters"
     ).first()

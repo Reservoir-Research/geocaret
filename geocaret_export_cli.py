@@ -1,28 +1,28 @@
 import os
 import argparse
-import ee
 import logging
+import ee
 import polling2
 from tqdm import tqdm
 from yaspin import yaspin
 from yaspin.spinners import Spinners
 
-ee.Initialize() # Needs initialising before loading from delineator
-from delineator import heet_config as cfg
-from delineator import heet_log as lg
+ee.Initialize() # Needs initialising before loading from geocaret
 
-lg.log_file_name = "heet_export.log"
+from geocaret import config as cfg
+from geocaret import log as lg
+from geocaret import task
+from geocaret import monitor as mtr
 
-from delineator import heet_task
-from delineator import heet_monitor as mtr
+lg.log_file_name = "geocaret_export.log"
 
 parser = argparse.ArgumentParser(
-    usage="python heet_export_cli.py  --results-path <path-to-results-folder-in-GEE> --drive-folder <folder-in-GDrive> --project <GEE-project-name>"
+    usage="python geocaret_export_cli.py  --results-path <path-to-results-folder-in-GEE> --drive-folder <folder-in-GDrive> --project <GEE-project-name>"
 )
 parser.add_argument(
     "--results-path", 
     required=True,
-    help="Full path to the heet results folder on Earth Engine (must start from projects/<project-name>/...)"
+    help="Full path to the geocaret results folder on Earth Engine (must start from projects/<project-name>/...)"
 )
 
 # EE Export to Drive functionality is not well documented
@@ -97,18 +97,18 @@ def update_sp_fail(sp):
 
 def update_sp_err_fatal(sp):
     sp.write("")
-    sp.write("  [ERROR] HEET EXPORTER encountered a fatal error and will exit")
+    sp.write("  [ERROR] GeoCARET EXPORTER encountered a fatal error and will exit")
     sp.write("")
-    sp.write("Thank you for using HEET EXPORTER!")
+    sp.write("Thank you for using GeoCARET EXPORTER!")
     return sp
 
 
 def update_sp_warn_skip(sp):
     sp.write("")
     sp.write(
-        "  [WARNING] HEET EXPORTER encountered an problem and will skip Export step"
+        "  [WARNING] GeoCARET EXPORTER encountered an problem and will skip Export step"
     )
-    sp.write("  [WARNING] Check heet_export.log for further details.")
+    sp.write("  [WARNING] Check geocaret_export.log for further details.")
     sp.write("")
     sp.write("")
     return sp
@@ -117,7 +117,7 @@ def update_sp_warn_skip(sp):
 def update_sp_err_time(sp):
     current_active_analyses = ",".join([str(i) for i in mtr.active_analyses])
     sp.write(
-        "  [WARNING] Analysis wait time limit exceeded. Cancelling all unfinished HEET EXPORTER"
+        "  [WARNING] Analysis wait time limit exceeded. Cancelling all unfinished GeoCARET EXPORTER"
     )
     sp.write(f"            tasks (active analysis ids: {current_active_analyses})")
     sp.write("")
@@ -151,7 +151,7 @@ if __name__ == "__main__":
             if "CI_ROBOT_USER" in os.environ:
                 sp = update_sp_inf_service(sp)
             else:
-                heet_task.export_to_drive(export_from_path=results_path)
+                task.export_to_drive(export_from_path=results_path)
         except Exception as error:
             # Handles any issue, including connectivity
             print("Raised exception")
@@ -168,7 +168,7 @@ if __name__ == "__main__":
             keep_going = 1
             while (len(mtr.active_exports) > 0) and (keep_going == 1):
                 try:
-                    heet_task.wait_until_exports()
+                    task.wait_until_exports()
                     active_count = len(mtr.active_exports)
                     new_exports = remaining_export_size - active_count
                     remaining_export_size = active_count
@@ -178,10 +178,10 @@ if __name__ == "__main__":
                     sp = update_sp_fail(sp)
                     sp = update_sp_err_time(sp)
                     logger.info(
-                        "(Waiting) Analysis wait time limit exceeded. Cancelling all unfinished HEET tasks."
+                        "(Waiting) Analysis wait time limit exceeded. Cancelling all unfinished GeoCARET tasks."
                     )
                     try:
-                        heet_task.kill_all_heet_tasks()
+                        task.kill_all_heet_tasks()
                     except Exception:
                         sp = update_sp_err_fatal(sp)
                         sys.exit()

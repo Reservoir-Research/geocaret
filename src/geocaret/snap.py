@@ -3,19 +3,19 @@
 import ee
 import logging
 
-
+import_exceptions = (ModuleNotFoundError, ee.ee_exception.EEException)
 try:
-    from delineator import heet_config as cfg
-    from delineator import heet_data as dta
-    from delineator import heet_log as lg
+    from geocaret import config as cfg
+    from geocaret import data as dta
+    from geocaret import log as lg
 
-except ModuleNotFoundError:
+except import_exceptions:
     if not ee.data._credentials:
         ee.Initialize()
 
-    import heet_config as cfg
-    import heet_data as dta
-    import heet_log as lg
+    import geocaret.config as cfg
+    import geocaret.data as dta
+    import geocaret.log as lg
 debug_mode = False
 
 # =============================================================================

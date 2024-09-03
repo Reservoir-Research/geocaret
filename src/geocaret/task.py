@@ -1,41 +1,42 @@
-import ee
-
+""" """
 from typing import Optional
 import re
 import sys
 import logging
-import pandas as pd
 from pathlib import Path
+import pandas as pd
+import ee
 
 import polling2
 from polling2 import poll_decorator
 
+import_exceptions = (ModuleNotFoundError, ee.ee_exception.EEException)
 try:
-    from delineator import heet_config as cfg
-    from delineator import heet_export
-    from delineator import heet_monitor as mtr
-    from delineator import heet_task
-    from delineator import heet_basins
-    from delineator import heet_catchment
-    from delineator import heet_reservoir as heet_res
-    from delineator import heet_params
-    from delineator import heet_river
-    from delineator import heet_log as lg
+    from geocaret import config as cfg
+    from geocaret import export
+    from geocaret import monitor as mtr
+    from geocaret import task
+    from geocaret import basins
+    from geocaret import catchment
+    from geocaret import reservoir as res
+    from geocaret import params
+    from geocaret import river
+    from geocaret import log as lg
 
-except ModuleNotFoundError:
+except import_exceptions:
     if not ee.data._credentials:
         ee.Initialize()
 
-    import heet_config as cfg
-    import heet_export
-    import heet_monitor as mtr
-    import heet_task
-    import heet_basins
-    import heet_catchment
-    import heet_reservoir as heet_res
-    import heet_params
-    import heet_river
-    import heet_log as lg
+    import geocaret.config as cfg
+    import geocaret.export
+    import geocaret.monitor as mtr
+    import geocaret.task
+    import geocaret.basins
+    import geocaret.catchment
+    import geocaret.reservoir as res
+    import geocaret.params
+    import geocaret.river
+    import geocaret.log as lg
 
 # Gets or creates a logger
 logger = logging.getLogger(__name__)
@@ -164,14 +165,14 @@ def find_assets(search_list: list, asset_collection: list) -> list:
 
 
 def clear_tmp_folder():
-    heet_assets = ee.data.listAssets({"parent": cfg.ps_heet_folder})
-    asset_collection = heet_assets["assets"]
+    geocaret_assets = ee.data.listAssets({"parent": cfg.ps_geocaret_folder})
+    asset_collection = geocaret_assets["assets"]
     logger.info(
-        f"[clear_tmp_folder] Found {str(len(asset_collection))} items in {cfg.ps_heet_folder}"
+        f"[clear_tmp_folder] Found {str(len(asset_collection))} items in {cfg.ps_geocaret_folder}"
     )
 
     if len(asset_collection) > 0:
-        assets_to_delete = find_assets(heet_assets["assets"], asset_collection)
+        assets_to_delete = find_assets(geocaret_assets["assets"], asset_collection)
         assets_to_delete.reverse()
 
         for target_asset in assets_to_delete:
@@ -181,8 +182,8 @@ def clear_tmp_folder():
 
 def assets_to_ftc():
 
-    heet_assets = ee.data.listAssets({"parent": cfg.ps_heet_folder})
-    asset_collection = heet_assets["assets"]
+    geocaret_assets = ee.data.listAssets({"parent": cfg.ps_geocaret_folder})
+    asset_collection = geocaret_assets["assets"]
 
     dams_ftc = ee.FeatureCollection(cfg.dams_table_path)
 
@@ -305,37 +306,37 @@ def assets_to_ftc():
                             )
                         else:
                             output_feat = output_feat.set(
-                                heet_params.profile_empty_river()
+                                params.profile_empty_river()
                             )
                             status = 5
                     else:
                         output_feat = output_feat.set(
-                            heet_params.profile_empty_nicatchment()
+                            params.profile_empty_nicatchment()
                         )
-                        output_feat = output_feat.set(heet_params.profile_empty_river())
+                        output_feat = output_feat.set(params.profile_empty_river())
                         status = 4
                 else:
-                    output_feat = output_feat.set(heet_params.profile_empty_reservoir())
+                    output_feat = output_feat.set(params.profile_empty_reservoir())
                     output_feat = output_feat.set(
-                        heet_params.profile_empty_nicatchment()
+                        params.profile_empty_nicatchment()
                     )
-                    output_feat = output_feat.set(heet_params.profile_empty_river())
+                    output_feat = output_feat.set(params.profile_empty_river())
                     status = 3
             else:
-                output_feat = output_feat.set(heet_params.profile_empty_catchment())
-                output_feat = output_feat.set(heet_params.profile_empty_reservoir())
-                output_feat = output_feat.set(heet_params.profile_empty_nicatchment())
-                output_feat = output_feat.set(heet_params.profile_empty_river())
+                output_feat = output_feat.set(params.profile_empty_catchment())
+                output_feat = output_feat.set(params.profile_empty_reservoir())
+                output_feat = output_feat.set(params.profile_empty_nicatchment())
+                output_feat = output_feat.set(params.profile_empty_river())
                 status = 2
 
         else:
             # Use raw dam location if snap failed
             input_geom = dam_feat.first().geometry()
-            output_feat = output_feat.set(heet_params.profile_empty_point())
-            output_feat = output_feat.set(heet_params.profile_empty_catchment())
-            output_feat = output_feat.set(heet_params.profile_empty_reservoir())
-            output_feat = output_feat.set(heet_params.profile_empty_nicatchment())
-            output_feat = output_feat.set(heet_params.profile_empty_river())
+            output_feat = output_feat.set(params.profile_empty_point())
+            output_feat = output_feat.set(params.profile_empty_catchment())
+            output_feat = output_feat.set(params.profile_empty_reservoir())
+            output_feat = output_feat.set(params.profile_empty_nicatchment())
+            output_feat = output_feat.set(params.profile_empty_river())
             status = 1
 
         output_feat = ee.Feature(output_feat).setGeometry(input_geom)
@@ -344,27 +345,27 @@ def assets_to_ftc():
 
     output_assets_ftc = ee.FeatureCollection(output_list)
 
-    heet_export.export_ftc(output_assets_ftc, "0", "output_parameters")
+    export.export_ftc(output_assets_ftc, "0", "output_parameters")
 
 
-def export_to_drive(export_from_path: str=cfg.ps_heet_folder) -> Optional[bool]:
+def export_to_drive(export_from_path: str=cfg.ps_geocaret_folder) -> Optional[bool]:
     """ """
     try:
-        heet_assets = ee.data.listAssets(export_from_path)
-        asset_collection = heet_assets["assets"]
+        geocaret_assets = ee.data.listAssets(export_from_path)
+        asset_collection = geocaret_assets["assets"]
         # TODO: Add information if export_from_path is not correct and no assets can be found
         logger.info(
             f"[export_to_drive] Found {str(len(asset_collection))} items in {export_from_path}"
         )
 
         if len(asset_collection) > 0:
-            assets_to_export = find_assets(heet_assets["assets"], asset_collection)
+            assets_to_export = find_assets(geocaret_assets["assets"], asset_collection)
             assets_to_export.reverse()
 
             for target_asset in assets_to_export:
                 asset_name = target_asset["name"]
                 logger.info(f"[export_to_drive] Exporting to Google Drive {asset_name}")
-                heet_export.asset_to_drive(target_asset)
+                export.asset_to_drive(target_asset)
 
     except Exception as error:
         logger.exception("[export_to_drive] Problem Exporting to Google Drive")
@@ -376,7 +377,7 @@ def export_to_assets():
     target_asset_folder = (
         cfg.root_folder
         + "/"
-        + cfg.heet_folder.split("/")[0]
+        + cfg.geocaret_folder.split("/")[0]
         + "/"
         + cfg.output_asset_folder_name
     )
@@ -387,17 +388,17 @@ def export_to_assets():
         return False
 
     try:
-        heet_assets = ee.data.listAssets({"parent": cfg.ps_heet_folder})
-        asset_collection = heet_assets["assets"]
+        geocaret_assets = ee.data.listAssets({"parent": cfg.ps_geocaret_folder})
+        asset_collection = geocaret_assets["assets"]
 
         if len(asset_collection) > 0:
-            assets_to_rename = find_assets(heet_assets["assets"], asset_collection)
+            assets_to_rename = find_assets(geocaret_assets["assets"], asset_collection)
             assets_to_rename.reverse()
 
             for target_asset in assets_to_rename:
                 asset_name = target_asset["name"]
                 new_asset_name = re.sub(
-                    cfg.ps_heet_folder, target_asset_folder, asset_name
+                    cfg.ps_geocaret_folder, target_asset_folder, asset_name
                 )
 
                 ee.data.renameAsset(asset_name, new_asset_name)
@@ -413,8 +414,8 @@ def prepare_gee_assets_folder():
         clear_tmp_folder()
 
     except Exception as error:
-        # Assume first run (no Heet folder)
-        subfolders = cfg.heet_folder.split("/")
+        # Assume first run (no GeoCARET folder)
+        subfolders = cfg.geocaret_folder.split("/")
 
         target_path = cfg.root_folder
         for sf in subfolders:
@@ -425,12 +426,12 @@ def prepare_gee_assets_folder():
                 ee.data.createAsset({"type": "Folder"}, target_path)
 
 
-def kill_all_heet_tasks():
+def kill_all_geocaret_tasks():
 
     # Finished operations can be SUCCEEDED, CANCELLED, FAILED
     task_list = ee.data.listOperations()
 
-    running_heet_jobs = [
+    running_geocaret_jobs = [
         t
         for t in task_list
         if (
@@ -439,15 +440,15 @@ def kill_all_heet_tasks():
         )
     ]
 
-    for heet_job in running_heet_jobs:
-        ee.data.cancelOperation(heet_job["name"])
+    for geocaret_job in running_geocaret_jobs:
+        ee.data.cancelOperation(geocaret_job["name"])
 
 
 def existing_tasks_running():
 
     task_list = ee.data.listOperations()
 
-    running_heet_jobs = [
+    running_geocaret_jobs = [
         t
         for t in task_list
         if (
@@ -456,7 +457,7 @@ def existing_tasks_running():
         )
     ]
 
-    if len(running_heet_jobs) > 0:
+    if len(running_geocaret_jobs) > 0:
         return True
     else:
         return False
@@ -465,9 +466,9 @@ def existing_tasks_running():
 def existing_job_files():
 
     try:
-        heet_assets = ee.data.listAssets({"parent": cfg.ps_heet_folder})
+        geocaret_assets = ee.data.listAssets({"parent": cfg.ps_geocaret_folder})
 
-        if len(heet_assets["assets"]) > 0:
+        if len(geocaret_assets["assets"]) > 0:
             return True
         else:
             return False
@@ -626,7 +627,7 @@ def trigger_next_step():
     # Final step in calculation terminates analysis prior to export
     if len(mtr.new_results_log["mriv_vec_params"]) > 0:
         new_priver_ids = mtr.new_results_log["mriv_vec_params"]
-        heet_params.batch_delete_shapes(new_priver_ids, "main_river_vector")
+        params.batch_delete_shapes(new_priver_ids, "main_river_vector")
 
         for c_dam_id in new_priver_ids:
             mtr.active_analyses.remove(c_dam_id)
@@ -635,22 +636,22 @@ def trigger_next_step():
     # - calculate parameters.
     if len(mtr.new_results_log["mriv_vec"]) > 0:
         new_river_ids = mtr.new_results_log["mriv_vec"]
-        heet_params.batch_profile_rivers(new_river_ids)
+        params.batch_profile_rivers(new_river_ids)
 
     # When nics with params arrive,
     # - delineate rivers
     if len(mtr.new_results_log["nic_vec_params"]) > 0:
         logger.info("Delineating inundated rivers")
         new_pnic_ids = mtr.new_results_log["nic_vec_params"]
-        heet_river.batch_delineate_rivers(new_pnic_ids)
-        heet_params.batch_delete_shapes(new_pnic_ids, "ni_catchment_vector")
+        river.batch_delineate_rivers(new_pnic_ids)
+        params.batch_delete_shapes(new_pnic_ids, "ni_catchment_vector")
 
     # When nics without parameters arrive
     # - add parameters
     if len(mtr.new_results_log["nic_vec"]) > 0:
         logger.info("Calculating NIC params")
         new_nic_ids = mtr.new_results_log["nic_vec"]
-        heet_params.batch_profile_nicatchments(new_nic_ids)
+        params.batch_profile_nicatchments(new_nic_ids)
 
     # When res with parameters arrive
     # - delineate NICS
@@ -658,15 +659,15 @@ def trigger_next_step():
     if len(mtr.new_results_log["res_vec_params"]) > 0:
         logger.info("Delineating non-inundated catchments")
         new_preservoir_ids = mtr.new_results_log["res_vec_params"]
-        heet_catchment.batch_delineate_nicatchments(new_preservoir_ids)
-        heet_params.batch_delete_shapes(new_preservoir_ids, "reservoir_vector")
+        catchment.batch_delineate_nicatchments(new_preservoir_ids)
+        params.batch_delete_shapes(new_preservoir_ids, "reservoir_vector")
 
     # When res without parameters arrive:
     # - Add parameters
     if len(mtr.new_results_log["res_vec"]) > 0:
         logger.info("Calculating Reservoir Params")
         new_reservoir_ids = mtr.new_results_log["res_vec"]
-        heet_params.batch_profile_reservoirs(new_reservoir_ids)
+        params.batch_profile_reservoirs(new_reservoir_ids)
 
     # When catchments with params arrive
     # - delineate reservoirs
@@ -674,20 +675,20 @@ def trigger_next_step():
     if len(mtr.new_results_log["catch_vec_params"]) > 0:
         logger.info("Delineating reservoirs")
         new_pcatchment_ids = mtr.new_results_log["catch_vec_params"]
-        heet_res.batch_delineate_reservoirs(new_pcatchment_ids)
-        heet_params.batch_delete_shapes(new_pcatchment_ids, "catchment_vector")
+        res.batch_delineate_reservoirs(new_pcatchment_ids)
+        params.batch_delete_shapes(new_pcatchment_ids, "catchment_vector")
 
     # When delineated catchments arrive, add params
     if len(mtr.new_results_log["catch_vec"]) > 0:
         logger.info("Calculating Catchment Params")
         new_catchment_ids = mtr.new_results_log["catch_vec"]
-        heet_params.batch_profile_catchments(new_catchment_ids)
+        params.batch_profile_catchments(new_catchment_ids)
 
     # When snapped points arrive, delineate catchments.
     if len(mtr.new_results_log["subbasin_pts"]) > 0:
         logger.info("Delineating catchments")
         new_snapped_ids = mtr.new_results_log["subbasin_pts"]
-        heet_catchment.batch_delineate_catchments(new_snapped_ids)
+        catchment.batch_delineate_catchments(new_snapped_ids)
 
 
 def run_analysis(pbar):
@@ -732,7 +733,7 @@ def run_analysis(pbar):
 
     # Initiate analysis by snapping dams to hydrorivers & finding upstream basins
     # for all dams in batch
-    heet_basins.batch_find_upstream_basins(dams_ftc, c_dam_ids)
+    basins.batch_find_upstream_basins(dams_ftc, c_dam_ids)
 
     # Monitor the EE task queue for complete or failed jobs
     # until the active analysis list is empty
@@ -750,13 +751,13 @@ def run_analysis(pbar):
                 current_active_analyses = ",".join(
                     [str(i) for i in mtr.active_analyses]
                 )
-                emsg = f"Analysis wait time limit exceeded. Cancelling all unfinished HEET tasks (active: {current_active_analyses}."
+                emsg = f"Analysis wait time limit exceeded. Cancelling all unfinished GeoCARET tasks (active: {current_active_analyses}."
                 logger.info(emsg)
-                kill_all_heet_tasks()
+                kill_all_geocaret_tasks()
                 keep_going = 0
             except:
-                logger.debug("HEET encountered an error and will exit")
-                sys.exit("HEET encountered an error and will exit")
+                logger.debug("GeoCARET encountered an error and will exit")
+                sys.exit("GeoCARET encountered an error and will exit")
 
             pbar.update(mtr.new_results_count)
 
@@ -767,7 +768,7 @@ def run_analysis(pbar):
             logger.info("Triggering Next Analysis Step (No wait)")
             trigger_next_step()
 
-        new_results_count = heet_task.log_new_results()
+        new_results_count = task.log_new_results()
 
         pbar.update(mtr.new_results_count)
 

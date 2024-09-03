@@ -3,26 +3,27 @@ debug_mode = False
 import ee
 import logging
 
+import_exceptions = (ModuleNotFoundError, ee.ee_exception.EEException)
 try:
-    from delineator import heet_config as cfg
-    from delineator import heet_data as dta
-    from delineator import heet_export
-    from delineator import heet_monitor as mtr
-    from delineator import heet_log as lg
+    from geocaret import config as cfg
+    from geocaret import data as dta
+    from geocaret import export
+    from geocaret import monitor as mtr
+    from geocaret import log as lg
 
-except ModuleNotFoundError:
+except import_exceptions:
     if not ee.data._credentials:
         ee.Initialize()
 
-    import heet_config as cfg
-    import heet_data as dta
-    import heet_export
-    import heet_monitor as mtr
-    import heet_log as lg
+    import geocaret.config as cfg
+    import geocaret.data as dta
+    import geocaret.export
+    import geocaret.monitor as mtr
+    import geocaret.log as lg
 
 import sys
 sys.path.append("..")
-import lib
+import geocaret.lib as lib
 
 # Gets or creates a logger
 logger = logging.getLogger(__name__)
@@ -73,7 +74,7 @@ def simplify_reservoir(r_ftc, c_dam_id_str):
 
         try:
             logger.info(f"{msg} {c_dam_id_str}")
-            heet_export.export_ftc(sr_vector, c_dam_id_str, "simple_reservoir_vector")
+            export.export_ftc(sr_vector, c_dam_id_str, "simple_reservoir_vector")
 
         except Exception as error:
             logger.exception(f"{msg} {c_dam_id_str}")
@@ -87,12 +88,12 @@ def batch_delineate_reservoirs(c_dam_ids):
 
         c_dam_id_str = str(c_dam_id)
 
-        snapped_point_name = cfg.ps_heet_folder + "/" + "PS_" + c_dam_id_str
+        snapped_point_name = cfg.ps_geocaret_folder + "/" + "PS_" + c_dam_id_str
 
         # First OK; single feature
         damFeat = ee.FeatureCollection(snapped_point_name).first()
 
-        catchmentAssetName = cfg.ps_heet_folder + "/" + "C_" + c_dam_id_str
+        catchmentAssetName = cfg.ps_geocaret_folder + "/" + "C_" + c_dam_id_str
         catchmentVector = ee.FeatureCollection(catchmentAssetName)
 
         if c_dam_id in mtr.existing_dams:
@@ -120,7 +121,7 @@ def batch_delineate_reservoirs(c_dam_ids):
                     **{"source": damFeat, "exclude": ["ancestor_ids"]}
                 )
 
-                heet_export.export_ftc(
+                export.export_ftc(
                     ee.FeatureCollection(ee.Feature(reservoirVectorFeat)),
                     c_dam_id_str,
                     "reservoir_vector",
@@ -334,7 +335,7 @@ def delineate_future_reservoir(catchmentVector, c_dam_id_str):
 
         try:
             logger.info(f"{msg} {c_dam_id_str}")
-            heet_export.export_image(inundated_area, c_dam_id_str, "waterbodies_pixels")
+            export.export_image(inundated_area, c_dam_id_str, "waterbodies_pixels")
 
         except Exception as error:
             logger.exception(f"{msg} {c_dam_id_str}")
@@ -359,7 +360,7 @@ def delineate_future_reservoir(catchmentVector, c_dam_id_str):
 
         try:
             logger.info(f"{msg} {c_dam_id_str}")
-            heet_export.export_ftc(water_bodies, c_dam_id_str, "waterbodies_vector")
+            export.export_ftc(water_bodies, c_dam_id_str, "waterbodies_vector")
 
         except Exception as error:
             logger.exception(f"{msg} {c_dam_id_str}")
@@ -545,7 +546,7 @@ def delineate_existing_reservoir(
 
         try:
             logger.info(f"{msg} {c_dam_id_str}")
-            heet_export.export_image(inundated_area, c_dam_id_str, "waterbodies_pixels")
+            export.export_image(inundated_area, c_dam_id_str, "waterbodies_pixels")
 
         except Exception as error:
             logger.exception(f"{msg} {c_dam_id_str}")
@@ -575,7 +576,7 @@ def delineate_existing_reservoir(
 
         try:
             logger.info(f"{msg} {c_dam_id_str}")
-            heet_export.export_ftc(water_bodies, c_dam_id_str, "waterbodies_vector")
+            export.export_ftc(water_bodies, c_dam_id_str, "waterbodies_vector")
 
         except Exception as error:
             logger.exception(f"{msg} {c_dam_id_str}")

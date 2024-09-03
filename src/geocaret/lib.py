@@ -5,7 +5,7 @@ import sys
 import toml
 
 
-APPLICATION_NAME = "heet_cli"
+APPLICATION_NAME = "geocaret"
 
 def get_package_file(*folders: str) -> pathlib.Path:
     """Imports package data using importlib functionality.
@@ -38,7 +38,7 @@ def load_toml(file_path: pathlib.Path) -> Dict:
     
     
 def _get_config():
-    asset_config = load_toml(get_package_file("config/assets.toml"))
+    asset_config = load_toml(get_package_file("config_files/assets.toml"))
     return asset_config
 
     

@@ -72,7 +72,7 @@ def test_mean_soil_oc_stocks(get_logger) -> None:
     Assert:
         The calculated result is within 5% relative error of the expected result (8.25).
     """
-    from heet_params import mean_soil_oc_stocks
+    from geocaret.params import mean_soil_oc_stocks
     logger = get_logger
     carbon_poly_px4 = ee.FeatureCollection(
         "projects/ee-future-dams/assets/XHEET_TEST_POLYS/carbon_poly_px4"
@@ -108,7 +108,7 @@ def test_mean_soil_oc_stocks_null(get_logger) -> None:
     Assert:
         The calculated result is None when no data is available.
     """
-    from heet_params import mean_soil_oc_stocks
+    from geocaret.params import mean_soil_oc_stocks
     logger = get_logger
     soil_poly_px2N = ee.FeatureCollection(
         "projects/ee-future-dams/assets/XHEET_TEST_POLYS/soil_poly_px2N"
@@ -142,7 +142,7 @@ def test_mean_soil_oc_content(get_logger) -> None:
     Assert:
         The calculated result is within 5% relative error of the expected result (208.067).
     """
-    from heet_params import mean_soil_oc_content
+    from geocaret.params import mean_soil_oc_content
     logger = get_logger
     psoc_poly_org_px1 = ee.FeatureCollection(
         "projects/ee-future-dams/assets/XHEET_TEST_POLYS/psoc_poly_org_px1"
@@ -180,7 +180,7 @@ def test_mean_soil_nitrogen_content(get_logger) -> None:
     Assert:
         The calculated result is within 5% relative error of the expected result (66.368).
     """
-    from heet_params import mean_soil_nitrogen_content
+    from geocaret.params import mean_soil_nitrogen_content
     logger = get_logger
     soiln_poly_px1 = ee.FeatureCollection(
         "projects/ee-future-dams/assets/XHEET_TEST_POLYS/soiln_poly_px1"
@@ -219,7 +219,7 @@ def test_mean_soil_bdod(get_logger) -> None:
     Assert:
         The calculated result is within 5% relative error of the expected result (1.077).
     """
-    from heet_params import mean_soil_bdod
+    from geocaret.params import mean_soil_bdod
     logger = get_logger
     soilbdod_poly_px1 = ee.FeatureCollection(
         "projects/ee-future-dams/assets/XHEET_TEST_POLYS/soilbdod_poly_px1"
@@ -257,7 +257,7 @@ def test_total_doc_export(get_logger) -> None:
     Assert:
         The calculated result is within 5% relative error of the expected result (-43.62673765).
     """
-    from heet_params import total_doc_export
+    from geocaret.params import total_doc_export
     logger = get_logger
     cn_poly_px1 = ee.FeatureCollection(
         "projects/ee-future-dams/assets/XHEET_TEST_POLYS/cn_poly_px1"
@@ -294,7 +294,7 @@ def test_mean_strata_weighted_mol_n(get_logger) -> None:
     Assert:
         The calculated result is within 5% relative error of the expected result (4.317969258).
     """
-    from heet_params import mean_strata_weighted_mol_n
+    from geocaret.params import mean_strata_weighted_mol_n
     logger = get_logger
     cn_poly_px1 = ee.FeatureCollection(
         "projects/ee-future-dams/assets/XHEET_TEST_POLYS/cn_poly_px1"
@@ -331,7 +331,7 @@ def test_mean_strata_weighted_mol_c(get_logger) -> None:
     Assert:
         The calculated result is within 5% relative error of the expected result (5.81363375).
     """
-    from heet_params import mean_strata_weighted_mol_c
+    from geocaret.params import mean_strata_weighted_mol_c
     logger = get_logger
     cn_poly_px1 = ee.FeatureCollection(
         "projects/ee-future-dams/assets/XHEET_TEST_POLYS/cn_poly_px1"

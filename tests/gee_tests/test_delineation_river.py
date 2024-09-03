@@ -1,6 +1,6 @@
 """
 This module contains a test case for delineating the main river using the 
-`delineate_river` function from the `heet_river` package. The test ensures that 
+`delineate_river` function from the `river` package. The test ensures that 
 the function runs without errors when applied to a known dam and produces the 
 expected results.
 
@@ -19,7 +19,7 @@ def test_rwo_delineate_river(get_logger) -> None:
     """
     Test that delineation of the main river runs without error for a known dam.
 
-    This test checks the `delineate_river` function from the `heet_river` package 
+    This test checks the `delineate_river` function from the `river` package 
     to ensure it executes successfully without raising any errors when provided 
     with valid input data for a known dam.
 
@@ -27,10 +27,10 @@ def test_rwo_delineate_river(get_logger) -> None:
         get_logger: A pytest fixture for logging messages during testing.
 
     Asserts:
-        The function runs without raising a `MyError` exception. If an exception is 
+        The function runs without raising a `Exception` exception. If an exception is 
         raised, the test fails and logs an error message.
     """
-    from heet_river import delineate_river
+    from geocaret.river import delineate_river
     catchmentAssetName = "projects/ee-future-dams/assets/XHEET_TEST_EXAMPLE/C_1201"
     catchment_ftc = ee.FeatureCollection(catchmentAssetName)
     reservoirAssetName = "projects/ee-future-dams/assets/XHEET_TEST_EXAMPLE/R_1201"
@@ -40,7 +40,7 @@ def test_rwo_delineate_river(get_logger) -> None:
     try:
         mainRiverVector, riverVector = delineate_river(damFeat, res_ftc, "1201")
         msg = "delineate_river completed without explicit error(s)"
-    except MyError:
+    except Exception:
         msg = "delineate_river failed with error(s)"
         pytest.fail("delineate_river failed with error(s)")
     logger = get_logger

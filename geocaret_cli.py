@@ -1,4 +1,4 @@
-import ee
+""" """
 import os
 import re
 import sys
@@ -8,7 +8,6 @@ import requests
 import logging
 import json
 import pandas as pd
-
 from pathlib import Path
 from datetime import datetime
 from typing import Tuple, Iterator, Union
@@ -19,14 +18,14 @@ from pyfiglet import figlet_format
 from tqdm import tqdm
 from termcolor import colored
 import polling2
-
-from delineator import heet_validate  # Does not import ee
-from delineator import heet_log as lg
-from delineator import heet_monitor as mtr
+import ee
+from geocaret import validate  # Does not import ee
+from geocaret import log as lg
+from geocaret import monitor as mtr
 
 # ! IMPORTANT !
 #
-# Additional imports of heet_* modules are delayed until EE authentications
+# Additional imports of * modules are delayed until EE authentications
 # has been checked and completed if needed. Otherwise imports will fail
 # if not authenticated to EE.
 #
@@ -251,7 +250,7 @@ def update_sp_inv_file(sp, issues):
     sp.write("")
     sp.write(f"  Please fix the following issues:\n{issues}")
     sp.write("")
-    sp.write("  See heet_input_report.csv for further details")
+    sp.write("  See geocaret_input_report.csv for further details")
     sp.write("")
     sp.write("Thank you for using HEET!")
     return sp
@@ -327,10 +326,10 @@ def update_sp_warn_skip(sp):
 
 def update_sp_chose_skip(sp):
     sp.write("")
-    sp.write("  [INFO] Export to Google Drive is TURNED OFF in heet_config")
+    sp.write("  [INFO] Export to Google Drive is TURNED OFF in geocaret_config")
     sp.write("  [INFO] Skipping Export to Google Drive")
     sp.write("  [INFO] You can export your results to Google Drive later")
-    sp.write("  [INFO] using utility tool heet_export_cli.py")
+    sp.write("  [INFO] using utility tool geocaret_export_cli.py")
     sp.write("")
     return sp
 
@@ -345,7 +344,7 @@ def update_sp_inv_output(sp, issues):
     sp.write("")
     sp.write(f"  Please be aware of the following issues:\n{issues}")
     sp.write("")
-    sp.write("  See heet_output_report.csv for further details")
+    sp.write("  See geocaret_output_report.csv for further details")
     sp.write("")
     return sp
 
@@ -460,7 +459,7 @@ def main():
 
         # File Loads
         try:
-            df_inputs = heet_validate.csv_to_df(input_file_path)
+            df_inputs = validate.csv_to_df(input_file_path)
         except Exception:
             sp = update_sp_fail(sp)
             sp = update_sp_err_load(sp, input_file_path)
@@ -468,7 +467,7 @@ def main():
 
         # Fields valid
         try:
-            status = heet_validate.valid_input_fields(df_inputs)
+            status = validate.valid_input_fields(df_inputs)
         except Exception:
             sp = update_sp_fail(sp)
             sp = update_sp_err_fatal(sp)
@@ -481,7 +480,7 @@ def main():
 
         # File valid
         try:
-            status = heet_validate.valid_input(
+            status = validate.valid_input(
                 df_inputs, input_file_path, output_folder_path
             )
         except Exception:
@@ -524,14 +523,14 @@ def main():
 
     # Unconventional, heet imports (using ee) are delayed until GEE
     # authentication and initialisation are confirmed.
-    from delineator import heet_task
-    from delineator import heet_export
-    from delineator import heet_config as cfg
+    from geocaret import task
+    from geocaret import export
+    from geocaret import config as cfg
 
     cfg.output_asset_folder_name = output_folder_name
     cfg.output_drive_folder = "XHEET_" + cfg.output_asset_folder_name
 
-    heet_settings = {
+    geocaret_settings = {
         "input_file_path": args.inputfile,
         "jobname": (args.jobname).upper(),
         "outputs": args.outputs,
@@ -547,7 +546,7 @@ def main():
 
     settings_file_path = Path(output_folder_path, "settings.txt")
     with open(settings_file_path, "w") as file:
-        file.write(json.dumps(heet_settings))
+        file.write(json.dumps(geocaret_settings))
 
     # Set export parameters for output selected
     if outputs == "extended":
@@ -610,8 +609,8 @@ def main():
     with yaspin(Spinners.line, text=step_desc, color="yellow") as sp:
 
         try:
-            existing_tasks = heet_task.existing_tasks_running()
-            existing_files = heet_task.existing_job_files()
+            existing_tasks = task.existing_tasks_running()
+            existing_files = task.existing_job_files()
         except Exception:
             # Handles any issue, including connectivity
             sp = update_sp_err_fatal(sp)
@@ -656,8 +655,8 @@ def main():
 
         if existing_tasks == True:
             try:
-                heet_task.kill_all_heet_tasks()
-                heet_task.wait_until_jobs_finish()
+                task.kill_all_heet_tasks()
+                task.wait_until_jobs_finish()
             except Exception:
                 # Handles any issue, including connectivity
                 sp = update_sp_fail(sp)
@@ -665,7 +664,7 @@ def main():
                 sys.exit()
 
         try:
-            heet_task.prepare_gee_assets_folder()
+            task.prepare_gee_assets_folder()
         except Exception:
             # Handles any issue, including connectivity
             sp = update_sp_fail(sp)
@@ -681,51 +680,51 @@ def main():
     with yaspin(Spinners.line, text=step_desc, color="yellow") as sp:
 
         try:
-            df = heet_validate.prepare_input_table(df_inputs)
+            df = validate.prepare_input_table(df_inputs)
         except Exception:
             # Handles any issue, including connectivity
             sp = update_sp_fail(sp)
             sp = update_sp_err_fatal(sp)
             logger.exception(
-                "[heet_cli] There was a problem preparing input file.  Exiting..."
+                "[geocaret_cli] There was a problem preparing input file.  Exiting..."
             )
             sys.exit()
 
         try:
-            inputs_ftc = heet_export.df_to_ee(df)
+            inputs_ftc = export.df_to_ee(df)
         except Exception:
             # Handles any issue, including connectivity
             sp = update_sp_fail(sp)
             sp = update_sp_err_fatal(sp)
             logger.exception(
-                "[heet_cli] There was a problem converting input file from df to ftc.  Exiting..."
+                "[geocaret_cli] There was a problem converting input file from df to ftc.  Exiting..."
             )
             sys.exit()
 
         try:
-            upload_task = heet_export.upload_user_inputs(inputs_ftc)
+            upload_task = export.upload_user_inputs(inputs_ftc)
         except Exception:
             sp = update_sp_fail(sp)
             sp = update_sp_err_upload(sp)
             logger.exception(
-                "[heet_cli] There was a problem uploading user inputs to Google Earth Engine. Exiting..."
+                "[geocaret_cli] There was a problem uploading user inputs to Google Earth Engine. Exiting..."
             )
             sys.exit()
 
         try:
-            heet_task.wait_until_upload(upload_task)
+            task.wait_until_upload(upload_task)
         except polling2.TimeoutException:
             sp = update_sp_fail(sp)
             sp = update_sp_err_upload(sp)
             logger.info(
-                "[heet_cli] Uploading user inputs to Google Earth Engine timed out. Exiting..."
+                "[geocaret_cli] Uploading user inputs to Google Earth Engine timed out. Exiting..."
             )
             sys.exit()
         except Exception:
             sp = update_sp_fail(sp)
             sp = update_sp_err_upload(sp)
             logger.exception(
-                "[heet_cli] There was a problem uploading user inputs to Google Earth Engine. Exiting..."
+                "[geocaret_cli] There was a problem uploading user inputs to Google Earth Engine. Exiting..."
             )
 
         try:
@@ -734,7 +733,7 @@ def main():
             sp = update_sp_fail(sp)
             sp = update_sp_err_upload(sp)
             logger.debug(
-                "[heet_cli] There was a problem uploading user inputs to Google Earth Engine. Exiting..."
+                "[geocaret_cli] There was a problem uploading user inputs to Google Earth Engine. Exiting..."
             )
 
         if upload_success == True:
@@ -755,7 +754,7 @@ def main():
         try:
             sp = update_sp_success(sp)
             pbar = tqdm(total=n_calcs, ncols=80)
-            status = heet_task.run_analysis(pbar)
+            status = task.run_analysis(pbar)
         except Exception:
             # Handles any issue, including connectivity
             sp = update_sp_fail(sp)
@@ -770,7 +769,7 @@ def main():
                     "(Running) Analysis wait time limit exceeded. Cancelling all unfinished HEET tasks."
                 )
                 try:
-                    heet_task.kill_all_heet_tasks()
+                    task.kill_all_heet_tasks()
                 except Exception:
                     sp = update_sp_err_fatal(sp)
                     sys.exit()
@@ -783,7 +782,7 @@ def main():
     with yaspin(Spinners.line, text=step_desc, color="yellow") as sp:
 
         try:
-            heet_task.wait_until_jobs_finish()
+            task.wait_until_jobs_finish()
         except polling2.TimeoutException:
             sp = update_sp_fail(sp)
             sp = update_sp_err_time(sp)
@@ -791,7 +790,7 @@ def main():
                 "(Waiting) Analysis wait time limit exceeded. Cancelling all unfinished HEET tasks."
             )
             try:
-                heet_task.kill_all_heet_tasks()
+                task.kill_all_heet_tasks()
             except Exception:
                 sp = update_sp_err_fatal(sp)
                 sys.exit()
@@ -810,7 +809,7 @@ def main():
     with yaspin(Spinners.line, text=step_desc, color="yellow") as sp:
 
         try:
-            heet_task.assets_to_ftc()
+            task.assets_to_ftc()
         except Exception:
             # Handles any issue, including connectivity
             sp = update_sp_fail(sp)
@@ -825,7 +824,7 @@ def main():
     with yaspin(Spinners.line, text=step_desc, color="yellow") as sp:
 
         try:
-            heet_task.wait_until_jobs_finish()
+            task.wait_until_jobs_finish()
         except polling2.TimeoutException:
             sp = update_sp_fail(sp)
             sp = update_sp_err_time(sp)
@@ -833,7 +832,7 @@ def main():
                 "(Waiting) Analysis wait time limit exceeded. Cancelling all unfinished HEET tasks."
             )
             try:
-                heet_task.kill_all_heet_tasks()
+                task.kill_all_heet_tasks()
             except Exception:
                 sp = update_sp_err_fatal(sp)
                 sys.exit()
@@ -856,7 +855,7 @@ def main():
                 if "CI_ROBOT_USER" in os.environ:
                     sp = update_sp_inf_service(sp)
                 else:
-                    heet_task.export_to_drive()
+                    task.export_to_drive()
             except Exception:
                 # Handles any issue, including connectivity
                 sp = update_sp_fail(sp)
@@ -871,7 +870,7 @@ def main():
                 keep_going = 1
                 while (len(mtr.active_exports) > 0) and (keep_going == 1):
                     try:
-                        heet_task.wait_until_exports()
+                        task.wait_until_exports()
                         active_count = len(mtr.active_exports)
                         new_exports = remaining_export_size - active_count
                         remaining_export_size = active_count
@@ -884,7 +883,7 @@ def main():
                             "(Waiting) Analysis wait time limit exceeded. Cancelling all unfinished HEET tasks."
                         )
                         try:
-                            heet_task.kill_all_heet_tasks()
+                            task.kill_all_heet_tasks()
                         except Exception:
                             sp = update_sp_err_fatal(sp)
                             sys.exit()
@@ -901,7 +900,7 @@ def main():
     with yaspin(Spinners.line, text=step_desc, color="yellow") as sp:
 
         try:
-            heet_export.batch_export_to_json(output_folder_path)
+            export.batch_export_to_json(output_folder_path)
         except Exception:
             # Handles any issue, including connectivity
             sp = update_sp_fail(sp)
@@ -919,7 +918,7 @@ def main():
     with yaspin(Spinners.line, text=step_desc, color="yellow") as sp:
 
         try:
-            heet_export.download_output_parameters(output_folder_path)
+            export.download_output_parameters(output_folder_path)
         except Exception:
             # Handles any issue, including connectivity
             sp = update_sp_fail(sp)
@@ -937,7 +936,7 @@ def main():
             if "CI_ROBOT_USER" in os.environ:
                 sp = update_sp_inf_service(sp)
             else:
-                heet_task.export_to_assets()
+                task.export_to_assets()
         except Exception:
             # Handles any issue, including connectivity
             sp = update_sp_fail(sp)
@@ -955,7 +954,7 @@ def main():
         output_file_path = Path(output_folder_path, "output_parameters.csv")
 
         try:
-            df_outputs = heet_validate.csv_to_df(output_file_path)
+            df_outputs = validate.csv_to_df(output_file_path)
         except Exception:
             # Handles any issue, including connectivity
             sp = update_sp_fail(sp)
@@ -963,7 +962,7 @@ def main():
             sys.exit()
         else:
             try:
-                status = heet_validate.valid_output_fields(df_outputs)
+                status = validate.valid_output_fields(df_outputs)
             except Exception:
                 # Handles any issue, including connectivity
                 sp = update_sp_fail(sp)
@@ -985,7 +984,7 @@ def main():
         output_file_path = Path(output_folder_path, "output_parameters.csv")
 
         try:
-            df_outputs = heet_validate.csv_to_df(output_file_path)
+            df_outputs = validate.csv_to_df(output_file_path)
         except Exception:
             # Handles any issue, including connectivity
             sp = update_sp_fail(sp)
@@ -993,7 +992,7 @@ def main():
             sys.exit()
         else:
             try:
-                status = heet_validate.valid_output(
+                status = validate.valid_output(
                     df_outputs, output_file_path, output_folder_path
                 )
             except Exception:
@@ -1015,12 +1014,12 @@ def main():
     with yaspin(Spinners.line, text=step_desc, color="yellow") as sp:
 
         try:
-            heet_task.task_audit(output_folder_path)
+            task.task_audit(output_folder_path)
         except Exception:
             # Handles any issue, including connectivity
             sp = update_sp_fail(sp)
             sp = update_sp_warn_skip(sp)
-            logger.debug("[heet_cli] HEET encountered a problem generating tasks.csv")
+            logger.debug("[geocaret_cli] HEET encountered a problem generating tasks.csv")
             sys.exit()
         else:
             sp = update_sp_success(sp)
@@ -1032,7 +1031,7 @@ def main():
     with yaspin(Spinners.line, text=step_desc, color="yellow") as sp:
 
         try:
-            heet_task.clear_tmp_folder()
+            task.clear_tmp_folder()
         except Exception:
             # Handles any issue, including connectivity
             sp = update_sp_fail(sp)

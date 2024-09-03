@@ -1,7 +1,10 @@
 """
 Module: test_params_terraclimate.py
 
-This module contains a series of pytest functions that test the accuracy and reliability of various Terraclim data processing functions implemented in the `heet_params` module. The tests compare computed values against manually calculated reference values to ensure the correctness of the implemented algorithms.
+This module contains a series of pytest functions that test the accuracy and reliability of 
+various Terraclim data processing functions implemented in the `params` module. The tests 
+compare computed values against manually calculated reference values to ensure the correctness of 
+the implemented algorithms.
 
 Functions:
 - test_terraclim_windspeed
@@ -9,6 +12,7 @@ Functions:
 - test_terraclim_soilm_b
 - test_terraclim_pet
 - test_terraclim_pr
+
 - test_terraclim_ro
 - test_terraclim_crossref_ro
 - test_terraclim_crossref_soil
@@ -47,7 +51,7 @@ def test_terraclim_windspeed(get_logger, target_ftc, test_result) -> None:
         - The calculated windspeed is within 1% of the manually calculated value for GRID and GRID_PNULL.
         - The result for GRID_NULL should be None.
     """
-    from heet_params import terraclim_monthly_mean
+    from geocaret.params import terraclim_monthly_mean
     logger = get_logger
     target_var = 'vs'
     test_input = {
@@ -97,7 +101,7 @@ def test_terraclim_soilm_a(get_logger, target_ftc, test_result) -> None:
         - The calculated soil moisture is within 5% of the manually calculated value for GRID and GRID_PNULL.
         - The result for GRID_NULL should be None.
     """
-    from heet_params import terraclim_annual_mean
+    from geocaret.params import terraclim_annual_mean
     logger = get_logger
     target_var = 'soil'
     test_input = {
@@ -144,7 +148,7 @@ def test_terraclim_soilm_b(get_logger, target_ftc, test_result) -> None:
         - The calculated soil moisture is within 5% of the manually calculated value for GRID and GRID_PNULL.
         - The result for GRID_NULL should be None.
     """
-    from heet_params import terraclim_monthly_mean
+    from geocaret.params import terraclim_monthly_mean
     logger = get_logger
     target_var = 'soil'
     test_input = {
@@ -190,7 +194,7 @@ def test_terraclim_pet(get_logger, target_ftc, test_result) -> None:
         - The calculated PET is within 10% of the manually calculated value for GRID and GRID_PNULL.
         - The result for GRID_NULL should be None.
     """
-    from heet_params import terraclim_annual_mean
+    from geocaret.params import terraclim_annual_mean
     logger = get_logger
     target_var = 'pet'
     test_input = {
@@ -237,7 +241,7 @@ def test_terraclim_pr(get_logger, target_ftc, test_result) -> None:
         - The calculated precipitation is within 10% of the manually calculated value for GRID and GRID_PNULL.
         - The result for GRID_NULL should be None.
     """
-    from heet_params import terraclim_annual_mean
+    from geocaret.params import terraclim_annual_mean
     logger = get_logger
     target_var = 'pr'
     test_input = {
@@ -287,7 +291,7 @@ def test_terraclim_ro(get_logger, target_ftc, test_result) -> None:
         - The calculated runoff is within 10% of the manually calculated value for GRID and GRID_PNULL.
         - The result for GRID_NULL should be None.
     """
-    from heet_params import terraclim_annual_mean
+    from geocaret.params import terraclim_annual_mean
     logger = get_logger
     target_var = 'ro'
     test_input = {
@@ -325,8 +329,8 @@ def test_terraclim_crossref_ro(get_logger) -> None:
         - The calculated runoff from cross-referencing is within 10% of the manually calculated value for GRID and GRID_PNULL.
         - The result for GRID_NULL should be None.
     """
-    from heet_params import terraclim_annual_mean
-    import heet_data as dta
+    from geocaret.params import terraclim_annual_mean
+    import geocaret.data as dta
     logger = get_logger
     target_var = 'ro'
     REFDATA = ee.FeatureCollection("projects/ee-future-dams/assets/XHEET_TEST_ASSETS/BasinATLAS_v10_lev12") 
@@ -367,8 +371,8 @@ def test_terraclim_crossref_soil(get_logger) -> None:
         The ratio of the calculated Terraclim soil moisture value to the reference HydroAtlas value
         should be within the range of 0.1 to 10, indicating they are of the same order of magnitude.
     """
-    from heet_params import terraclim_monthly_mean
-    import heet_data as dta
+    from geocaret.params import terraclim_monthly_mean
+    import geocaret.data as dta
     logger = get_logger
     target_var = 'soil'
     REFDATA = ee.FeatureCollection("projects/ee-future-dams/assets/XHEET_TEST_ASSETS/BasinATLAS_v10_lev12") 

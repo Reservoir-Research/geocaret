@@ -4,7 +4,8 @@ import os
 import logging
 import pytest
 import ee
-from lib import get_package_file
+import sys
+from geocaret.lib import get_package_file
 
 
 @pytest.fixture(scope='session', autouse=True)

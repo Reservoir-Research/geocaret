@@ -7,24 +7,25 @@ import logging
 # Import asset locations from config
 import sys
 sys.path.append("..")
-import lib
+import geocaret.lib as lib
 
+import_exceptions = (ModuleNotFoundError, ee.ee_exception.EEException)
 try:
-    from delineator import heet_config as cfg
-    from delineator import heet_data as dta
-    from delineator import heet_export
-    from delineator import heet_monitor as mtr
-    from delineator import heet_log as lg
+    from geocaret import config as cfg
+    from geocaret import data as dta
+    from geocaret import export
+    from geocaret import monitor as mtr
+    from geocaret import log as lg
 
-except ModuleNotFoundError:
+except import_exceptions:
     if not ee.data._credentials:
         ee.Initialize()
 
-    import heet_config as cfg
-    import heet_data as dta
-    import heet_export
-    import heet_monitor as mtr
-    import heet_log as lg
+    import geocaret.config as cfg
+    import geocaret.data as dta
+    import geocaret.export
+    import geocaret.monitor as mtr
+    import geocaret.log as lg
 
 if debug_mode == True:
     mtr.existing_dams = []
@@ -662,7 +663,7 @@ def landcover_bysoil_buffer(res_ftc, landcover_analysis_file_str, c_dam_id):
     try:
         logger.info(f"{msg} {c_dam_id_str}")
         if cfg.exportBufferVector == True:
-            heet_export.export_ftc(
+            export.export_ftc(
                 res_buffer_ftc, c_dam_id_str, "reservoir_buffer_zone"
             )
 
@@ -2341,7 +2342,7 @@ def profile_reservoir(reservoir_ftc, landcover_analysis_file_str, c_dam_id):
     )
 
     # Mean annual global horizontal irradiance (terraclim)
-    #  TODO terraclim_mghr underdevelopment (see heet_params_draft)
+    #  TODO terraclim_mghr underdevelopment (see geocaret_params_draft)
     # Example use: terraclim_mghr(2000, 2019, reservoir_ftc)
     mghr_all_kwhperm2perday_alt1 = "UD"
     mghr_nov_mar_kwhperm2perday_alt1 = "UD"
@@ -2509,13 +2510,13 @@ def profile_reservoir(reservoir_ftc, landcover_analysis_file_str, c_dam_id):
 
 def batch_delete_shapes(c_dam_ids, output_type):
 
-    file_prefix = heet_export.export_job_specs[output_type]["fileprefix"]
+    file_prefix = export.export_job_specs[output_type]["fileprefix"]
 
     for c_dam_id in c_dam_ids:
 
         c_dam_id_str = str(c_dam_id)
 
-        targetAssetName = cfg.ps_heet_folder + "/" + file_prefix + c_dam_id_str
+        targetAssetName = cfg.ps_geocaret_folder + "/" + file_prefix + c_dam_id_str
 
         try:
             ee.data.deleteAsset(targetAssetName)
@@ -2531,7 +2532,7 @@ def batch_profile_reservoirs(c_dam_ids):
 
         c_dam_id_str = str(c_dam_id)
 
-        reservoirAssetName = cfg.ps_heet_folder + "/" + "r_" + c_dam_id_str
+        reservoirAssetName = cfg.ps_geocaret_folder + "/" + "r_" + c_dam_id_str
         reservoir_ftc = ee.FeatureCollection(reservoirAssetName)
 
         try:
@@ -2541,7 +2542,7 @@ def batch_profile_reservoirs(c_dam_ids):
             updated_reservoir_ftc = profile_reservoir(
                 reservoir_ftc, landcover_analysis_file_str, c_dam_id
             )
-            heet_export.export_ftc(
+            export.export_ftc(
                 updated_reservoir_ftc, c_dam_id_str, "reservoir_vector_params"
             )
         except Exception as error:
@@ -2557,7 +2558,7 @@ def batch_profile_catchments(c_dam_ids):
 
         c_dam_id_str = str(c_dam_id)
 
-        catchmentAssetName = cfg.ps_heet_folder + "/" + "c_" + c_dam_id_str
+        catchmentAssetName = cfg.ps_geocaret_folder + "/" + "c_" + c_dam_id_str
         catchment_ftc = ee.FeatureCollection(catchmentAssetName)
 
         try:
@@ -2567,7 +2568,7 @@ def batch_profile_catchments(c_dam_ids):
             updated_catchment_ftc = profile_catchment(
                 catchment_ftc, landcover_analysis_file_str
             )
-            heet_export.export_ftc(
+            export.export_ftc(
                 updated_catchment_ftc, c_dam_id_str, "catchment_vector_params"
             )
         except Exception as error:
@@ -2583,12 +2584,12 @@ def batch_profile_rivers(c_dam_ids):
 
         c_dam_id_str = str(c_dam_id)
 
-        riverAssetName = cfg.ps_heet_folder + "/" + "ms_" + c_dam_id_str
+        riverAssetName = cfg.ps_geocaret_folder + "/" + "ms_" + c_dam_id_str
         river_ftc = ee.FeatureCollection(riverAssetName)
 
         try:
             updated_river_ftc = profile_river(river_ftc)
-            heet_export.export_ftc(
+            export.export_ftc(
                 ee.FeatureCollection(updated_river_ftc),
                 c_dam_id_str,
                 "main_river_vector_params",
@@ -2606,12 +2607,12 @@ def batch_profile_nicatchments(c_dam_ids):
 
         c_dam_id_str = str(c_dam_id)
 
-        nicatchmentAssetName = cfg.ps_heet_folder + "/" + "n_" + c_dam_id_str
+        nicatchmentAssetName = cfg.ps_geocaret_folder + "/" + "n_" + c_dam_id_str
         nicatchment_ftc = ee.FeatureCollection(nicatchmentAssetName)
 
         try:
             updated_nicatchment_ftc = profile_nicatchment(nicatchment_ftc)
-            heet_export.export_ftc(
+            export.export_ftc(
                 updated_nicatchment_ftc, c_dam_id_str, "ni_catchment_vector_params"
             )
         except Exception as error:

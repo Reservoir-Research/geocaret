@@ -1,26 +1,28 @@
+""" """
 import ee
 import logging
 
+import_exceptions = (ModuleNotFoundError, ee.ee_exception.EEException)
 try:
-    from delineator import heet_config as cfg
-    from delineator import heet_data as dta
-    from delineator import heet_export
-    from delineator import heet_reservoir as heet_res
-    from delineator import heet_monitor as mtr
-    from delineator import heet_snap as snap
-    from delineator import heet_log as lg
+    from geocaret import config as cfg
+    from geocaret import data as dta
+    from geocaret import export
+    from geocaret import reservoir as res
+    from geocaret import monitor as mtr
+    from geocaret import snap as snap
+    from geocaret import log as lg
 
-except ModuleNotFoundError:
+except import_exceptions:
     if not ee.data._credentials:
         ee.Initialize()
 
-    import heet_config as cfg
-    import heet_data as dta
-    import heet_export
-    import heet_reservoir as heet_res
-    import heet_monitor as mtr
-    import heet_snap as snap
-    import heet_log as lg
+    import geocaret.config as cfg
+    import geocaret.data as dta
+    import geocaret.export
+    import geocaret.reservoir as res
+    import geocaret.monitor as mtr
+    import geocaret.snap as snap
+    import geocaret.log as lg
 debug_mode = False
 # ==============================================================================
 #  Set up logger
@@ -225,7 +227,7 @@ def delineate_river(damFeat, res_ftc, c_dam_id_str):
 
     cDamFeat = damFeat
     # Simplify reservoir vector to single outer boundary
-    sres_ftc = heet_res.simplify_reservoir(res_ftc, c_dam_id_str)
+    sres_ftc = res.simplify_reservoir(res_ftc, c_dam_id_str)
 
     # Convert simplified reservoir to a collection of boundary lines
     sres_boundaries_ftc = polygon_to_lines(sres_ftc)
@@ -239,7 +241,7 @@ def delineate_river(damFeat, res_ftc, c_dam_id_str):
 
         try:
             logger.info(f"{msg} {c_dam_id_str}")
-            heet_export.export_ftc(
+            export.export_ftc(
                 sres_boundaries_ftc, c_dam_id_str, "simple_reservoir_boundary"
             )
 
@@ -944,7 +946,7 @@ def delineate_river(damFeat, res_ftc, c_dam_id_str):
 
         try:
             logger.info(f"{msg} {c_dam_id_str}")
-            heet_export.export_ftc(
+            export.export_ftc(
                 inundated_river_csink_ftc, c_dam_id_str, "river_sink_lines"
             )
 
@@ -994,7 +996,7 @@ def delineate_river(damFeat, res_ftc, c_dam_id_str):
 
         try:
             logger.info(f"{msg} {c_dam_id_str}")
-            heet_export.export_ftc(
+            export.export_ftc(
                 inundated_river_csource_ftc, c_dam_id_str, "river_source_lines"
             )
 
@@ -1049,10 +1051,10 @@ def batch_delineate_rivers(c_dam_ids):
         # print ("[DEBUG] Processing", c_dam_id)
         c_dam_id_str = str(c_dam_id)
 
-        reservoirAssetName = cfg.ps_heet_folder + "/" + "R_" + c_dam_id_str
+        reservoirAssetName = cfg.ps_geocaret_folder + "/" + "R_" + c_dam_id_str
         res_ftc = ee.FeatureCollection(reservoirAssetName)
 
-        snappedAssetName = cfg.ps_heet_folder + "/" + "PS_" + c_dam_id_str
+        snappedAssetName = cfg.ps_geocaret_folder + "/" + "PS_" + c_dam_id_str
         damFeat = ee.FeatureCollection(snappedAssetName)
 
         riverVector, mainRiverVector = delineate_river(damFeat, res_ftc, c_dam_id_str)
@@ -1067,7 +1069,7 @@ def batch_delineate_rivers(c_dam_ids):
 
             try:
                 logger.info(f" {msg} {c_dam_id_str}")
-                heet_export.export_ftc(riverVector, c_dam_id_str, "river_vector")
+                export.export_ftc(riverVector, c_dam_id_str, "river_vector")
 
             except Exception as error:
                 logger.exception(f"{msg} {c_dam_id_str}")
@@ -1085,7 +1087,7 @@ def batch_delineate_rivers(c_dam_ids):
 
             try:
                 logger.info(f" {msg} {c_dam_id_str}")
-                heet_export.export_ftc(
+                export.export_ftc(
                     mainRiverVector, c_dam_id_str, "main_river_vector"
                 )
 

@@ -1,23 +1,24 @@
+""" """
 import logging
 import ee
 
+import_exceptions = (ModuleNotFoundError, ee.ee_exception.EEException)
 try:
-    from delineator import heet_config as cfg
-    from delineator import heet_data as dta
-    from delineator import heet_export
-    from delineator import heet_monitor as mtr
-    from delineator import heet_snap
-    from delineator import heet_log as lg
-except ModuleNotFoundError:
+    from geocaret import config as cfg
+    from geocaret import data as dta
+    from geocaret import export
+    from geocaret import monitor as mtr
+    from geocaret import snap
+    from geocaret import log as lg
+except import_exceptions:
     if not ee.data._credentials:
         ee.Initialize()
-
-    import heet_config as cfg
-    import heet_data as dta
-    import heet_export
-    import heet_monitor as mtr
-    import heet_snap
-    import heet_log as lg
+    import geocaret.config as cfg
+    import geocaret.data as dta
+    import geocaret.export
+    import geocaret.monitor as mtr
+    import geocaret.snap
+    import geocaret.log as lg
 debug_mode = False
 
 # ==============================================================================
@@ -272,7 +273,7 @@ def batch_find_upstream_basins(dams_ftc, c_dam_ids):
         # ==================================================================
 
         try:
-            snappedDamFeat = heet_snap.jensen_snap_hydroriver(damFeat)
+            snappedDamFeat = snap.jensen_snap_hydroriver(damFeat)
             logger.info(f"Snapping Dam Location {c_dam_id_str}")
 
         except Exception as error:
@@ -401,7 +402,7 @@ def batch_find_upstream_basins(dams_ftc, c_dam_ids):
 
                 location_ftc = ftc.map(lambda feat: ee.Feature(feat))
 
-                heet_export.export_ftc(
+                export.export_ftc(
                     location_ftc, c_dam_id_str, "snapped_dam_location"
                 )
             except Exception as error:

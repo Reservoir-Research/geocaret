@@ -3,8 +3,8 @@
 import ee
 # Import asset locations from config
 import sys
-sys.path.append("..")
-import lib
+#sys.path.append("..")
+import geocaret.lib as lib
 
 
 # ==============================================================================
