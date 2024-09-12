@@ -33,23 +33,33 @@ The dependencies are included in `requirements.txt`. You can install these depen
 pip install -r requirements.txt
 ```
 
-For more information, see installation guide in the `docs` for step by step instructions.
+The package can also be installed as a Docker image. For more information, see [installation instructions](https://reservoir-research.github.io/geocaret/installation/index.html)
 
 ## How to use GeoCARET
 
-Full instructions for installing and using GeoCARET can be found in the [docs folder](docs). Here you'll find detailed instructions to help you. Please, pay special attention to point 2. We shall explain it more deeply at the end of this section.
+Depending on the installation option, either as a Python package or as a Docker image, running GeoCARET requres a slightly different syntax. The details on how to run GeoCARET are provided [here](https://reservoir-research.github.io/geocaret/running_geocaret/index.html).
 
-1. [Register to use Google Earth Engine](docs/01_prerequisites.md) and prepare for running GeoCARET.
-2. Install GeoCARET on your computer. We recommend using the [GeoCARET Docker image](README.Docker.md). More technical users can also [Install GeoCARET and its dependencies](docs/02_install.md) if they prefer.
-3. [Prepare suitable input data](docs/03_input_data.md).
-4. [Run an analysis](docs/04_run.md).
-5. [Explore the outputs](docs/05A_output_data.md).
+# Demo
 
-Coming back to point **2**, the repository has two release branches: `main` and `geocaret_docker`. The release in `main` and the `geocaret_docker` branches can be used from within a Python virtual environment under the requirements that all package dependencies have been met. Alternatively, the users can switch to the `geocaret_docker` branch and build and run the Docker image. The Docker image will include the Python library and external software dependencies and eliminate the need to install them explicitly. For more information please navigate to [Install GeoCARET and its dependencies](docs/02_install.md) in `geocaret_docker` branch.
+We have provided a test data file that can be used to run GeoCARET. The file contains input data for analysis of a single reservoir. 
 
-# Documentation
+To run the demo using GeoCARET as a Python script, use the following syntax:
 
-Please see the `docs` folder for instructions on (i) how to install and run GeoCARET (ii) how to prepare the input data.
+```
+> python heet_cli.py tests/data/dams.csv test_project job01 standard
+
+```
+
+To run the demo using GeoCARET Docker container, type the following:
+
+```
+> docker compose run --rm geocaret python heet_cli.py tests/data/dams.csv test_project job01 standard
+
+```
+
+# Tests
+
+The repository contains unit tests which test the behaviour of individual components of the software. They can be executed using `pytest` by typing `pytest tests` in the root folder where the `tests` directory is located.
 
 # Disclaimer
 
