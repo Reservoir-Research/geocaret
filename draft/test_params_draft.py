@@ -7,7 +7,7 @@ ee.Initialize()
 # MGHR
 def test_terraclim_mghr():
     """Test that terraclim ro for a set of test values."""
-    from heet_params import terraclim_mghr
+    from params import terraclim_mghr
         
     GRID = ee.FeatureCollection("users/KamillaHarding/XHEET_TEST/terraclim_grid_22_01") 
     GRID_NULL = ee.FeatureCollection("users/KamillaHarding/XHEET_TEST/terraclim_null_grid_22") 

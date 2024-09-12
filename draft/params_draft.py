@@ -13,7 +13,7 @@ logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
 
 # define file handler and set formatter
-file_handler = logging.FileHandler('heet.log')
+file_handler = logging.FileHandler('geocaret.log')
 formatter    = logging.Formatter('%(asctime)s : %(levelname)s : %(name)s : %(message)s')
 file_handler.setFormatter(formatter)
 
