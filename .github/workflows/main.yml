@@ -1,0 +1,53 @@
+name: CI-PUSH-MAIN
+
+# We can specify which Github events will trigger a CI build
+on:
+  push:
+
+# now define a single job 'build' (but could define more)
+jobs:
+  build:
+
+    # we can also specify the OS to run tests on
+    runs-on: ubuntu-latest
+
+    # a job is a seq of steps
+    steps:
+
+    # Next we need to checkout out repository, and set up Python
+    # A 'name' is just an optional label shown in the log - helpful to clarify progress - and can be anything
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Python 3.8
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8
+
+    - name: Install Python dependencies
+      run: |
+        python3 -m pip install --upgrade pip
+        pip3 install -r requirements.txt
+        pip3 install -e .
+
+
+    - name: Make EE credentials         
+      run: |
+        echo "$GCLOUD_SERVICE_KEY" | base64 --decode > service_account_creds.json
+      env:
+        GCLOUD_SERVICE_KEY: ${{ secrets.GCLOUD_SERVICE_KEY }} 
+        
+                
+    - name: Test with PyTest
+      run: |
+        coverage run  -m pytest -v tests && coverage report -m
+      env:
+        CI_ROBOT_USER: ${{ secrets.CI_ROBOT_USER }}
+        GCLOUD_SERVICE_KEY: ${{ secrets.GCLOUD_SERVICE_KEY }}
+        GCLOUD_ACCOUNT_EMAIL: ${{ secrets.GCLOUD_ACCOUNT_EMAIL }}
+
+    - name: Delete secret file
+      run: |
+        rm "service_account_creds.json"
+      if: always()
+
