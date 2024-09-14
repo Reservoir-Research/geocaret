@@ -18,7 +18,9 @@ with your email address registered with Google Earth Engine.
 
 # Requirements
 
-Our software requires Python 3.8 or higher.
+Our software requires Python 3.8 or 3.9 only.
+
+We are currently experiencing errors when trying to run our software in Python 3.10 caused by `frictionless` package being limited to version 4.40.8 or lower which does not supporting the new hierarchy of classes in Python's collections module. We are working on resolving this issue.
 
 A number of additional python libraries are required to run the heet tool. These are listed in `requirements.txt`.
 
