@@ -1,0 +1,4 @@
+id,country,name,river,main_basin,dam_lat,dam_lon,dam_height,fsl_masl,power_capacity ,turbine_efficiency,plant_depth,future_dam_model,year_commissioned
+8,Myanmar,Bawgata,Bawgata,Sittaung,18.2556,96.8485,79.9,,160,,,TRUE,2020
+9,Myanmar,Belin,Bilin River,Bilin,17.5197,97.2435,131,,280,,,TRUE,2021
+10,Myanmar,Buywa (upper),Mon Chaung,Ayeyarwady,20.7661,94.0818,137.5,,150,,,TRUE,2019
