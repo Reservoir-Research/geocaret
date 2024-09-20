@@ -2,7 +2,7 @@ services:
   geocaret:
     build:
       context: .
-    image: geocaret
+    image: geocaret_image
     volumes:
       - ${GEOCARET_AUTH_PATH:-./auth}:/home/appuser/.config
       - ./data:/home/appuser/geocaret/data

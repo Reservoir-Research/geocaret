@@ -2,7 +2,7 @@
 
 # heet_cli.py requires Python 3.8
 ARG PYTHON_VERSION=3.8.18
-FROM python:${PYTHON_VERSION}-slim as base
+FROM python:${PYTHON_VERSION}-slim AS base
 
 # Prevents Python from writing pyc files.
 ENV PYTHONDONTWRITEBYTECODE=1
