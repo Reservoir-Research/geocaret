@@ -1,15 +1,25 @@
-name: "GeoCARET Build"
+name: "GeoCARET Documentation Build"
 
-on: [push, pull_request, workflow_dispatch]
+on:
+  push:
+    branches:
+      - release
+  pull_request:
+    branches:
+      - release
+  workflow_dispatch:
+    branches:
+      - release
 
 env:
-  # Only build on Python 3.8+
-  CIBW_BUILD: cp38-* cp39-* cp310-*
+  # Only build on Python 3.8
+  # environment variable controlling which Python versions and platforms to build wheels for, when using cibuildwheel.
+  CIBW_BUILD: cp38-*
   SERVICEACCOUNT: ${{ secrets.SERVICEACCOUNT }}
   SERVICEACCOUNT_EMAIL: ${{ secrets.SERVICEACCOUNT_EMAIL }}
   
-permissions: write-all
-  
+permissions:
+  contents: write
 
 jobs:
 
@@ -40,9 +50,9 @@ jobs:
 
       - name: Deploy docs 🚀
         uses: JamesIves/github-pages-deploy-action@3.7.1
-        # Only publish on main
-        if: github.ref == 'refs/heads/main'
+        # deployment will only happen when the workflow is triggered by a push or pull request to the release branch
+        if: github.ref == 'refs/heads/release'
         with:
           BRANCH: gh-pages # The branch the action should deploy to.
           FOLDER: docs/_build/html # The folder the action should deploy.
-          CLEAN: true # Automatically remove deleted files from the deploy branc
+          CLEAN: true # Automatically remove deleted files from the deploy branch
