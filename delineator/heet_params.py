@@ -855,8 +855,10 @@ def landcover_bysoil(land_ftc, landcover_analysis_file_str):
 
     key_to_int = {"0": 0, "1": 1, "null": 2}
 
-    def generate_codes(d):
-        group_no = ee.Number.int(ee.Dictionary(d).get("group"))
+    def generate_codes(d) -> ee.Number:
+        """ """
+        #group_no = ee.Number.int(ee.Dictionary(d).get("group"))
+        group_no = ee.Number(ee.Dictionary(d).get("group")).int()
         code = ee.Number(
             ee.Dictionary(ee.Dictionary(d).get("histogram"))
             .keys()
