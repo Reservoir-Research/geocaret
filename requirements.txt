@@ -2,7 +2,7 @@ pytest
 pytest-cov
 pandas
 frictionless<=4.40.8
-earthengine-api==0.1.408
+earthengine-api==0.1.383
 pyyaml
 polling2
 yaspin
