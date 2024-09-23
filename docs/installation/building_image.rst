@@ -8,28 +8,23 @@ Docker can be used to quickly & easily create a run-time environment for running
 
 To use GeoCARET with Docker you will need to build and run an instance of a Docker image - see :ref:`What are Docker Images`.
 
-Generally, you will not need to build your own image, as we provide a **pre-built image** that will be suitable for most purposes. See :ref:`Pulling GeoCARET Docker image` for accessing & using the pre-built GeoCARET docker image.
+Generally, you will not need to build your own image, as we provide a **pre-built image** as a package on GitHub, that will be suitable for most purposes. See :ref:`Pulling GeoCARET Docker image` for accessing & using the pre-built GeoCARET docker image.
 
-However, if you *do* want to build your own image, this guide will take you through the process.
+However, if you want to build your own image, this guide will take you through the process.
 
-As a prerequisite, you need to first install Docker Desktop - an application that provides an easy-to-use interface for working with Docker on a desktop operating system. 
+As a prerequisite, you need to first install Docker `Docker Desktop <https://www.docker.com/products/docker-desktop/>`_ - an application that provides an easy-to-use interface for working with Docker on a desktop operating system. Docker Desktop is free and can be installed on Windows, Mac & Linux computers, Please visit https://docs.docker.com/get-docker/ and follow the appropriate instructions for installing Docker Desktop on your computer. For Linux distributions, you can alternatively install `Docker Engine <https://docs.docker.com/engine/install/>`_. 
 
 .. note::
    This documentation assumes that the reader is comfortable working in the shell (linux/macOS) or PowerShell (Windows) and has
    basic experience with git_.
 
-Installing Docker Desktop (a prerequisite)
-------------------------------------------
-
-Docker Desktop is free and can be installed on Windows, Mac & Linux computers, Please visit https://docs.docker.com/get-docker/ and follow the appropriate instructions for installing Docker Desktop on your computer.
-
-Once installed, make sure Docker Desktop is running. To do so, open a shell prompt (Linux/macOS) or PowerShell (Windows) and type the following:
+Once installed, make sure that Docker is running. To do so, open a shell prompt (Linux/macOS) or PowerShell (Windows) and type the following:
 
 .. code-block:: bash
 
    docker -v
 
-This should return the version number of the installed version of docker. If you see an error message along the lines of *‘Cannot connect to the Docker daemon’* then restart Docker Desktop and try again.
+This should return the version number of the installed version of docker. If you see an error message along the lines of *‘Cannot connect to the Docker daemon’* then restart Docker Desktop / Docker Engine and try again.
 
 Building the GeoCARET Docker image
 ----------------------------------
@@ -52,7 +47,7 @@ Build the GeoCARET Docker Image
 
 Building the GeoCARET image is simple. Make sure that 
 
-* Docker Desktop is running
+* Docker Desktop / Docker Engine is running
 * You are in the root folder of the GeoCARET code base that you cloned in the previous step. 
 
 Then inside the root directory of GeoCARET, i.e. where `setup.py` is located, type:

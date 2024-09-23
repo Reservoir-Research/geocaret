@@ -10,12 +10,9 @@ What is Docker?
 ---------------
 
 Docker is a tool for packaging applications and their dependencies so they can run consistently on any computer. 
-Think of it like a shipping container for software. 
-Just as a shipping container can hold different items and be transported easily from place to place, Docker allows bundling application with everything they need to run and move it effortlessly between different computers or environments. 
-This ensures that the application behaves the same way no matter where it's used, making it easier to develop, test, and deploy software.
+Think of it like a shipping container for software. Just as a shipping container can hold different items and be transported easily from place to place, Docker allows bundling application with everything they need to run and move it effortlessly between different computers or environments. This ensures that the application behaves the same way no matter where it's used, making it easier to develop, test, and deploy software.
 
-In the context of our software, we create a Docker container with GeoCARET_ together with everything that it needs to run, i.e. the *Python Interpreter*, additional *Python libraries* aka. dependencies that the source-code relies on, and additional tools required by the Google Earth Engine (GEE_).
-Once the Docker container has been built, it can run on a computer without the user having to worry about unmet dependencies and library and Python version conflicts.
+In the context of our software, we "bundle" GeoCARET_ together with everything that it needs to run, i.e. the *Python Interpreter*, additional *Python libraries* aka. dependencies that the source-code relies on, and additional tools required by the Google Earth Engine (GEE_). Once the Docker image has been built, it can run as a container on a computer without the user having to worry about unmet dependencies and library and Python version conflicts.
 
 .. image:: ../_static/images/docker-explanation-cropped.png
   :width: 800
