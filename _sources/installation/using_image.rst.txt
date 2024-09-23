@@ -64,7 +64,7 @@ You can create this folder structure in a shell prompt (Linux or macOS), or Powe
    mkdir outputs
    mkdir auth
 
-You will also need to download the file `compose.yml <https://github.com/UoMResearchIT/geocaret/blob/geocaret_docker/compose.yml>`__ and save it inside your GeoCARET workspace folder (e.g. ``my_geocaret_work_folder`` in the above example). The final file structure (assuming your top folder is called *my_geocaret_work_folder*)should look as follows:
+You will also need to download the file `compose.yml <https://github.com/Reservoir-Research/geocaret/blob/release/compose.yml>`__ and save it inside your GeoCARET workspace folder (e.g. ``my_geocaret_work_folder`` in the above example). The final file structure (assuming your top folder is called *my_geocaret_work_folder*)should look as follows:
 
 ::
 
