@@ -80,11 +80,14 @@
 <li class="toctree-l2 current"><a class="current reference internal" href="#">About Docker</a></li>
 <li class="toctree-l2"><a class="reference internal" href="building_image.html">Building the GeoCARET Docker Image</a></li>
 <li class="toctree-l2"><a class="reference internal" href="using_image.html">Using the GeoCARET Docker Image</a></li>
-<li class="toctree-l2"><a class="reference internal" href="additional_steps.html">Additional Steps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="account_setup.html">Set up GEE and GCloud</a></li>
+<li class="toctree-l2"><a class="reference internal" href="access_to_assets.html">Access to Private Assets</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../algorithms.html">Algorithms</a></li>
 <li class="toctree-l1" x-data="{ expanded: $el.classList.contains('current') ? true : false }"><a :class="{ 'expanded' : expanded }" @click="expanded = !expanded" class="reference internal expandable" href="../running_geocaret/index.html">Running GeoCARET<button @click.prevent.stop="expanded = !expanded" type="button"><span class="sr-only"></span><svg fill="currentColor" height="18px" stroke="none" viewbox="0 0 24 24" width="18px" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg></button></a><ul x-show="expanded">
+<li class="toctree-l2"><a class="reference internal" href="../running_geocaret/first_run.html">First Run</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../running_geocaret/first_run.html#subsequent-runs">Subsequent Runs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../running_geocaret/running_python_package.html">Running the GeoCARET Script</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../running_geocaret/running_docker.html">Running the GeoCARET Docker Container</a></li>
 </ul>
@@ -131,11 +134,8 @@
 <section id="what-is-docker">
 <span id="id1"></span><h2>What is Docker?</h2>
 <p>Docker is a tool for packaging applications and their dependencies so they can run consistently on any computer.
-Think of it like a shipping container for software.
-Just as a shipping container can hold different items and be transported easily from place to place, Docker allows bundling application with everything they need to run and move it effortlessly between different computers or environments.
-This ensures that the application behaves the same way no matter where it’s used, making it easier to develop, test, and deploy software.</p>
-<p>In the context of our software, we create a Docker container with <a class="reference external" href="https://github.com/Reservoir-Research/geocaret">GeoCARET</a> together with everything that it needs to run, i.e. the <em>Python Interpreter</em>, additional <em>Python libraries</em> aka. dependencies that the source-code relies on, and additional tools required by the Google Earth Engine (<a class="reference external" href="https://earthengine.google.com/">GEE</a>).
-Once the Docker container has been built, it can run on a computer without the user having to worry about unmet dependencies and library and Python version conflicts.</p>
+Think of it like a shipping container for software. Just as a shipping container can hold different items and be transported easily from place to place, Docker allows bundling application with everything they need to run and move it effortlessly between different computers or environments. This ensures that the application behaves the same way no matter where it’s used, making it easier to develop, test, and deploy software.</p>
+<p>In the context of our software, we “bundle” <a class="reference external" href="https://github.com/Reservoir-Research/geocaret">GeoCARET</a> together with everything that it needs to run, i.e. the <em>Python Interpreter</em>, additional <em>Python libraries</em> aka. dependencies that the source-code relies on, and additional tools required by the Google Earth Engine (<a class="reference external" href="https://earthengine.google.com/">GEE</a>). Once the Docker image has been built, it can run as a container on a computer without the user having to worry about unmet dependencies and library and Python version conflicts.</p>
 <a class="reference internal image-reference" href="../_images/docker-explanation-cropped.png"><img alt="Dockerising GeoCARET" src="../_images/docker-explanation-cropped.png" style="width: 800px;"/>
 </a>
 </section>

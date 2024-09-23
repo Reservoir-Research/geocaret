@@ -19,7 +19,7 @@
 <link href="../search.html" rel="search" title="Search"/>
 <link href="../genindex.html" rel="index" title="Index"/>
 <link href="running_docker.html" rel="next" title="Running the GeoCARET Docker Container"/>
-<link href="index.html" rel="prev" title="Running GeoCARET"/>
+<link href="first_run.html" rel="prev" title="First Run"/>
 <script>
     <!-- Prevent Flash of wrong theme -->
       const userPreference = localStorage.getItem('darkMode');
@@ -80,11 +80,14 @@
 <li class="toctree-l2"><a class="reference internal" href="../installation/using_docker.html">About Docker</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation/building_image.html">Building the GeoCARET Docker Image</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation/using_image.html">Using the GeoCARET Docker Image</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../installation/additional_steps.html">Additional Steps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation/account_setup.html">Set up GEE and GCloud</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation/access_to_assets.html">Access to Private Assets</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../algorithms.html">Algorithms</a></li>
 <li class="toctree-l1 current" x-data="{ expanded: $el.classList.contains('current') ? true : false }"><a :class="{ 'expanded' : expanded }" @click="expanded = !expanded" class="reference internal expandable" href="index.html">Running GeoCARET<button @click.prevent.stop="expanded = !expanded" type="button"><span class="sr-only"></span><svg fill="currentColor" height="18px" stroke="none" viewbox="0 0 24 24" width="18px" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg></button></a><ul class="current" x-show="expanded">
+<li class="toctree-l2"><a class="reference internal" href="first_run.html">First Run</a></li>
+<li class="toctree-l2"><a class="reference internal" href="first_run.html#subsequent-runs">Subsequent Runs</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Running the GeoCARET Script</a></li>
 <li class="toctree-l2"><a class="reference internal" href="running_docker.html">Running the GeoCARET Docker Container</a></li>
 </ul>
@@ -160,14 +163,7 @@ Assuming your Earth Engine project is called <strong>my-ee-project</strong>, you
 <p class="admonition-title">Hint</p>
 <p>Needed when running GeoCARET for the first time only.</p>
 </div>
-<p>If this is the first time you’ve run the GeoCARET tool, you will be asked to authenticate with Google’s cloud services:</p>
-<ol class="arabic simple">
-<li><p>You’ll be shown a URL, which you should copy and paste into a web browser. In Windows PowerShell you can hold down the <code class="docutils literal notranslate"><span class="pre">Ctrl</span></code> key and click the URL to open it automatically.</p></li>
-<li><p>Follow the instructions to authenticate with Google</p></li>
-<li><p>After authenticating, you’ll be given a token, which you should paste back into the GeoCARET tool command line.</p></li>
-<li><p>Press enter to start the analysis.</p></li>
-</ol>
-<p>Once authenticated the GeoCARET analysis will run. This could take several minutes to complete.</p>
+<p>If this is the first time you’ve run the GeoCARET tool, you will be asked to authenticate with Google’s cloud services. See <a class="reference internal" href="first_run.html"><span class="doc">First Run</span></a> for details.</p>
 </section>
 <section id="results-and-visualization">
 <h3>Results and Visualization</h3>
@@ -272,11 +268,11 @@ All examples below assume that the command prompt points to the root (main) fold
 </section>
 </div><div class="flex justify-between items-center pt-6 mt-12 border-t border-border gap-4">
 <div class="mr-auto">
-<a class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-input hover:bg-accent hover:text-accent-foreground py-2 px-4" href="index.html">
+<a class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-input hover:bg-accent hover:text-accent-foreground py-2 px-4" href="first_run.html">
 <svg class="mr-2 h-4 w-4" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
 <polyline points="15 18 9 12 15 6"></polyline>
 </svg>
-        Running GeoCARET
+        First Run
       </a>
 </div>
 <div class="ml-auto">

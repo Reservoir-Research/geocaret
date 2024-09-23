@@ -19,13 +19,12 @@ To install and run GeoCARET_ on the command line, you will need to
 5. Request access to the GeoCARET_ private assets.
 6. Run the GeoCARET_ script using the correct command line syntax.
 
-This document provides a guide to steps **1** -- **3**. Steps **4** and **5** are described in :doc:`additional_steps`.
-Step **6** is described in :doc:`../running_geocaret/running_python_package`.
+This document provides a guide to steps **1** -- **3**. Steps **4** and **5** are described in :doc:`account_setup` and :doc:`access_to_assets`, respectively. Step **6** is described in :doc:`../running_geocaret/running_python_package`.
 
 1. Installing Python
 --------------------
 
-GeoCARET_ requires **Python 3.8 or newer**.
+GeoCARET_ requires **Python 3.8**.
 
 Windows Machines
 ~~~~~~~~~~~~~~~~
@@ -185,9 +184,4 @@ This tool requires the ``gcloud`` command line tool. A working Gcloud installati
 Final Steps (4 & 5)
 -------------------
 
-To complete the installation, you need to set up a Google Cloud project and request access to some Private Assets. The instructions on how to do this can be found in :doc:`additional_steps`.
-
-
-
-
-
+To complete the installation, you need to set up a Google Cloud project and request access to some Private Assets. The instructions on how to do this can be found in :doc:`account_setup` and :doc:`access_to_assets`.

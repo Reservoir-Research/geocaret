@@ -18,7 +18,7 @@
 <link href="../_static/css/custom.css?v=38484ab1" rel="stylesheet" type="text/css"/>
 <link href="../search.html" rel="search" title="Search"/>
 <link href="../genindex.html" rel="index" title="Index"/>
-<link href="additional_steps.html" rel="next" title="Additional Steps"/>
+<link href="account_setup.html" rel="next" title="Set up GEE and GCloud"/>
 <link href="building_image.html" rel="prev" title="Building the GeoCARET Docker Image"/>
 <script>
     <!-- Prevent Flash of wrong theme -->
@@ -80,11 +80,14 @@
 <li class="toctree-l2"><a class="reference internal" href="using_docker.html">About Docker</a></li>
 <li class="toctree-l2"><a class="reference internal" href="building_image.html">Building the GeoCARET Docker Image</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Using the GeoCARET Docker Image</a></li>
-<li class="toctree-l2"><a class="reference internal" href="additional_steps.html">Additional Steps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="account_setup.html">Set up GEE and GCloud</a></li>
+<li class="toctree-l2"><a class="reference internal" href="access_to_assets.html">Access to Private Assets</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../algorithms.html">Algorithms</a></li>
 <li class="toctree-l1" x-data="{ expanded: $el.classList.contains('current') ? true : false }"><a :class="{ 'expanded' : expanded }" @click="expanded = !expanded" class="reference internal expandable" href="../running_geocaret/index.html">Running GeoCARET<button @click.prevent.stop="expanded = !expanded" type="button"><span class="sr-only"></span><svg fill="currentColor" height="18px" stroke="none" viewbox="0 0 24 24" width="18px" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg></button></a><ul x-show="expanded">
+<li class="toctree-l2"><a class="reference internal" href="../running_geocaret/first_run.html">First Run</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../running_geocaret/first_run.html#subsequent-runs">Subsequent Runs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../running_geocaret/running_python_package.html">Running the GeoCARET Script</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../running_geocaret/running_docker.html">Running the GeoCARET Docker Container</a></li>
 </ul>
@@ -130,12 +133,12 @@
 <h1>Using the GeoCARET Docker Image</h1>
 <p>The GeoCARET Docker image is the simplest way to run GeoCARET. This guide will take you through the required steps:</p>
 <ol class="arabic">
-<li><p>Install Docker Desktop.</p></li>
+<li><p>Install Docker Desktop / Docker Engine (Linux only).</p></li>
 <li><p>Pull the GeoCARET Docker image.</p></li>
 <li><p>Use Docker compose to run GeoCARET.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>This documentation assumes that the reader: (1) Understands how to use Google Earth Engine (GEE) and has a properly configured GEE cloud project. See <a class="reference internal" href="additional_steps.html"><span class="doc">Additional Steps</span></a>. (2) Understands how to use the GeoCARET tool. See <a class="reference internal" href="../ghg_emissions/input_data.html"><span class="doc">Preparing Inputs</span></a> &amp; <a class="reference internal" href="../running_geocaret/running_python_package.html"><span class="doc">Running the GeoCARET Script</span></a> for full details. (3) Has a basic familiarity with the shell (macOS or linux) or PowerShell (Windows).</p>
+<p>This documentation assumes that the reader: (1) Understands how to use Google Earth Engine (GEE) and has a properly configured GEE cloud project. See <a class="reference internal" href="access_to_assets.html"><span class="doc">Access to Private Assets</span></a>. (2) Understands how to use the GeoCARET tool. See <a class="reference internal" href="../ghg_emissions/input_data.html"><span class="doc">Preparing Inputs</span></a> &amp; <a class="reference internal" href="../running_geocaret/running_python_package.html"><span class="doc">Running the GeoCARET Script</span></a> for full details. (3) Has a basic familiarity with the shell (macOS or linux) or PowerShell (Windows).</p>
 </div>
 </li>
 </ol>
@@ -144,8 +147,8 @@
 <p>If you already have Docker installed on your computer then skip to the next section, <a class="reference internal" href="#pull-the-geocaret-docker-image">Pull the GeoCARET Docker image</a>.</p>
 <section id="installing-docker-desktop">
 <h3>Installing Docker Desktop</h3>
-<p>Docker Desktop is free and can be installed on Windows, Mac &amp; Linux computers, Please visit <a class="reference external" href="https://docs.docker.com/get-docker/">https://docs.docker.com/get-docker/</a> and follow the appropriate instructions for installing Docker Desktop on your computer.</p>
-<p>Once installed, make sure Docker Desktop is running, and open a shell prompt (Linux/macOS) or PowerShell (Windows) and typing the following:</p>
+<p>Docker Desktop is free and can be installed on Windows, Mac &amp; Linux computers, Please visit <a class="reference external" href="https://docs.docker.com/get-docker/">https://docs.docker.com/get-docker/</a> and follow the appropriate instructions for installing Docker Desktop on your computer. For Linux distributions, you can alternatively install <a class="reference external" href="https://docs.docker.com/engine/install/">Docker Engine</a>.
+Once installed, make sure Docker is running, and open a shell prompt (Linux/macOS) or PowerShell (Windows) and typing the following:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1">docker<span class="w"> </span>-v
 </span></code></pre></div>
 </div>
@@ -154,12 +157,8 @@
 </section>
 <section id="pull-the-geocaret-docker-image">
 <span id="pulling-geocaret-docker-image"></span><h2>Pull the GeoCARET Docker image</h2>
-<div class="admonition attention">
-<p class="admonition-title">Attention</p>
-<p>The GeoCARET image is not hosted as a package yet. Update a.s.a.p. You will need to build the Docker image yourself for now.</p>
-</div>
 <p>Open a shell prompt (macOS/Linux) or PowerShell (Windows) and type:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1">docker<span class="w"> </span>pull<span class="w"> </span>ghcr.io/Reservoir-Research/geocaret
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1">docker<span class="w"> </span>pull<span class="w"> </span>ghcr.io/reservoir-research/geocaret
 </span></code></pre></div>
 </div>
 </section>
@@ -168,13 +167,13 @@
 <section id="prepare-your-workspace">
 <h3>Prepare your workspace</h3>
 <p>Docker compose is a tool for simplifying the execution of docker containers. We’ll use it to run GeoCARET.</p>
-<p>First you’ll need to create a new folder for your GeoCARET workspace, and then inside this you must then create three sub-folders:</p>
+<p>First you’ll need to create a new (root) folder for your GeoCARET workspace where you must create three sub-folders:</p>
 <ul class="simple">
 <li><p><strong>data</strong>, which will hold your input data files.</p></li>
 <li><p><strong>outputs</strong>, which will hold the analyses output files</p></li>
 <li><p><strong>auth</strong>, which will hold your <a class="reference external" href="https://earthengine.google.com/">GEE</a> authentication credentials</p></li>
 </ul>
-<p>For example open a shell prompt if on Linux or macOS, or PowerShell if on Windows, and type:</p>
+<p>You can create this folder structure in a shell prompt (Linux or macOS), or PowerShell if on Windows, by typing:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1">mkdir<span class="w"> </span>my_geocaret_work_folder
 </span><span id="line-2"><span class="nb">cd</span><span class="w"> </span>my_geocaret_work_folder
 </span><span id="line-3">mkdir<span class="w"> </span>data
@@ -182,7 +181,14 @@
 </span><span id="line-5">mkdir<span class="w"> </span>auth
 </span></code></pre></div>
 </div>
-<p>You will also need to download the file <a class="reference external" href="https://github.com/UoMResearchIT/geocaret/blob/geocaret_docker/compose.yml">compose.yml</a> and save it inside your GeoCARET workspace folder (e.g. <code class="docutils literal notranslate"><span class="pre">my_geocaret_work_folder</span></code> in the above example).</p>
+<p>You will also need to download the file <a class="reference external" href="https://github.com/UoMResearchIT/geocaret/blob/geocaret_docker/compose.yml">compose.yml</a> and save it inside your GeoCARET workspace folder (e.g. <code class="docutils literal notranslate"><span class="pre">my_geocaret_work_folder</span></code> in the above example). The final file structure (assuming your top folder is called <em>my_geocaret_work_folder</em>)should look as follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><code><span id="line-1">my_geocaret_work_folder
+</span><span id="line-2">├── data
+</span><span id="line-3">├── outputs
+</span><span id="line-4">├── auth
+</span><span id="line-5">└── compose.yml
+</span></code></pre></div>
+</div>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
 <p><strong>Linux users &amp; directory permissions</strong></p>
@@ -206,10 +212,10 @@ If you use Linux on a personal laptop, then it is very likely your user account 
 </section>
 <section id="running-geocaret-with-docker-compose">
 <h3>Running GeoCARET with <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">compose</span></code></h3>
-<p>To run the GeoCARET Docker container, please read the instructions in <a class="reference internal" href="../running_geocaret/running_docker.html"><span class="doc">Running the GeoCARET Docker Container</span></a>.</p>
+<p>To run the GeoCARET Docker container, please read the instructions in <a class="reference internal" href="../running_geocaret/running_docker.html"><span class="doc">Running the GeoCARET Docker Container</span></a>. When you run GeoCARET for the first time, you will need to authenticate access to Earth Engine manually. The detailed information can be found in <a class="reference internal" href="../running_geocaret/first_run.html"><span class="doc">First Run</span></a>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Please make sure you complete the additional installation steps first: -see <a class="reference internal" href="additional_steps.html"><span class="doc">Additional Steps</span></a>.</p>
+<p>Please make sure you complete the additional installation steps first and set up your Google account: -see <a class="reference internal" href="access_to_assets.html"><span class="doc">Access to Private Assets</span></a> and <a class="reference internal" href="account_setup.html"><span class="doc">Set up GEE and GCloud</span></a>.</p>
 </div>
 </section>
 </section>
@@ -224,8 +230,8 @@ If you use Linux on a personal laptop, then it is very likely your user account 
       </a>
 </div>
 <div class="ml-auto">
-<a class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-input hover:bg-accent hover:text-accent-foreground py-2 px-4" href="additional_steps.html">
-        Additional Steps
+<a class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-input hover:bg-accent hover:text-accent-foreground py-2 px-4" href="account_setup.html">
+        Set up GEE and GCloud
         <svg class="ml-2 h-4 w-4" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
 <polyline points="9 18 15 12 9 6"></polyline>
 </svg>

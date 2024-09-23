@@ -80,11 +80,14 @@
 <li class="toctree-l2"><a class="reference internal" href="../installation/using_docker.html">About Docker</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation/building_image.html">Building the GeoCARET Docker Image</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation/using_image.html">Using the GeoCARET Docker Image</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../installation/additional_steps.html">Additional Steps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation/account_setup.html">Set up GEE and GCloud</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation/access_to_assets.html">Access to Private Assets</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../algorithms.html">Algorithms</a></li>
 <li class="toctree-l1 current" x-data="{ expanded: $el.classList.contains('current') ? true : false }"><a :class="{ 'expanded' : expanded }" @click="expanded = !expanded" class="reference internal expandable" href="index.html">Running GeoCARET<button @click.prevent.stop="expanded = !expanded" type="button"><span class="sr-only"></span><svg fill="currentColor" height="18px" stroke="none" viewbox="0 0 24 24" width="18px" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg></button></a><ul class="current" x-show="expanded">
+<li class="toctree-l2"><a class="reference internal" href="first_run.html">First Run</a></li>
+<li class="toctree-l2"><a class="reference internal" href="first_run.html#subsequent-runs">Subsequent Runs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="running_python_package.html">Running the GeoCARET Script</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Running the GeoCARET Docker Container</a></li>
 </ul>
@@ -153,13 +156,7 @@
 <p class="admonition-title">Hint</p>
 <p>Needed when running GeoCARET for the first time only.</p>
 </div>
-<p>If this is the first time you’ve run the GeoCARET tool, you will be asked to authenticate with Google’s cloud services:</p>
-<ol class="arabic simple">
-<li><p>You’ll be shown a URL, which you should copy and paste into a web browser. In Windows PowerShell you can hold down the <code class="docutils literal notranslate"><span class="pre">Ctrl</span></code> key and click the URL to open it automatically.</p></li>
-<li><p>Follow the instructions to authenticate with Google</p></li>
-<li><p>After authenticating, you’ll be given a token, which you should paste back into the GeoCARET tool command line.</p></li>
-<li><p>Press enter to start the analysis.</p></li>
-</ol>
+<p>If this is the first time you’ve run the GeoCARET tool, you will be asked to authenticate with Google’s cloud services. See <a class="reference internal" href="first_run.html"><span class="doc">First Run</span></a> for details.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Your authentication details will be cached in the <code class="docutils literal notranslate"><span class="pre">auth</span></code> sub-folder inside the GeoCARET workspace folder. When you

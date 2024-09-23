@@ -31,14 +31,8 @@ Google Cloud authentication
 .. hint::
    Needed when running GeoCARET for the first time only.
 
-If this is the first time you’ve run the GeoCARET tool, you will be asked to authenticate with Google’s cloud services:
+If this is the first time you’ve run the GeoCARET tool, you will be asked to authenticate with Google’s cloud services. See :doc:`first_run` for details.
 
-1. You’ll be shown a URL, which you should copy and paste into a web browser. In Windows PowerShell you can hold down the ``Ctrl`` key and click the URL to open it automatically.
-2. Follow the instructions to authenticate with Google
-3. After authenticating, you’ll be given a token, which you should paste back into the GeoCARET tool command line.
-4. Press enter to start the analysis.
-
-..
 .. note::
    Your authentication details will be cached in the ``auth`` sub-folder inside the GeoCARET workspace folder. When you
    subsequently run GeoCARET from this folder, you will not need to reauthenticate.

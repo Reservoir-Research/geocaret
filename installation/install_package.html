@@ -80,11 +80,14 @@
 <li class="toctree-l2"><a class="reference internal" href="using_docker.html">About Docker</a></li>
 <li class="toctree-l2"><a class="reference internal" href="building_image.html">Building the GeoCARET Docker Image</a></li>
 <li class="toctree-l2"><a class="reference internal" href="using_image.html">Using the GeoCARET Docker Image</a></li>
-<li class="toctree-l2"><a class="reference internal" href="additional_steps.html">Additional Steps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="account_setup.html">Set up GEE and GCloud</a></li>
+<li class="toctree-l2"><a class="reference internal" href="access_to_assets.html">Access to Private Assets</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../algorithms.html">Algorithms</a></li>
 <li class="toctree-l1" x-data="{ expanded: $el.classList.contains('current') ? true : false }"><a :class="{ 'expanded' : expanded }" @click="expanded = !expanded" class="reference internal expandable" href="../running_geocaret/index.html">Running GeoCARET<button @click.prevent.stop="expanded = !expanded" type="button"><span class="sr-only"></span><svg fill="currentColor" height="18px" stroke="none" viewbox="0 0 24 24" width="18px" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg></button></a><ul x-show="expanded">
+<li class="toctree-l2"><a class="reference internal" href="../running_geocaret/first_run.html">First Run</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../running_geocaret/first_run.html#subsequent-runs">Subsequent Runs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../running_geocaret/running_python_package.html">Running the GeoCARET Script</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../running_geocaret/running_docker.html">Running the GeoCARET Docker Container</a></li>
 </ul>
@@ -141,11 +144,10 @@ Experience with Python is advantageous but not essential.</p>
 <li><p>Request access to the <a class="reference external" href="https://github.com/Reservoir-Research/geocaret">GeoCARET</a> private assets.</p></li>
 <li><p>Run the <a class="reference external" href="https://github.com/Reservoir-Research/geocaret">GeoCARET</a> script using the correct command line syntax.</p></li>
 </ol>
-<p>This document provides a guide to steps <strong>1</strong> – <strong>3</strong>. Steps <strong>4</strong> and <strong>5</strong> are described in <a class="reference internal" href="additional_steps.html"><span class="doc">Additional Steps</span></a>.
-Step <strong>6</strong> is described in <a class="reference internal" href="../running_geocaret/running_python_package.html"><span class="doc">Running the GeoCARET Script</span></a>.</p>
+<p>This document provides a guide to steps <strong>1</strong> – <strong>3</strong>. Steps <strong>4</strong> and <strong>5</strong> are described in <a class="reference internal" href="account_setup.html"><span class="doc">Set up GEE and GCloud</span></a> and <a class="reference internal" href="access_to_assets.html"><span class="doc">Access to Private Assets</span></a>, respectively. Step <strong>6</strong> is described in <a class="reference internal" href="../running_geocaret/running_python_package.html"><span class="doc">Running the GeoCARET Script</span></a>.</p>
 <section id="installing-python">
 <h2>1. Installing Python</h2>
-<p><a class="reference external" href="https://github.com/Reservoir-Research/geocaret">GeoCARET</a> requires <strong>Python 3.8 or newer</strong>.</p>
+<p><a class="reference external" href="https://github.com/Reservoir-Research/geocaret">GeoCARET</a> requires <strong>Python 3.8</strong>.</p>
 <section id="windows-machines">
 <h3>Windows Machines</h3>
 <p>In order to install <a class="reference external" href="https://github.com/Reservoir-Research/geocaret">GeoCARET</a> on Windows you need to have <strong>Python 3.8</strong> installed on your machine.
@@ -299,7 +301,7 @@ Instead, we let the user choose the method they’re most comfortable with and c
 </section>
 <section id="final-steps-4-5">
 <h2>Final Steps (4 &amp; 5)</h2>
-<p>To complete the installation, you need to set up a Google Cloud project and request access to some Private Assets. The instructions on how to do this can be found in <a class="reference internal" href="additional_steps.html"><span class="doc">Additional Steps</span></a>.</p>
+<p>To complete the installation, you need to set up a Google Cloud project and request access to some Private Assets. The instructions on how to do this can be found in <a class="reference internal" href="account_setup.html"><span class="doc">Set up GEE and GCloud</span></a> and <a class="reference internal" href="access_to_assets.html"><span class="doc">Access to Private Assets</span></a>.</p>
 </section>
 </section>
 </div><div class="flex justify-between items-center pt-6 mt-12 border-t border-border gap-4">

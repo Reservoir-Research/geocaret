@@ -80,11 +80,14 @@
 <li class="toctree-l2"><a class="reference internal" href="using_docker.html">About Docker</a></li>
 <li class="toctree-l2"><a class="reference internal" href="building_image.html">Building the GeoCARET Docker Image</a></li>
 <li class="toctree-l2"><a class="reference internal" href="using_image.html">Using the GeoCARET Docker Image</a></li>
-<li class="toctree-l2"><a class="reference internal" href="additional_steps.html">Additional Steps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="account_setup.html">Set up GEE and GCloud</a></li>
+<li class="toctree-l2"><a class="reference internal" href="access_to_assets.html">Access to Private Assets</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../algorithms.html">Algorithms</a></li>
 <li class="toctree-l1" x-data="{ expanded: $el.classList.contains('current') ? true : false }"><a :class="{ 'expanded' : expanded }" @click="expanded = !expanded" class="reference internal expandable" href="../running_geocaret/index.html">Running GeoCARET<button @click.prevent.stop="expanded = !expanded" type="button"><span class="sr-only"></span><svg fill="currentColor" height="18px" stroke="none" viewbox="0 0 24 24" width="18px" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg></button></a><ul x-show="expanded">
+<li class="toctree-l2"><a class="reference internal" href="../running_geocaret/first_run.html">First Run</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../running_geocaret/first_run.html#subsequent-runs">Subsequent Runs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../running_geocaret/running_python_package.html">Running the GeoCARET Script</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../running_geocaret/running_docker.html">Running the GeoCARET Docker Container</a></li>
 </ul>
@@ -135,18 +138,17 @@ All of the above steps are described in detail in the <a class="reference intern
 </section>
 <section id="installation-using-docker-option-2">
 <h2>Installation using Docker - Option 2</h2>
-<p>We also provide an alternative, easier installation option, that uses Docker containarization.
+<p>We also provide an alternative installation option from a Docker image.
 You can find more information in <a class="reference internal" href="using_docker.html#what-is-docker"><span class="std std-ref">What is Docker?</span></a> and subseqent chapters - <a class="reference internal" href="building_image.html"><span class="doc">Building the GeoCARET Docker Image</span></a> and <a class="reference internal" href="using_image.html"><span class="doc">Using the GeoCARET Docker Image</span></a>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Installing <a class="reference external" href="https://github.com/Reservoir-Research/geocaret">GeoCARET</a> with Docker requires prior installation of the <code class="docutils literal notranslate"><span class="pre">Docker</span> <span class="pre">Desktop</span></code> software - see <a class="reference internal" href="building_image.html"><span class="doc">Building the GeoCARET Docker Image</span></a> and <a class="reference internal" href="using_image.html"><span class="doc">Using the GeoCARET Docker Image</span></a> for details.</p>
+<p>Installing <a class="reference external" href="https://github.com/Reservoir-Research/geocaret">GeoCARET</a> with Docker requires prior installation of <code class="docutils literal notranslate"><span class="pre">Docker</span> <span class="pre">Desktop</span></code> - see <a class="reference internal" href="building_image.html"><span class="doc">Building the GeoCARET Docker Image</span></a> and <a class="reference internal" href="using_image.html"><span class="doc">Using the GeoCARET Docker Image</span></a> for details.</p>
 </div>
 </section>
 <section id="additional-steps">
 <h2>Additional Steps</h2>
-<p>Regardless of the installation method, whether as a standalone <em>Python</em> package or via a <em>Docker container</em>, the users need to create an account on <a class="reference external" href="https://cloud.google.com/?hl=en">Google Cloud</a> and set up a project folder before being able to use <a class="reference external" href="https://github.com/Reservoir-Research/geocaret">GeoCARET</a>.
-The users will also need permission to access private assets that are required for running the computations with <a class="reference external" href="https://github.com/Reservoir-Research/geocaret">GeoCARET</a>.
-These steps are outlined in detail in <a class="reference internal" href="additional_steps.html"><span class="doc">Additional Steps</span></a>.</p>
+<p>Regardless of the installation method, the users need to create a Google Account, set up a project in Google Cloud, and request and obtain permissions for reading private assets (GIS layers) required for running some of the computations in <a class="reference external" href="https://github.com/Reservoir-Research/geocaret">GeoCARET</a>.</p>
+<p>These steps are outlined in detail in <a class="reference internal" href="account_setup.html"><span class="doc">Set up GEE and GCloud</span></a> and <a class="reference internal" href="access_to_assets.html"><span class="doc">Access to Private Assets</span></a>.</p>
 
 </section>
 </section>

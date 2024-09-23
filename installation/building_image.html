@@ -80,11 +80,14 @@
 <li class="toctree-l2"><a class="reference internal" href="using_docker.html">About Docker</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Building the GeoCARET Docker Image</a></li>
 <li class="toctree-l2"><a class="reference internal" href="using_image.html">Using the GeoCARET Docker Image</a></li>
-<li class="toctree-l2"><a class="reference internal" href="additional_steps.html">Additional Steps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="account_setup.html">Set up GEE and GCloud</a></li>
+<li class="toctree-l2"><a class="reference internal" href="access_to_assets.html">Access to Private Assets</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../algorithms.html">Algorithms</a></li>
 <li class="toctree-l1" x-data="{ expanded: $el.classList.contains('current') ? true : false }"><a :class="{ 'expanded' : expanded }" @click="expanded = !expanded" class="reference internal expandable" href="../running_geocaret/index.html">Running GeoCARET<button @click.prevent.stop="expanded = !expanded" type="button"><span class="sr-only"></span><svg fill="currentColor" height="18px" stroke="none" viewbox="0 0 24 24" width="18px" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg></button></a><ul x-show="expanded">
+<li class="toctree-l2"><a class="reference internal" href="../running_geocaret/first_run.html">First Run</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../running_geocaret/first_run.html#subsequent-runs">Subsequent Runs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../running_geocaret/running_python_package.html">Running the GeoCARET Script</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../running_geocaret/running_docker.html">Running the GeoCARET Docker Container</a></li>
 </ul>
@@ -130,23 +133,19 @@
 <h1>Building the GeoCARET Docker Image</h1>
 <p>Docker can be used to quickly &amp; easily create a run-time environment for running <a class="reference external" href="https://github.com/Reservoir-Research/geocaret">GeoCARET</a>, without having to install the correct version of <strong>Python</strong>, <strong>gcloud CLI</strong>, or <strong>other required dependencies</strong>.</p>
 <p>To use GeoCARET with Docker you will need to build and run an instance of a Docker image - see <a class="reference internal" href="using_docker.html#what-are-docker-images"><span class="std std-ref">Docker Images</span></a>.</p>
-<p>Generally, you will not need to build your own image, as we provide a <strong>pre-built image</strong> that will be suitable for most purposes. See <a class="reference internal" href="using_image.html#pulling-geocaret-docker-image"><span class="std std-ref">Pull the GeoCARET Docker image</span></a> for accessing &amp; using the pre-built GeoCARET docker image.</p>
-<p>However, if you <em>do</em> want to build your own image, this guide will take you through the process.</p>
-<p>As a prerequisite, you need to first install Docker Desktop - an application that provides an easy-to-use interface for working with Docker on a desktop operating system.</p>
+<p>Generally, you will not need to build your own image, as we provide a <strong>pre-built image</strong> as a package on GitHub, that will be suitable for most purposes. See <a class="reference internal" href="using_image.html#pulling-geocaret-docker-image"><span class="std std-ref">Pull the GeoCARET Docker image</span></a> for accessing &amp; using the pre-built GeoCARET docker image.</p>
+<p>However, if you want to build your own image, this guide will take you through the process.</p>
+<p>As a prerequisite, you need to first install Docker <a class="reference external" href="https://www.docker.com/products/docker-desktop/">Docker Desktop</a> - an application that provides an easy-to-use interface for working with Docker on a desktop operating system. Docker Desktop is free and can be installed on Windows, Mac &amp; Linux computers, Please visit <a class="reference external" href="https://docs.docker.com/get-docker/">https://docs.docker.com/get-docker/</a> and follow the appropriate instructions for installing Docker Desktop on your computer. For Linux distributions, you can alternatively install <a class="reference external" href="https://docs.docker.com/engine/install/">Docker Engine</a>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>This documentation assumes that the reader is comfortable working in the shell (linux/macOS) or PowerShell (Windows) and has
 basic experience with <a class="reference external" href="https://git-scm.com/book/en/v2/Getting-Started-What-is-Git%3F">git</a>.</p>
 </div>
-<section id="installing-docker-desktop-a-prerequisite">
-<h2>Installing Docker Desktop (a prerequisite)</h2>
-<p>Docker Desktop is free and can be installed on Windows, Mac &amp; Linux computers, Please visit <a class="reference external" href="https://docs.docker.com/get-docker/">https://docs.docker.com/get-docker/</a> and follow the appropriate instructions for installing Docker Desktop on your computer.</p>
-<p>Once installed, make sure Docker Desktop is running. To do so, open a shell prompt (Linux/macOS) or PowerShell (Windows) and type the following:</p>
+<p>Once installed, make sure that Docker is running. To do so, open a shell prompt (Linux/macOS) or PowerShell (Windows) and type the following:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1">docker<span class="w"> </span>-v
 </span></code></pre></div>
 </div>
-<p>This should return the version number of the installed version of docker. If you see an error message along the lines of <em>‘Cannot connect to the Docker daemon’</em> then restart Docker Desktop and try again.</p>
-</section>
+<p>This should return the version number of the installed version of docker. If you see an error message along the lines of <em>‘Cannot connect to the Docker daemon’</em> then restart Docker Desktop / Docker Engine and try again.</p>
 <section id="id1">
 <h2>Building the GeoCARET Docker image</h2>
 <section id="clone-the-geocaret-github-repository">
@@ -161,7 +160,7 @@ basic experience with <a class="reference external" href="https://git-scm.com/bo
 <span id="build-the-geocaret-docker-image-1"></span><h3>Build the GeoCARET Docker Image</h3>
 <p>Building the GeoCARET image is simple. Make sure that</p>
 <ul class="simple">
-<li><p>Docker Desktop is running</p></li>
+<li><p>Docker Desktop / Docker Engine is running</p></li>
 <li><p>You are in the root folder of the GeoCARET code base that you cloned in the previous step.</p></li>
 </ul>
 <p>Then inside the root directory of GeoCARET, i.e. where <cite>setup.py</cite> is located, type:</p>
@@ -193,7 +192,6 @@ basic experience with <a class="reference external" href="https://git-scm.com/bo
 </div></div><aside class="hidden text-sm xl:block" id="right-sidebar">
 <div class="sticky top-16 -mt-10 max-h-[calc(100vh-5rem)] overflow-y-auto pt-6 space-y-2"><p class="font-medium">On this page</p>
 <ul>
-<li><a :data-current="activeSection === '#installing-docker-desktop-a-prerequisite'" class="reference internal" href="#installing-docker-desktop-a-prerequisite">Installing Docker Desktop (a prerequisite)</a></li>
 <li><a :data-current="activeSection === '#id1'" class="reference internal" href="#id1">Building the GeoCARET Docker image</a><ul>
 <li><a :data-current="activeSection === '#clone-the-geocaret-github-repository'" class="reference internal" href="#clone-the-geocaret-github-repository">Clone the GeoCARET GitHub repository</a></li>
 <li><a :data-current="activeSection === '#build-the-geocaret-docker-image'" class="reference internal" href="#build-the-geocaret-docker-image">Build the GeoCARET Docker Image</a></li>
