@@ -7,15 +7,6 @@ from tqdm import tqdm
 from yaspin import yaspin
 from yaspin.spinners import Spinners
 
-ee.Initialize() # Needs initialising before loading from delineator
-from delineator import heet_config as cfg
-from delineator import heet_log as lg
-
-lg.log_file_name = "heet_export.log"
-
-from delineator import heet_task
-from delineator import heet_monitor as mtr
-
 parser = argparse.ArgumentParser(
     usage="python heet_export_cli.py  --results-path <path-to-results-folder-in-GEE> --drive-folder <folder-in-GDrive> --project <GEE-project-name>"
 )
@@ -42,7 +33,7 @@ parser.add_argument(
 parser.add_argument(
     "--project",
     type=str,
-    default = "",
+    required=True,
     help="Name of Earth Engine cloud project to use",
 )
 
@@ -51,10 +42,15 @@ results_path = args.results_path
 drive_folder = args.drive_folder
 project = args.project
 
-if project:
-    ee.Initialize(project=project)
-else:
-    ee.Initialize()
+ee.Initialize(project=project)
+
+# Importing from delineator needs to be done after ee.Initialize 
+from delineator import heet_config as cfg
+from delineator import heet_log as lg
+from delineator import heet_task
+from delineator import heet_monitor as mtr
+
+lg.log_file_name = "heet_export.log"
 
 # Warning - overwriting ipmorted config data.
 cfg.output_drive_folder = drive_folder
