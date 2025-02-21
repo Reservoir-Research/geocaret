@@ -1,11 +1,10 @@
 cff-version: 1.2.0
 message: If you use this software, please cite it using these metadata.
-title: "GeoCARET - An open-source Geospatial CAtchment and REservoir Tool written in Python."
+title: "GeoCARET - a command line Python tool for delineating and analysing catchments and reservoirs."
 abstract: GeoCARET is a command line tool for geospatial analysis of catchments and reservoirs. It uses Google Earth Engine (GEE) as a back-end for geospatial calculations and as a database of geospatial (GIS) layers. GeoCARET allows a Pythonic interface for scheduling large jobs on Google Earth Engine without the need of manual steps and the usage of GEE's web-interface.
 authors:
   - family-names: Kopec-Harding
     given-names: Kamilla
-    orcid: "https://orcid.org/0000-0002-2960-7944"
   - familiy-names: Janus
     given-names: Tomasz
   - family-names: Barry
@@ -16,4 +15,4 @@ authors:
 version: 1.0.0
 date-released: "2024-07-01"
 license: GPL-3.0
-repository-code: "https://github.com/citation-file-format/my-research-software"
+repository-code: "https://github.com/Reservoir-Research/geocaret"
